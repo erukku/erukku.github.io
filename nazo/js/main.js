@@ -1,4 +1,5 @@
 
+import App from "./app.js";
 (async () =>
 {
     const app = new PIXI.Application({antialias: true,
@@ -17,5 +18,7 @@
     container.addChild(flame);
     container.addChild(display);
     app.stage.addChild(container);
+
+    const nazoapp = new App(display);
 
 })();
