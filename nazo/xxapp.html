@@ -11,19 +11,26 @@
     <meta charset = "UTF-8">
     <title>game</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@8.8.0/dist/pixi.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@pixi/ui@2.2.1/dist/pixi-ui.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
 
-    
+    <script type="importmap">
+      {
+          "imports": {
+              "pixi": "https://cdn.jsdelivr.net/npm/pixi.js@8.8.0/+esm",
+              "pixi-ui": "https://cdn.jsdelivr.net/npm/@pixi/ui@2.2.1/+esm"
+          }
+      }
+  </script>
   </head>
 
   <body>
 
 
 
-    <script src = "js/move.js">
-    </script>
 
     <div class="navbar-fixed">
       <nav>
@@ -59,10 +66,15 @@
       </div>
     
 
-    <script type="module">
-      import * as PIXI from 'https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.js';
-      //import * as PIXI from "https://pixijs.download/release/pixi.js"
+      <script type="importmap">
+        {
+            "imports": {
+                "pixi": "https://cdn.jsdelivr.net/npm/pixi.js@8.8.0/+esm",
+                "pixi-ui": "https://cdn.jsdelivr.net/npm/@pixi/ui@2.2.1/+esm"
+            }
+        }
     </script>
+
     
     <script  type="module" src="js/main.js"></script>
     
