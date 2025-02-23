@@ -2,12 +2,16 @@
 import App from "./app.js";
 (async () =>
 {
+
+
+
     const app = new PIXI.Application({antialias: true,
         autoDensity: true,});
 
     await app.init({ width: 375, height: 667 ,backgroundColor: 0xffffff});
 
-    document.body.appendChild(app.canvas);
+    document.getElementById('canvas-placeholder').appendChild(app.canvas);
+    //document.body.appendChild(app.canvas);
 
     var flame = new PIXI.Graphics().roundRect(0,0,app.canvas.width,app.canvas.height,20).fill(0xaaaaaa);
 
@@ -18,7 +22,13 @@ import App from "./app.js";
     container.addChild(flame);
     container.addChild(display);
     app.stage.addChild(container);
+    //app.stage.addChild(flame)
 
-    const nazoapp = new App(display);
+    const nazoapp = new App(display,app);
+    app.ticker.add(() => {
+        app.renderer.render(app.stage);
+    });
+
+    
 
 })();
