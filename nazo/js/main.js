@@ -19,6 +19,7 @@ import App from "./app.js";
 
     var container = new PIXI.Container();
 
+    
     container.addChild(flame);
     container.addChild(display);
     app.stage.addChild(container);
