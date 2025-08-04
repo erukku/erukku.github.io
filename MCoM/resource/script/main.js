@@ -18,8 +18,7 @@ import DefaultDict from "./util/DefaultDict.js"
         autoDensity: true,});
 
     await app.init({ width: 640, height: 360 ,backgroundColor: 0x1099bb});
-
-    document.body.appendChild(app.canvas);
+    document.body.appendChild((document.createElement("center").appendChild(app.canvas)));
 
     /*
     let po = new PIXI.Container();
