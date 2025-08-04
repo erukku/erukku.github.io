@@ -1,0 +1,77 @@
+
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset = "UTF-8">
+    <title>game</title>
+    
+    <script src="
+    https://cdn.jsdelivr.net/npm/pixi.js@8.8.0/dist/pixi.min.js
+    "></script>
+
+
+  </head>
+
+  <body>
+
+
+
+
+    <div class="navbar-fixed">
+      <nav>
+        <a href="/" class="brand-logo">Renoyu site</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="">LINK</a></li>
+        <li><a href="https://atcoder.jp/users/renoyu">Atcoder</a></li>
+        <li><a href="https://github.com/erukku/">Github</a></li>
+        <li><a href="https://www.pixiv.net/">pixiv</a></li>
+      </ul>
+      </nav>
+    </div>
+
+      <ul id="slide-out" href="#" class="sidenav">
+        <li><div class="user-view">
+          <div class="background">
+            <img class="responsive-img" src = 'image/yukari.jpg'>
+          </div>
+          <a href="#user"><img class="circle" src = 'image/yukari.jpg'></a>
+          <a href="#name"><span class="black-text name">renoyu</span></a>
+        </div></li>
+        <li><a href="https://twitter.com/rennoyu/"><i class="material-icons">last_page</i>twitter @rennoyu</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+        <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
+      </ul>
+    
+      <div class="fixed-action-btn sidenav-trigger" data-target="slide-out">
+        <a class="btn-floating btn-large red">
+          <i class="large material-icons">menu</i>
+        </a>
+      </div>
+    
+
+      <script type="importmap">
+        {
+            "imports": {
+                "pixi.js": "https://cdn.jsdelivr.net/npm/pixi.js@8.8.0/+esm",
+                "pixi-ui": "https://cdn.jsdelivr.net/npm/@pixi/ui@2.2.2/+esm"
+            }
+        }
+    </script>
+
+    <div id="canvas-placeholder"></div>
+
+    
+    <script  type="module" src="js/main.js"></script>
+    
+
+
+
+  </body>
+</html>
