@@ -55,7 +55,7 @@ class Player{
     }
 
     setTest(){
-        this.assets.add({alias:"player",src:"./resource/img/player.png"});
+        this.assets.add({alias:"player",src:"MCoM/resource/img/player.png"});
 
         
         
