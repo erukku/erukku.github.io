@@ -1,0 +1,91 @@
+import Status from "./Status.js"
+import Body from "../../base/Body.js"
+import Deck from "../../../card/Deck.js"
+import Position from "../../base/Position.js"
+import ConvertPos from "../../base/ConvertPos.js"
+
+class Enemy{
+    constructor(){
+        this.status = new Status();
+        this.deck = new Deck();
+        this.deck.setEBase();
+        this.position = new Position();
+        this.body = new Body();
+        this.graphic = new PIXI.Container();
+        this.converter = new ConvertPos();
+
+        this.action = "move";
+        this.actionPattern = new Array();
+        this.actionFlame = 0;
+
+        this.direction = "R";
+        this.breaked = false;
+    }
+    setTest(){
+        this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
+        this.graphicShadow = new PIXI.Graphics().circle(0,0,15).fill(0x000000);
+        //this.graphicShadow.scale.y = 0.7;
+        //this.graphicShadow.y +=  (1-this.graphicShadow.scale.y)*30
+
+        this.body.setBody(30,10,30);
+
+        this.graphicMain.x -= 15;
+        
+        this.graphic.addChild(this.graphicShadow);
+        this.graphic.addChild(this.graphicMain);
+
+        this.converter.convert(this);
+
+        this.actionPattern = [["move",50],["attack",50]];
+        
+    }
+
+    setPos(x,y,z){
+        this.position.setPos(x,y,z);
+        this.converter.convert(this);
+    }
+
+    addPos(x,y,z){
+        this.position.addPos(x,y,z);
+        this.converter.convert(this);
+    }
+
+    think(){
+        if(this.actionFlame == 0){
+            var num = 0;
+            var randomNum = Math.random();
+
+            for(var i = 0;i < this.actionPattern.length;i++){
+                var data = this.actionPattern[i];
+                num += data[1]/100;
+                if(randomNum < num){
+                    this.action = data[0];
+                    break
+                }
+            }
+        }
+        else if(this.actionFlame == 60){
+            
+            this.actionFlame = 0;
+            return 0
+        }
+        this.actionFlame += 1;
+    }
+
+    selectCard(index){
+        this.deck
+    }
+
+    damage(num){
+        this.status.damage(num);
+        console.log(this.status);
+
+    }
+
+    destroy(){
+        this.graphic.destroy({children : true});
+        console.log(this.graphicShadow);
+    }
+}
+
+export default Enemy;
