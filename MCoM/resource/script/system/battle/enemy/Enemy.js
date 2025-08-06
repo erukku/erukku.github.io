@@ -3,12 +3,20 @@ import Body from "../../base/Body.js"
 import Deck from "../../../card/Deck.js"
 import Position from "../../base/Position.js"
 import ConvertPos from "../../base/ConvertPos.js"
+import AttackInfo from "./AttackInfo.js"
 
+
+import DeckShow from "../../../ui/battle/DeckShow.js"
 class Enemy{
     constructor(){
         this.status = new Status();
         this.deck = new Deck();
         this.deck.setEBase();
+
+        this.uiContainer = new PIXI.Container();
+        this.deckset = new DeckShow(this.uiContainer);
+        this.deckset.deckSet(this.deck);
+
         this.position = new Position();
         this.body = new Body();
         this.graphic = new PIXI.Container();
@@ -20,6 +28,12 @@ class Enemy{
 
         this.direction = "R";
         this.breaked = false;
+
+        this.attackInfo = new AttackInfo();
+        this.attacking = false;
+        this.attackId = 0;
+        this.attackFlame = 0;
+        this.attackedE = new Array();
     }
     setTest(){
         this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
@@ -60,6 +74,7 @@ class Enemy{
                 num += data[1]/100;
                 if(randomNum < num){
                     this.action = data[0];
+                    console.log(this.action);
                     break
                 }
             }
@@ -73,13 +88,18 @@ class Enemy{
     }
 
     selectCard(index){
-        this.deck
+        var card = this.deck[0];
+        return card;
     }
 
     damage(num){
         this.status.damage(num);
         console.log(this.status);
+    }
 
+    attack(){
+        this.attackData = this.attackInfo.getInfo(0);
+        this.attacking = true;   
     }
 
     destroy(){

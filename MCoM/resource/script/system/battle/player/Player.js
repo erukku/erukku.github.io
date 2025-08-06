@@ -180,8 +180,10 @@ class Player{
     attack(){
         this.attackData = this.attackInfo.getInfo(0);
         this.attacking = true;
-        
-        
+    }
+    damage(num){
+        this.status.damage(num);
+        console.log(this.status);
     }
 }
 

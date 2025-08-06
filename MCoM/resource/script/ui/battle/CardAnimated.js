@@ -53,9 +53,16 @@ class CardAnimated{
 
     drop(cards,i,side){
         var card = cards.deckList[i].cardGraphic
+
+        var xSpeed = this.xSpeed;
+        var ySpeed = this.ySpeed;
+        if(side == "L"){
+            xSpeed *= -1;
+        }
+        
         if(this.flame <= 20){
-            card.x -= this.xSpeed;
-            card.y += this.ySpeed;
+            card.x -= xSpeed;
+            card.y += ySpeed;
             this.ySpeed += 2;
         }
         else{
@@ -65,9 +72,9 @@ class CardAnimated{
             this.flame = 0;
         }
         this.flame += 1;
-        
-
     }
+
+    
 
 }
 

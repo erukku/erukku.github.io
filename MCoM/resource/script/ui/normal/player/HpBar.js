@@ -58,7 +58,7 @@ class HpBar{
         
         
         
-        var image = await PIXI.Assets.load("./resource/img/sword.png");
+        var image = await PIXI.Assets.load("MCoM/resource/img/sword.png");
         
         
         var playerIcon = new PIXI.Sprite(image);
@@ -73,7 +73,7 @@ class HpBar{
     })();
     }
 
-    damege(num){
+    damage(num){
         this.hp = this.hp - num
 
         if(this.hp < 0){

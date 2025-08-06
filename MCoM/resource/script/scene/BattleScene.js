@@ -148,6 +148,8 @@ class BattleScene{
         for(var i = 0; i < this.enemyList.length;i++){
             if(this.enemyList[i].action == "attack"){
                 this.enemyList[i].selectCard();
+                this.enemyList[i].deckset.use();
+                this.enemyList[i].attack();
             }
             0;
         }
@@ -163,8 +165,37 @@ class BattleScene{
     action(){
         for(var i = 0;i < this.enemyList.length;i++){
             var enemy = this.enemyList[i];
-            if(enemy.action == "attack"){
-                
+            if(enemy.action == "attack" || enemy.attacking){
+                if(enemy.attackFlame == enemy.attackData[0]){
+                    enemy.attackFlame = 0;
+                    enemy.attacking = false;
+                    enemy.attackedE = new Array();
+                    return 0
+                }
+                var aC = new AttackCollider();
+                var hit = aC.isHitted(enemy,enemy.attackData[2],new Array(this.player));
+    
+                for(var i = 0;i < hit.length;i++){
+                    var e = hit[i];
+                    var f = false;
+                    for(var j = 0;j < enemy.attackedE.length;j++){
+                        if(e == enemy.attackedE[j]){
+                            f = true;
+                            break;
+                        }
+    
+                    }
+                    if(f){
+                        break;
+                    }
+                    e.damage(enemy.attackData[1]);
+                    this.player.hpBar.damage(enemy.attackData[1]);
+                    enemy.attackedE.push(e);
+                    
+                    
+                }
+
+                enemy.attackFlame += 1;
             }
         }
 

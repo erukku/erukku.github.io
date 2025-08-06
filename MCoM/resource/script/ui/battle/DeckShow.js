@@ -25,7 +25,7 @@ class DeckShow{
 
 
 
-    constructor(scene){
+    constructor(scene,side){
         this.R = 80;
         this.pushcount = 0;
         this.deckList;
@@ -57,6 +57,11 @@ class DeckShow{
         this.rolling = false;
         this.rollFlame = 0;
         this.rollFn = 0;
+
+        this.side = side;
+        if(this.side){
+            this.startangle *= 1;
+        }
     }
 
     deckSet(deck){
@@ -71,7 +76,12 @@ class DeckShow{
             this.deckList[i].cardGraphic.y = this.R*Math.sin(this.startangle+i * (360/circleCardNum) * (Math.PI/180));
             this.deckCircle.addChild(this.deckList[i].cardGraphic) 
             if(i == 0){
-                this.deckList[i].cardGraphic.x += 50;
+                if(this.side == "L"){
+                    this.deckList[i].cardGraphic.x += 50;
+                }
+                else{
+                    this.deckList[i].cardGraphic.x -= 50;
+                }
                 this.deckList[i].cardGraphic.y -= 50;
             }  
         }
