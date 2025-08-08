@@ -13,6 +13,7 @@ class CardBase{
         this.reloadBase = 1;
         this.reloadChanged = 1;
         this.reloadFlame = 0;
+        this.cost = 0;
 
     }
 

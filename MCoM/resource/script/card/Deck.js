@@ -12,13 +12,13 @@ class Deck{
         var atCard = new CardBase("attack");
         atCard.setBaseInfo(num,num);
         num += 1;
-        atCard.drawCard();
+        atCard.drawCard(2);
         this.deck.push(atCard);
         }
         var atCard = new CardBase("magic");
         atCard.setBaseInfo(num,num);
         num += 1;
-        atCard.drawCard();
+        atCard.drawCard(5);
         this.deck.push(atCard);
 
         var atCard = new CardBase("item");

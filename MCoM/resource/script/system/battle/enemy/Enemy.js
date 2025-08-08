@@ -14,7 +14,7 @@ class Enemy{
         this.deck.setEBase();
 
         this.uiContainer = new PIXI.Container();
-        this.deckset = new DeckShow(this.uiContainer);
+        this.deckset = new DeckShow(this.uiContainer,"R");
         this.deckset.deckSet(this.deck);
 
         this.position = new Position();
@@ -34,6 +34,8 @@ class Enemy{
         this.attackId = 0;
         this.attackFlame = 0;
         this.attackedE = new Array();
+
+        this.cardIndex = 0;
     }
     setTest(){
         this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
@@ -51,6 +53,7 @@ class Enemy{
         this.converter.convert(this);
 
         this.actionPattern = [["move",50],["attack",50]];
+        //this.actionPattern = [["move",50]];
         
     }
 
@@ -74,7 +77,7 @@ class Enemy{
                 num += data[1]/100;
                 if(randomNum < num){
                     this.action = data[0];
-                    console.log(this.action);
+                    //console.log(this.action);
                     break
                 }
             }
@@ -88,7 +91,7 @@ class Enemy{
     }
 
     selectCard(index){
-        var card = this.deck[0];
+        var card = this.deck.deck[index];
         return card;
     }
 

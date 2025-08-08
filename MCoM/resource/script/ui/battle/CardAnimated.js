@@ -17,6 +17,7 @@ class CardAnimated{
 
     movecC(cards,i,goalX,goalY){
         var card = cards.deckList[i].cardGraphic
+        //console.log(i)
         if(card.x == goalX && card.y == goalY){
             //card.visible = false;
             
@@ -47,6 +48,7 @@ class CardAnimated{
         else{
             card.x += (goalX - card.x)/10
             card.y += (goalY - card.y)/10
+            //console.log(card.x,card.y)
         }
     }
 

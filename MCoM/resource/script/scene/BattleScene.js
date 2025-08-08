@@ -23,6 +23,7 @@ class BattleScene{
         this.app = app;
         this.collider = new Collider();
         this.ticker = PIXI.Ticker.shared;
+        this.ticker.maxFPS = 60;
 
         this.keyFn = null;
 
@@ -32,6 +33,9 @@ class BattleScene{
 
         this.arriveEnemy = new Array();
         this.deadEnemy = new Array();
+
+        this.cardAnimationTicker = null;
+        this.flame = 0;
     }
     setTest(){
         var This = this;
@@ -48,7 +52,8 @@ class BattleScene{
     }
 
     turn(){
-
+        this.flame += 1;
+        //console.log("flame",this.flame)
         if(this.enemyList.length == 0){
             this.battleEnd();
         }
@@ -140,6 +145,7 @@ class BattleScene{
           if(this.keyPressing("c")) { // ③
               this.player.deckset.reload();
           }
+
     }
     
 
@@ -147,9 +153,36 @@ class BattleScene{
         //enemy
         for(var i = 0; i < this.enemyList.length;i++){
             if(this.enemyList[i].action == "attack"){
-                this.enemyList[i].selectCard();
-                this.enemyList[i].deckset.use();
-                this.enemyList[i].attack();
+                var card = this.enemyList[i].selectCard(0);
+
+                if(card.cardClass == "reload"){
+                    this.player.deckset.use();
+                    break
+                }
+
+                if(this.fieldCard.isExist(card,"enemy")){
+
+                    this.enemyList[i].deckset.use();
+                    this.enemyList[i].attack();
+
+                    //console.log(this.fieldCard.cardSide,this.fieldCard.fieldCard,i);
+                    continue;
+                }
+
+                if(this.fieldCard.cardSide == "enemy"){
+                    continue;
+                }
+
+
+                if(this.fieldCard.checkCard(card,"enemy")){
+                    //this.cardAnimationTicker.breaked = true;
+                    
+                    this.enemyList[i].deckset.use();
+                    this.enemyList[i].attack();
+
+                }
+
+                
             }
             0;
         }
@@ -157,26 +190,56 @@ class BattleScene{
         
         //player
         if(this.keyPressing("a")) { // ③
-            this.player.deckset.use();// Aが押された時に実行したい処理を記述
-            this.player.attack();
+            var cardIndex = this.player.deckset.getCardIndex();
+            var card = this.player.deck.deck[cardIndex];
+            //console.log(this.player.deck.deck);
+            
+            if(card.cardClass == 'reload'){
+                this.player.deckset.use();
+                //console.log(card.cardClass)
+                //console.log(21313)
+                return 0;
+            }
+
+            if(this.fieldCard.isExist(card,"player")){
+                this.player.deckset.use();// Aが押された時に実行したい処理を記述
+                this.player.attack();
+                
+            }
+            
+            if(this.fieldCard.cardSide == "player"){
+                return 0;
+            }
+            
+            if(this.fieldCard.checkCard(card,"player")){
+                //this.cardAnimationTicker.breaked = true;
+
+                this.player.deckset.use();// Aが押された時に実行したい処理を記述
+                this.player.attack();
+            }
         }
     }
 
     action(){
+
         for(var i = 0;i < this.enemyList.length;i++){
             var enemy = this.enemyList[i];
-            if(enemy.action == "attack" || enemy.attacking){
+            if(enemy.action == "attack" && enemy.attacking){
                 if(enemy.attackFlame == enemy.attackData[0]){
+                   
                     enemy.attackFlame = 0;
                     enemy.attacking = false;
                     enemy.attackedE = new Array();
+
+                    this.fieldCard.reset();
+
                     return 0
                 }
                 var aC = new AttackCollider();
                 var hit = aC.isHitted(enemy,enemy.attackData[2],new Array(this.player));
     
-                for(var i = 0;i < hit.length;i++){
-                    var e = hit[i];
+                for(var ii = 0;ii < hit.length;ii++){
+                    var e = hit[ii];
                     var f = false;
                     for(var j = 0;j < enemy.attackedE.length;j++){
                         if(e == enemy.attackedE[j]){
@@ -196,6 +259,7 @@ class BattleScene{
                 }
 
                 enemy.attackFlame += 1;
+
             }
         }
 
@@ -205,6 +269,8 @@ class BattleScene{
                 this.player.attackFlame = 0;
                 this.player.attacking = false;
                 this.player.attackedE = new Array();
+
+                this.fieldCard.reset();
                 return 0
             }
             var aC = new AttackCollider();

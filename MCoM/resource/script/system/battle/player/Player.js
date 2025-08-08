@@ -17,7 +17,7 @@ class Player{
         this.deck = new Deck();
         this.deck.setBase();
 
-        this.deckset = new DeckShow(this.uiContainer);
+        this.deckset = new DeckShow(this.uiContainer,"L");
         this.deckset.deckSet(this.deck);
 
         this.position = new Position();
@@ -51,6 +51,8 @@ class Player{
         this.breaked = false;
 
         this.assets = PIXI.Assets;
+
+        this.cardIndex = 0;
         
     }
 
@@ -181,6 +183,7 @@ class Player{
         this.attackData = this.attackInfo.getInfo(0);
         this.attacking = true;
     }
+    
     damage(num){
         this.status.damage(num);
         console.log(this.status);

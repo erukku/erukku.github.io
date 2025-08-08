@@ -275,11 +275,11 @@ class OnWayScene{
 
                 this.appStage.addChild(this.player.uiContainer);
 
-                this.e1.uiContainer.x = 600;
+                //this.e1.uiContainer.x = 640;
                 this.appStage.addChild(this.e1.uiContainer);
-                this.e2.uiContainer.x = 600;
+                //this.e2.uiContainer.x = 640;
                 this.appStage.addChild(this.e2.uiContainer);
-                this.e3.uiContainer.x = 600;
+                //this.e3.uiContainer.x = 640;
                 this.appStage.addChild(this.e3.uiContainer);
 
                 var This = this;

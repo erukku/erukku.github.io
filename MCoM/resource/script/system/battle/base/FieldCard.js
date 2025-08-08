@@ -6,26 +6,46 @@ class FieldCard{
         this.flame = 0;
     }
 
-    checkCard(card,owner,side){
-        if(this.fieldCard == null){
+    isExist(card,side){
+        //console.log(this.fieldCard == null && this.cardSide == null);
+        if(this.fieldCard == null && this.cardSide == null){
             this.fieldCard = card;
-            this.cardOwner = owner;
             this.cardSide = side;
+            return true;
         }
+        else{
+            return false;
+        }
+    }
+
+
+    checkCard(card,side){
+        if(this.cardSide == side){
+            return false;
+        }
+        
 
         if(card.cost > this.fieldCard.cost){
             //break preside
-
+            
             //set side
             this.fieldCard = card;
-            this.cardOwner = owner;
             this.cardSide = side;
+            return true;
         }
         else{
             //continue
+            return false;
 
         }
 
+    }
+
+    reset(){
+        this.fieldCard = null;
+        this.cardOwner = null;
+        this.cardSide = null;
+        this.flame = 0;
     }
 
 }

@@ -15,7 +15,7 @@ class AttackInfo{
                 position.setPos(30,0,0);
 
                 var box = new AttackBox(position,body);
-                return [10,50,[box]];
+                return [60,50,[box]];
 
         }
 
