@@ -12,7 +12,7 @@ class Deck{
         var atCard = new CardBase("attack");
         atCard.setBaseInfo(num,num);
         num += 1;
-        atCard.drawCard(2);
+        atCard.drawCard(9);
         this.deck.push(atCard);
         }
         var atCard = new CardBase("magic");

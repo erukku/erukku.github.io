@@ -151,6 +151,7 @@ class BattleScene{
 
     useCard(){
         //enemy
+        var animate = null
         for(var i = 0; i < this.enemyList.length;i++){
             if(this.enemyList[i].action == "attack"){
                 var card = this.enemyList[i].selectCard(0);
@@ -162,8 +163,9 @@ class BattleScene{
 
                 if(this.fieldCard.isExist(card,"enemy")){
 
-                    this.enemyList[i].deckset.use();
+                    animate = this.enemyList[i].deckset.use();
                     this.enemyList[i].attack();
+                    this.fieldCard.cardFn = animate;
 
                     //console.log(this.fieldCard.cardSide,this.fieldCard.fieldCard,i);
                     continue;
@@ -176,10 +178,16 @@ class BattleScene{
 
                 if(this.fieldCard.checkCard(card,"enemy")){
                     //this.cardAnimationTicker.breaked = true;
-                    
-                    this.enemyList[i].deckset.use();
+                    if(this.fieldCard.cardFn != 0){
+                        this.fieldCard.cardFn.breaked = true;
+                    }
+                    animate = this.enemyList[i].deckset.use();
                     this.enemyList[i].attack();
 
+                    this.fieldCard.cardFn = animate;
+
+                }else{
+                    this.enemyList[i].deckset.waste();
                 }
 
                 
@@ -202,9 +210,10 @@ class BattleScene{
             }
 
             if(this.fieldCard.isExist(card,"player")){
-                this.player.deckset.use();// Aが押された時に実行したい処理を記述
+                animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
                 this.player.attack();
-                
+                this.fieldCard.cardFn = animate;
+                return 0;   
             }
             
             if(this.fieldCard.cardSide == "player"){
@@ -213,9 +222,19 @@ class BattleScene{
             
             if(this.fieldCard.checkCard(card,"player")){
                 //this.cardAnimationTicker.breaked = true;
+                console.log(this.fieldCard.cardFn);
 
-                this.player.deckset.use();// Aが押された時に実行したい処理を記述
+                if(this.fieldCard.cardFn != 0){
+                    this.fieldCard.cardFn.breaked = true;
+                }
+                
+                animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
                 this.player.attack();
+                this.fieldCard.cardFn = animate;
+            }
+            else{
+                console.log(1,1,1,this.fieldCard.cardSide)
+                this.player.deckset.waste();
             }
         }
     }

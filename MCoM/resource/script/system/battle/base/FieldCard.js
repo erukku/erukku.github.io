@@ -3,6 +3,7 @@ class FieldCard{
         this.fieldCard = null;
         this.cardOwner = null;
         this.cardSide = null;
+        this.cardFn = null;
         this.flame = 0;
     }
 
@@ -20,10 +21,6 @@ class FieldCard{
 
 
     checkCard(card,side){
-        if(this.cardSide == side){
-            return false;
-        }
-        
 
         if(card.cost > this.fieldCard.cost){
             //break preside
@@ -45,6 +42,7 @@ class FieldCard{
         this.fieldCard = null;
         this.cardOwner = null;
         this.cardSide = null;
+        
         this.flame = 0;
     }
 

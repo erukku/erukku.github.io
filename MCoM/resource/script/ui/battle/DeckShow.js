@@ -184,6 +184,7 @@ class DeckShow{
         var count = 0;
         this.pushcount %= (circleCardNum+1);
         
+        var a = null;
         for(var i = 0;i < this.deckList.length;i++){
             if(this.isDeck(i)){
                 continue;
@@ -199,6 +200,96 @@ class DeckShow{
                 var test = this;
                 var index = i;
                 var animate = new CardAnimated();
+                //console.log(index,ii % (circleCardNum+1) == 0);
+                //this.a = function(time){test.movecC(test,index,300,-80,this);}
+                if(this.side == "R"){
+                    var a = function(time){animate.movecC(test,index,-300,-80,this);}
+                }
+                else{
+                    var a = function(time){animate.movecC(test,index,300,-80,this);}
+                }
+                
+                animate.setSelf(a);
+                this.animateCard.add(a);
+
+                //this.deckList[i].cardGraphic.x = 300;
+                //this.deckList[i].cardGraphic.y = -80;
+                
+                //console.log(this.deckList[i]);
+                this.usedCard[this.deckList[i].getCardIds()] = true;
+                count += 1;
+
+                
+                continue;
+            }
+
+            count += 1;
+        }
+        this.usedCardNum += 1;
+        var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
+        var This = this;
+        this.rolling = true;
+        this.rollFn = function(time){This.rollFill(This,circleCardNum);}
+        this.animateCard.add(
+            this.rollFn
+        )
+        
+        return a;
+    }
+
+
+    waste(){
+        if(this.rolling){
+            return 0;
+        }
+        var count = 0
+        var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
+        for(var i = 0;i < this.deckList.length;i++){
+            if(this.isDeck(i)){
+                continue;
+            }
+            var ii = count + this.pushcount;
+            ii %= (circleCardNum)
+            ii += circleCardNum
+            ii %= circleCardNum
+            if(ii == 0){
+                if(this.deckList[i].cardClass == "reload"){
+                    if(this.deckList[i].costText.text == 0){
+                        this.deckList[i].afterReload();
+                        this.reload();
+                        return 0;
+                    }
+                    this.deckList[i].chargeReload()
+                    return 0;
+                }
+            }
+            count += 1;
+        }
+
+        if(this.attacking)
+
+        //this.usedCardNum += 1;
+
+        var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
+        var count = 0;
+        this.pushcount %= (circleCardNum+1);
+        
+        for(var i = 0;i < this.deckList.length;i++){
+            if(this.isDeck(i)){
+                continue;
+            }
+
+            var ii = count + this.pushcount;
+            ii %= (circleCardNum );
+            ii += circleCardNum;
+
+            //console.log(ii % circleCardNum);
+            if(ii % (circleCardNum) == 0){
+                var po = this.deckList;
+                var test = this;
+                var index = i;
+                var animate = new CardAnimated();
+                animate.breaked = true;
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
                 if(this.side == "R"){
@@ -232,10 +323,8 @@ class DeckShow{
         this.animateCard.add(
             this.rollFn
         )
-        
-
+      
     }
-
     keep(){
         if(this.rollFlame != 0){
             console.log(this.rollFlame)
