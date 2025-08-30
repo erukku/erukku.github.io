@@ -156,9 +156,13 @@ class BattleScene{
             if(this.enemyList[i].action == "attack"){
                 var card = this.enemyList[i].selectCard(0);
 
+                if(this.enemyList[i].actionFlame % 30 != 1){
+                    break;
+                }
+
                 if(card.cardClass == "reload"){
                     this.player.deckset.use();
-                    break
+                    break;
                 }
 
                 if(this.fieldCard.isExist(card,"enemy")){

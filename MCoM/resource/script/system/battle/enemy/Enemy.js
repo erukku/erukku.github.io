@@ -36,6 +36,8 @@ class Enemy{
         this.attackedE = new Array();
 
         this.cardIndex = 0;
+
+        this.useLock = false;
     }
     setTest(){
         this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);

@@ -33,7 +33,7 @@ class CardAnimated{
             }
             
 
-            if(this.flame == 20){
+            if(this.flame == 40){
                 card.x = -100;
                 card.y = -100;
                 cards.animateCard.remove(this.a);
