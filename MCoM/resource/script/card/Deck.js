@@ -56,6 +56,11 @@ class Deck{
         this.deck.push(atCard);
     }
 
+
+    addCard(card){
+        this.deck.add(card);
+    }
+
     load(data){
 
     }

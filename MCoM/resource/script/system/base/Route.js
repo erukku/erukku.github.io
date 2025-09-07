@@ -21,6 +21,7 @@ class Route{
             for(var j = 0; j < num;j++){
                 data.push("battle");
             }
+            data.push("shop");
             this.route.push(data);
         }
 
@@ -74,6 +75,11 @@ class Route{
                     
                     case "battle":
                         circle.fill(0xFF002A);
+                        icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        break;
+
+                    case "shop":
+                        circle.fill(0x99330A);
                         icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
                         break;
                 }

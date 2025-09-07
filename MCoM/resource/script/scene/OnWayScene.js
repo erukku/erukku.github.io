@@ -1,10 +1,12 @@
 import StageShow from "../ui/battle/StageShow.js"
 import BattleScene from "./BattleScene.js"
+import ShopScene from "./ShopScene.js"
 import ConvertPos from "../system/base/ConvertPos.js"
 
 import Route from "../system/base/Route.js"
 
 import Enemy from "../system/battle/enemy/Enemy.js"
+import ShopShow from "../ui/shop/showShow.js"
 
 class OnWayScene{
     constructor(stage,player,key,app){
@@ -73,7 +75,7 @@ class OnWayScene{
         this.ticker.add(this.transformFn);
         */
 
-        this.route.setRoute(1);
+        this.route.setRoute(2);
         this.route.setGraphic();
     }
 
@@ -161,6 +163,14 @@ class OnWayScene{
 
                 this.ticker.remove(this.keyFn);
             }
+            else if(nextEvent == "shop"){
+                this.route.removeContainer(this.appStage);
+                
+                this.testShop();
+
+                this.ticker.remove(this.keyFn);
+
+            }
             else if(nextEvent == "end"){
                 this.removeTicker();
                 this.manager.changeScene("end");
@@ -242,6 +252,12 @@ class OnWayScene{
         this.ticker.add(this.transformFn);
     }
 
+    testShop(){
+        var This = this;
+        this.transformFn = function(time){This.wallOpen("shop")};
+        this.ticker.add(this.transformFn);
+    }
+
     wallClose(){
         if(this.transformFlame < 30){
             this.leftWall.x += 320/30;
@@ -285,6 +301,10 @@ class OnWayScene{
                 var This = this;
                 this.transformFn = function(time){This.transformGround()};
                 this.ticker.add(this.transformFn);
+            }
+            else if(type == "shop"){
+                var shop = new ShopScene(this.player,null,this.baseStage,this.keyList,this)
+                shop.setTest();
             }
         }
     }

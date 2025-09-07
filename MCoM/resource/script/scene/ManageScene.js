@@ -1,5 +1,6 @@
 import StartScene from "./StartScene.js"
 import BattleScene from "./BattleScene.js"
+import ShopScene from "./ShopScene.js"
 import OnWayScene from "./OnWayScene.js"
 import EndScene from "./EndScene.js"
 
@@ -141,6 +142,9 @@ class ManageScene{
             this.changeFn = fn;
             this.ticker.add(fn);
             
+        }
+        else if(type == "shop"){
+
         }
         else if(type == "end"){
             var end = new EndScene();

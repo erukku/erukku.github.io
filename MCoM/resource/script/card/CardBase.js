@@ -47,7 +47,10 @@ class CardBase{
     drawCard(cost = 3){
         (async () =>{
         this.cardGraphic = new PIXI.Container();
-        this.cost = cost;
+
+        if(this.cost == 0){
+            this.cost = cost;
+        }
         
         switch (this.cardClass) {
             case 'attack':
@@ -151,6 +154,9 @@ class CardBase{
     })();
     }
 
+    setCost(){
+        return this.cost;
+    }
 }
 
 export default CardBase;
