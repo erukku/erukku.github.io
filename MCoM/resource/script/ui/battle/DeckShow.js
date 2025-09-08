@@ -312,7 +312,7 @@ class DeckShow{
                 //this.deckList[i].cardGraphic.x = 300;
                 //this.deckList[i].cardGraphic.y = -80;
                 
-                console.log(this.deckList[i]);
+                
                 this.usedCard[this.deckList[i].getCardIds()] = true;
                 count += 1;
 
@@ -334,7 +334,7 @@ class DeckShow{
     }
     keep(){
         if(this.rollFlame != 0 || this.keepCardNum == 3){
-            console.log(this.rollFlame)
+            
             return 0;
         }
 
@@ -353,7 +353,7 @@ class DeckShow{
             var ii = count + this.pushcount;
             ii %= circleCardNum;
             ii += circleCardNum;
-            console.log(ii)
+            
             if(ii % (circleCardNum) == 0 && this.deckList[i].cardClass == "reload"){
                 return 0;
             }
@@ -371,7 +371,7 @@ class DeckShow{
             }
 
             var ii = count + this.pushcount;
-            console.log(ii)
+            
             if(ii % (circleCardNum+1) == 0){
                 this.deckList[i].cardGraphic.x = 120 + (this.keepCardNum * 30);
                 this.deckList[i].cardGraphic.y = -280;
@@ -387,7 +387,7 @@ class DeckShow{
 
 
                 count += 1;
-                console.log("start")
+                
                 continue;
             }
 
@@ -425,7 +425,7 @@ class DeckShow{
         
         for(var i = 0 ; i < this.keepCardNum;i++){
             var card = array.pop();
-            console.log(card);
+            
             this.usedCard[card.getCardIds()] = true;
 
             card.cardGraphic.x = -50 + i * 30;
@@ -587,7 +587,7 @@ class DeckShow{
             cards.deckList[i].cardGraphic.y = this.R*Math.sin(this.startangle+(ii + 1 - this.rollFlame/10) * (360/circleCardNum) * (Math.PI/180));
             //console.log(ii % circleCardNum)
             if((ii % circleCardNum == 0) && this.rollFlame >= 10){
-                console.log(i,ii);
+                
                 if(this.side == "L"){
                     this.deckList[i].cardGraphic.x += 50;
                 }
@@ -621,7 +621,7 @@ class DeckShow{
             cards.deckList[i].cardGraphic.y = this.R*Math.sin(this.startangle+(ii - 1 + this.rollFlame/10) * (360/circleCardNum) * (Math.PI/180));
             
             if((ii % circleCardNum == 0) && this.rollFlame >= 10){
-                console.log(i,ii);
+                
                 if(this.side == "L"){
                     this.deckList[i].cardGraphic.x += 50;
                 }
@@ -658,7 +658,7 @@ class DeckShow{
             cards.deckList[i].cardGraphic.y = this.R*Math.sin(this.startangle+(ii) * (360/(circleCardNum)) * (Math.PI/180));
             
             if((ii % circleCardNum == 0)){
-                console.log(i,ii);
+                
                 if(this.side == "L"){
                     this.deckList[i].cardGraphic.x += 50;
                 }

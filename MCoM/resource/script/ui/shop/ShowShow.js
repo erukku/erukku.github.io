@@ -93,7 +93,7 @@ class ShopShow{
             this.cersor.y = this.itemGraphicContainer.getChildAt(this.cersorPos[0] + this.cersorPos[1]*4).y;
         }
 
-        console.log(this.cersor.x,this.cersor.y);
+        
     }
 
 
