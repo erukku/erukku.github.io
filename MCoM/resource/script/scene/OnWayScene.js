@@ -103,6 +103,8 @@ class OnWayScene{
             this.ticker.remove(this.keyFn);
 
             var enemys = [this.e1,this.e2,this.e3];
+
+            this.player.deckset.deckSet(this.player.deck);
             var battle = new BattleScene(this.player,enemys,this.baseStage,this.keyList,this);
             battle.setTest();
         }
@@ -179,11 +181,11 @@ class OnWayScene{
         }
 
         if(this.keyPrssing("i") && this.transformFn == null){
-            this.route.addCount(1);
+            this.route.addCount(-1);
 
         }
         if(this.keyPrssing("k") && this.transformFn == null){
-            this.route.addCount(-1);
+            this.route.addCount(1);
         }
 
         /*

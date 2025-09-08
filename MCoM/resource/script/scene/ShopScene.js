@@ -35,6 +35,8 @@ class ShopScene{
         this.ticker = PIXI.Ticker.shared;
         this.ticker.maxFPS = 60;
 
+        this.flame = 0;
+        this.inputflame = -100;
     }
 
     setTest(){
@@ -59,14 +61,17 @@ class ShopScene{
     }
 
     turn(){
-        //this.flame += 1;
+        this.flame += 1;
         //console.log("flame",this.flame)
         if(this.endFlag == true){
             this.shopUi.delete();
             this.shopEnd();
         }
 
-        this.input();
+        
+        if(this.inputflame < this.flame){
+            this.input();
+        }
         this.shopUi.setCersorPos(this.cersor[0],this.cersor[1]);
         this.shopUi.draw();
         
@@ -75,18 +80,23 @@ class ShopScene{
     input(){
         if(this.keyPressing("j")){
             this.cersorX(-1);
+            this.inputflame = this.flame + 6;
         }
         if(this.keyPressing("l")){
             this.cersorX(1);
+            this.inputflame = this.flame + 6;
         }
         if(this.keyPressing("k")){
             this.cersorY(1);
+            this.inputflame = this.flame + 6;
         }
         if(this.keyPressing("i")){
             this.cersorY(-1);
+            this.inputflame = this.flame + 6;
         }
         if(this.keyPressing("a")){
             this.enter();
+            this.inputflame = this.flame + 6;
         }
     }
 
@@ -118,7 +128,9 @@ class ShopScene{
             //仮　price無視
             if(this.cersor[0] != 4 && this.canbuy() && (this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] == false)){
                 this.player.deck.addCard(this.itemSell[this.cersor[0] + 4*this.cersor[1]][0]);
+                console.log(this.itemSell[this.cersor[0] + 4*this.cersor[1]][0]);
                 this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] = true;
+                //console.log("gagr");
             }
         }
     }

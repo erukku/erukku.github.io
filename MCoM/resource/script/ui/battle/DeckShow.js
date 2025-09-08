@@ -330,7 +330,28 @@ class DeckShow{
             console.log(this.rollFlame)
             return 0;
         }
-        
+
+                
+        var count = 0;
+        var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
+        this.pushcount %= (circleCardNum);
+        this.pushcount += (circleCardNum);
+        this.pushcount %= (circleCardNum);
+        for(var i = 0;i < this.deckList.length;i++){
+            //console.log(this.isDeck(i));
+            if(this.isDeck(i)){
+                continue;
+            }
+
+            var ii = count + this.pushcount;
+            ii %= circleCardNum;
+            ii += circleCardNum;
+            console.log(ii)
+            if(ii % (circleCardNum) == 0 && this.deckList[i].cardClass == "reload"){
+                return 0;
+            }
+            count += 1;
+        }
         this.keepCardNum += 1;
 
         var count = 0;
