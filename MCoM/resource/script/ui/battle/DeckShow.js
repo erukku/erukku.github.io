@@ -45,6 +45,8 @@ class DeckShow{
         this.usedCard = new DefaultDict(false);
         this.excludedCard = new DefaultDict(false);
 
+        this.keepCardArray = new Array();
+
         this.keepCardNum = 0;
         this.usedCardNum = 0;
         this.excludedCardNum = 0;
@@ -237,7 +239,6 @@ class DeckShow{
         return a;
     }
 
-
     waste(){
         if(this.rolling){
             return 0;
@@ -326,7 +327,7 @@ class DeckShow{
       
     }
     keep(){
-        if(this.rollFlame != 0){
+        if(this.rollFlame != 0 || this.keepCardNum == 3){
             console.log(this.rollFlame)
             return 0;
         }
@@ -376,6 +377,7 @@ class DeckShow{
                 this.costGraphic.x = 120 + ((this.keepCardNum+1) * 30);
                 this.costGraphic.y = -280;
                 this.keepCard[this.deckList[i].getCardIds()] = true;
+                this.keepCardArray.push(this.deckList[i]);
 
 
                 count += 1;
@@ -395,6 +397,64 @@ class DeckShow{
         )
 
 
+    }
+
+
+    keepUse(){
+
+        var container = new PIXI.Container();
+
+
+        var array = new Array();
+
+        for(var i = 0 ; i < this.keepCardArray.length;i++){
+            var card = this.keepCardArray.pop();
+            this.keepCard[card.getCardIds()] = false;
+
+            card.cardGraphic.x = -10000;
+            card.cardGraphic.y = -10000;
+            card.cardGraphic.scale.x = this.deckList[i].cardGraphic.scale.y = 1;
+
+            this.keepCardNum -= 1;
+
+            array.push(card);
+        }
+        
+        for(var i = 0 ; i < this.array.length;i++){
+            var card = this.array.pop();
+            this.wasteCard[card.getCardIds()] = true;
+
+            card.cardGraphic.x = i * 50;
+            card.cardGraphic.y = 0;
+            card.cardGraphic.scale.x = this.deckList[i].cardGraphic.scale.y = 1;
+
+            container.addChild(card);
+        }
+
+        //仮
+        this.costGraphic.visible = false;
+        this.cost = 0;
+        this.costGraphic.text = this.cost;
+    }
+
+    keepWaste(){
+
+        for(var i = 0 ; i < this.keepCardArray.length;i++){
+            var card = this.keepCardArray.pop();
+            this.keepCard[card.getCardIds()] = false;
+            this.wasteCard[card.getCardIds()] = true;
+
+            card.cardGraphic.x = -10000;
+            card.cardGraphic.y = -10000;
+            card.cardGraphic.scale.x = this.deckList[i].cardGraphic.scale.y = 1;
+
+            this.keepCardNum -= 1;
+        }
+
+        this.costGraphic.visible = false;
+        this.cost = 0;
+        this.costGraphic.text = this.cost;
+        
     }
 
     alluse(){

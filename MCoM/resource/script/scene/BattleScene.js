@@ -36,6 +36,7 @@ class BattleScene{
 
         this.cardAnimationTicker = null;
         this.flame = 0;
+        this.keepFlame = -100;
     }
     setTest(){
         var This = this;
@@ -136,8 +137,9 @@ class BattleScene{
           if(this.keyPressing("w")) { // ③
               this.player.deckset.move("L");// Aが押された時に実行したい処理を記述
           }
-          if(this.keyPressing("z")) { // ③
+          if(this.keyPressing("z") && (this.keepFlame < this.flame)) { // ③
               this.player.deckset.keep();
+              this.keepFlame = this.flame + 10;
           }
           if(this.keyPressing("x")) { // ③
               this.player.deckset.alluse();
