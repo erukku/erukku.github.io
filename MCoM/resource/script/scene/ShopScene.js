@@ -14,6 +14,10 @@ class ShopScene{
 
         this.itemSell = new Array();
         this.itemNum = 8;
+        this.itemSoldOut = new Array();
+        for(var i = 0;i < this.itemNum;i++){
+            this.itemSoldOut.push(false);
+        }
 
         this.keys = key[0];
         this.keyList = key;
@@ -44,6 +48,9 @@ class ShopScene{
 
         this.prepareItem();
         this.shopUi.setBase(this.itemSell);
+
+        this.cersor = [0,0];
+        this.cersorLog = new Array();
     }
 
     shopEnd(){
@@ -55,21 +62,66 @@ class ShopScene{
         //this.flame += 1;
         //console.log("flame",this.flame)
         if(this.endFlag == true){
-            this.flagEnd();
+            this.shopEnd();
         }
         
     }
 
     input(){
         if(this.keyPressing("j")){
-
+            this.cersorX(-1);
         }
         if(this.keyPressing("l")){
-
+            this.cersorX(1);
+        }
+        if(this.keyPressing("k")){
+            this.cersorY(-1);
+        }
+        if(this.keyPressing("i")){
+            this.cersorY(1);
+        }
+        if(this.keyPressing("a")){
+            this.cersorY(1);
         }
     }
 
+    cersorX(num){
+        this.cersor[0] += num;
+        if(this.cersor[0] < 0){
+            this.cersor[0] = 0;
+        }
+        else if(this.cersor[0] > 5){
+            this.cersor[0] = 4;
+        }
+    }
 
+    cersorY(num){
+        this.cersor[1] += num;
+        if(this.cersor[1] < 0){
+            this.cersor[1] = 0;
+        }
+        else if(this.cersor[1] > 2){
+            this.cersor[1] = 1;
+        }
+    }
+
+    enter(){
+        if(this.cersor[0] == 4){
+            this.endFlag = true;
+        }
+        else{
+            //仮　price無視
+            if(this.cersor[0] != 4 && this.canbuy() && (this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] == false)){
+                this.player.deck.addCard(this.itemSell[this.cersor[0] + 4*this.cersor[1]][0]);
+                this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] = true;
+            }
+        }
+    }
+
+    //money実装したら
+    canbuy(){
+        return true;
+    }
 
     prepareItem(){
 

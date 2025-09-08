@@ -20,6 +20,12 @@ class ShopShow{
         this.setItemGraphic();
         this.shopUi.addChild(this.itemGraphicContainer);
 
+        this.exitBox = new PIXI.Graphics().rect(0,0,60,60).fill(0xffffff);
+        this.exitBox.x = 320;
+        this.exitBox.y = 120;
+
+        this.shopUi.addChild(this.exitBox);
+
     }
 
     setItem(items){
