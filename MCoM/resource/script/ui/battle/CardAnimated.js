@@ -15,8 +15,8 @@ class CardAnimated{
         this.a = a;
     }
 
-    movecC(cards,card,goalX,goalY){
-        var card = card.cardGraphic;
+    movecC(cards,basecard,goalX,goalY){
+        var card = basecard.cardGraphic;
         //console.log(i)
         if(card.x == goalX && card.y == goalY){
             //card.visible = false;
@@ -25,7 +25,7 @@ class CardAnimated{
                 cards.animateCard.remove(this.a);
                 var This = this;
                 var fn = function(time){
-                    This.drop(cards,i,"");
+                    This.drop(cards,basecard,"");
                 }
                 this.a = fn;
                 cards.animateCard.add(fn);
@@ -53,8 +53,8 @@ class CardAnimated{
     }
 
 
-    drop(cards,card,side){
-        var card = card.cardGraphic
+    drop(cards,basecard,side){
+        var card = basecard.cardGraphic
 
         var xSpeed = this.xSpeed;
         var ySpeed = this.ySpeed;

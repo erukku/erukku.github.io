@@ -155,6 +155,11 @@ class DeckShow{
         if(this.rolling){
             return 0;
         }
+
+        if(this.keepCardNum == 3){
+            this.keepUse();
+            return 0;
+        }
         var count = 0
         var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
         for(var i = 0;i < this.deckList.length;i++){
@@ -408,37 +413,42 @@ class DeckShow{
 
         var array = new Array();
 
-        for(var i = 0 ; i < this.keepCardArray.length;i++){
+        for(var i = 0 ; i < this.keepCardNum;i++){
             var card = this.keepCardArray.pop();
             this.keepCard[card.getCardIds()] = false;
 
             card.cardGraphic.x = -10000;
             card.cardGraphic.y = -10000;
-            card.cardGraphic.scale.x = this.deckList[i].cardGraphic.scale.y = 1;
-
-            this.keepCardNum -= 1;
-
+            card.cardGraphic.scale.x = card.cardGraphic.scale.y = 1;
             array.push(card);
         }
         
-        for(var i = 0 ; i < this.array.length;i++){
-            var card = this.array.pop();
-            this.wasteCard[card.getCardIds()] = true;
+        for(var i = 0 ; i < this.keepCardNum;i++){
+            var card = array.pop();
+            console.log(card);
+            this.usedCard[card.getCardIds()] = true;
 
-            card.cardGraphic.x = i * 50;
+            card.cardGraphic.x = -50 + i * 30;
             card.cardGraphic.y = 0;
-            card.cardGraphic.scale.x = this.deckList[i].cardGraphic.scale.y = 1;
+            card.cardGraphic.scale.x = card.cardGraphic.scale.y = 1;
 
-            container.addChild(card);
+            card.cardGraphic.zIndex = 100-i;
+            container.addChild(card.cardGraphic);
         }
+
+        this.keepCardNum = 0;
 
         //仮
         var multiCard = new CardBase("attack");
         multiCard.cost = this.cost;
         multiCard.cardGraphic = container;
 
+        this.deckCircle.addChild(multiCard.cardGraphic);
+
         multiCard.cardGraphic.x = this.R*Math.cos(this.startangle);
         multiCard.cardGraphic.y = this.R*Math.sin(this.startangle);
+
+        
         if(this.side == "L"){
             multiCard.cardGraphic.x += 50;
         }
@@ -446,15 +456,6 @@ class DeckShow{
             multiCard.cardGraphic.x -= 50;
         }
         multiCard.cardGraphic.y -= 50;
-            
-        
-        multiCard.cardGraphic.x = -30;
-        
-        if(this.side == "R"){
-            multiCard.cardGraphic.x += 640 + 30; 
-        }
-
-        multiCard.cardGraphic.y = 330;
         
 
         var po = this.deckList;
@@ -485,7 +486,7 @@ class DeckShow{
         for(var i = 0 ; i < this.keepCardArray.length;i++){
             var card = this.keepCardArray.pop();
             this.keepCard[card.getCardIds()] = false;
-            this.wasteCard[card.getCardIds()] = true;
+            this.usedCard[card.getCardIds()] = true;
 
             card.cardGraphic.x = -10000;
             card.cardGraphic.y = -10000;

@@ -207,6 +207,12 @@ class BattleScene{
             var cardIndex = this.player.deckset.getCardIndex();
             var card = this.player.deck.deck[cardIndex];
             //console.log(this.player.deck.deck);
+
+            //仮
+            if(this.player.deckset.keepCardNum == 3){
+                card = new CardBase("attack");
+                card.cost = this.player.deckset.cost;
+            }
             
             if(card.cardClass == 'reload'){
                 this.player.deckset.use();
