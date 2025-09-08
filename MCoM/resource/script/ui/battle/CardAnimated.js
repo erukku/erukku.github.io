@@ -15,8 +15,8 @@ class CardAnimated{
         this.a = a;
     }
 
-    movecC(cards,i,goalX,goalY){
-        var card = cards.deckList[i].cardGraphic
+    movecC(cards,card,goalX,goalY){
+        var card = card.cardGraphic;
         //console.log(i)
         if(card.x == goalX && card.y == goalY){
             //card.visible = false;
@@ -53,8 +53,8 @@ class CardAnimated{
     }
 
 
-    drop(cards,i,side){
-        var card = cards.deckList[i].cardGraphic
+    drop(cards,card,side){
+        var card = card.cardGraphic
 
         var xSpeed = this.xSpeed;
         var ySpeed = this.ySpeed;

@@ -1,6 +1,7 @@
 import Deck from "../../card/Deck.js"
 import DefaultDict from "../../util/DefaultDict.js"
 import CardAnimated from "./CardAnimated.js"
+import CardBase from "../../card/CardBase.js";
 
 class DeckShow{
     deckList;
@@ -205,10 +206,10 @@ class DeckShow{
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
                 if(this.side == "R"){
-                    var a = function(time){animate.movecC(test,index,-300,-80,this);}
+                    var a = function(time){animate.movecC(test,po[index],-300,-80,this);}
                 }
                 else{
-                    var a = function(time){animate.movecC(test,index,300,-80,this);}
+                    var a = function(time){animate.movecC(test,po[index],300,-80,this);}
                 }
                 
                 animate.setSelf(a);
@@ -294,10 +295,10 @@ class DeckShow{
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
                 if(this.side == "R"){
-                    var a = function(time){animate.movecC(test,index,-300,-80,this);}
+                    var a = function(time){animate.movecC(test,po[index],-300,-80,this);}
                 }
                 else{
-                    var a = function(time){animate.movecC(test,index,300,-80,this);}
+                    var a = function(time){animate.movecC(test,po[index],300,-80,this);}
                 }
                 
                 animate.setSelf(a);
@@ -432,9 +433,51 @@ class DeckShow{
         }
 
         //仮
+        var multiCard = new CardBase("attack");
+        multiCard.cost = this.cost;
+        multiCard.cardGraphic = container;
+
+        multiCard.cardGraphic.x = this.R*Math.cos(this.startangle);
+        multiCard.cardGraphic.y = this.R*Math.sin(this.startangle);
+        if(this.side == "L"){
+            multiCard.cardGraphic.x += 50;
+        }
+        else{
+            multiCard.cardGraphic.x -= 50;
+        }
+        multiCard.cardGraphic.y -= 50;
+            
+        
+        multiCard.cardGraphic.x = -30;
+        
+        if(this.side == "R"){
+            multiCard.cardGraphic.x += 640 + 30; 
+        }
+
+        multiCard.cardGraphic.y = 330;
+        
+
+        var po = this.deckList;
+        var test = this;
+        var animate = new CardAnimated();
+        //console.log(index,ii % (circleCardNum+1) == 0);
+        //this.a = function(time){test.movecC(test,index,300,-80,this);}
+        if(this.side == "R"){
+            var a = function(time){animate.movecC(test,multiCard,-300,-80,this);}
+        }
+        else{
+            var a = function(time){animate.movecC(test,multiCard,300,-80,this);}
+        }
+        
+        animate.setSelf(a);
+        this.animateCard.add(a);
+        
+        
         this.costGraphic.visible = false;
         this.cost = 0;
         this.costGraphic.text = this.cost;
+
+    
     }
 
     keepWaste(){
