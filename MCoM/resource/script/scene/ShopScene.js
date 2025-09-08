@@ -62,8 +62,13 @@ class ShopScene{
         //this.flame += 1;
         //console.log("flame",this.flame)
         if(this.endFlag == true){
+            this.shopUi.delete();
             this.shopEnd();
         }
+
+        this.input();
+        this.shopUi.setCersorPos(this.cersor[0],this.cersor[1]);
+        this.shopUi.draw();
         
     }
 
@@ -75,13 +80,13 @@ class ShopScene{
             this.cersorX(1);
         }
         if(this.keyPressing("k")){
-            this.cersorY(-1);
+            this.cersorY(1);
         }
         if(this.keyPressing("i")){
-            this.cersorY(1);
+            this.cersorY(-1);
         }
         if(this.keyPressing("a")){
-            this.cersorY(1);
+            this.enter();
         }
     }
 
@@ -90,7 +95,7 @@ class ShopScene{
         if(this.cersor[0] < 0){
             this.cersor[0] = 0;
         }
-        else if(this.cersor[0] > 5){
+        else if(this.cersor[0] > 4){
             this.cersor[0] = 4;
         }
     }
@@ -100,7 +105,7 @@ class ShopScene{
         if(this.cersor[1] < 0){
             this.cersor[1] = 0;
         }
-        else if(this.cersor[1] > 2){
+        else if(this.cersor[1] > 1){
             this.cersor[1] = 1;
         }
     }

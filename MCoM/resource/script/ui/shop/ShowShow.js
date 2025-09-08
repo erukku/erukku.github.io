@@ -7,6 +7,9 @@ class ShopShow{
 
         this.itemList = null;
         this.itemGraphicContainer = new PIXI.Container();
+
+        this.cersor = null;
+        this.cersorPos = [0,0];
         
     }
 
@@ -26,6 +29,25 @@ class ShopShow{
 
         this.shopUi.addChild(this.exitBox);
 
+        this.setCersor();
+
+    }
+
+    setCersor(){
+        this.cersor = new PIXI.Container();
+
+        var rect = new PIXI.Graphics().rect(0,0,20,10).fill(0x444444);
+        rect.rotation = (Math.PI / 4);
+
+        this.cersor.addChild(rect);
+
+        this.shopUi.addChild(this.cersor);
+    }
+
+    setCersorPos(x,y){
+        this.cersorPos[0] = x;
+        this.cersorPos[1] = y;
+        //console.log(x,y);
     }
 
     setItem(items){
@@ -62,11 +84,24 @@ class ShopShow{
     }
 
     draw(){
+        if(this.cersorPos[0] == 4){
+            this.cersor.x = this.exitBox.x;
+            this.cersor.y = this.exitBox.y;
+        }
+        else{
+            this.cersor.x = this.itemGraphicContainer.getChildAt(this.cersorPos[0] + this.cersorPos[1]*4).x;
+            this.cersor.y = this.itemGraphicContainer.getChildAt(this.cersorPos[0] + this.cersorPos[1]*4).y;
+        }
 
+        console.log(this.cersor.x,this.cersor.y);
     }
 
+
+    //仮実装
     delete(){
-        this.shopUi.destroy();
+        this.shopUi.x = -10000;
+        this.shopUi.y = -10000;
+        //this.shopUi.destroy();
     }
 
 }

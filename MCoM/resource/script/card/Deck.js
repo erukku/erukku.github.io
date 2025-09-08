@@ -58,7 +58,7 @@ class Deck{
 
 
     addCard(card){
-        this.deck.add(card);
+        this.deck.push(card);
     }
 
     load(data){
