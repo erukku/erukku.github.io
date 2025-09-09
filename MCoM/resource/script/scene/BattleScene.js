@@ -305,12 +305,14 @@ class BattleScene{
                 return 0
             }
             else if(this.player.actionNow == null){
+                //console.log(this.player.attackData);
                 this.player.actionNow = this.player.attackData.shift();
+                //console.log(this.player.actionNow);
             }
 
             if(this.player.attackFlame == this.player.actionNow[1]){
                 this.player.attackFlame = 0;
-                
+                this.player.actionNow = null;
                 return 0
             }
 
@@ -327,12 +329,12 @@ class BattleScene{
                 var aC = new AttackCollider();
 
                 var data = this.player.actionNow[3];
+                //console.log(data);
 
                 if(data[0] == "move"){
                     //仮
-                    data[2][1].addPos(data[1],0,0);
+                    data[2][0][1].addPos(data[1],0,0);
                 }
-
 
                 var hit = aC.isHitted(this.player,data[2],this.enemyList);
 
@@ -349,7 +351,8 @@ class BattleScene{
                     if(f){
                         break;
                     }
-                    e.damage(this.player.attackData[2]);
+                     
+                    e.damage(this.player.actionNow[2]);
                     this.player.attackedE.push(e);
                     
                 }

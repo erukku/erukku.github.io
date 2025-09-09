@@ -1,5 +1,6 @@
 import AttackBox from "../base/AttackBox.js"
-
+import Body from "../../base/Body.js";
+import Position from "../../base/Position.js";
 class MagicInfo{
     constructor(){
     }
@@ -14,7 +15,7 @@ class MagicInfo{
                 position.setPos(30,0,0);
 
                 var box = new AttackBox(position,body);
-                return [2,["wait",30]["attack",60,50,["move",6,box]]];
+                return new Array(2,["wait",30],["attack",60,50,["move",6,[box]]]);
 
         }
 

@@ -43,7 +43,7 @@ class Player{
 
         this.attackInfo = new AttackInfo();
         this.magicInfo = new MagicInfo();
-        this.itemkInfo = new ItemInfo();
+        this.itemInfo = new ItemInfo();
         this.attacking = false;
         this.attackId = 0;
         this.attackFlame = 0;
@@ -189,21 +189,29 @@ class Player{
         var cardIndex = this.deckset.getCardIndex();
         var card = this.deck.deck[cardIndex];
 
+        console.log(cardIndex,card.cardClass);
+
         switch(card.cardClass){
             case "attack":
                 this.attackData = this.attackInfo.getInfo(0);
+                break;
 
             case "magic":
                 this.attackData = this.magicInfo.getInfo(0);
+                break;
 
             case "item":
                 this.attackData = this.itemInfo.getInfo(0);
+                break;
 
             case "special":
                 0
+                break;
 
 
         }
+
+        console.log(this.attackData);
 
         this.attackData.shift();
         this.attacking = true;
