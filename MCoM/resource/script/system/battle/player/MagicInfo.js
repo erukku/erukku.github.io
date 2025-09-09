@@ -14,7 +14,7 @@ class MagicInfo{
                 position.setPos(30,0,0);
 
                 var box = new AttackBox(position,body);
-                return [2,["wait",30]["attack",50,60,["move",6,box]]];
+                return [2,["wait",30]["attack",60,50,["move",6,box]]];
 
         }
 

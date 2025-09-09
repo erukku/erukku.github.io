@@ -7,6 +7,9 @@ class Status{
     damage(num){
         this.hp -= num;
     }
+    heal(num){
+        this.hp += num;
+    }
 }
 
 

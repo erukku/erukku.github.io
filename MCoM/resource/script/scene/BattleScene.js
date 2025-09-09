@@ -296,7 +296,7 @@ class BattleScene{
 
 
         if(this.player.attacking){
-            if(this.player.attackFlame == this.player.attackData[0]){
+            if(this.player.actionNow == null && this.player.attackData.length == 0){
                 this.player.attackFlame = 0;
                 this.player.attacking = false;
                 this.player.attackedE = new Array();
@@ -304,27 +304,56 @@ class BattleScene{
                 this.fieldCard.reset();
                 return 0
             }
-            var aC = new AttackCollider();
-            var hit = aC.isHitted(this.player,this.player.attackData[2],this.enemyList);
+            else if(this.player.actionNow == null){
+                this.player.actionNow = this.player.attackData.shift();
+            }
 
-            for(var i = 0;i < hit.length;i++){
-                var e = hit[i];
-                var f = false;
-                for(var j = 0;j < this.player.attackedE.length;j++){
-                    if(e == this.player.attackedE[j]){
-                        f = true;
+            if(this.player.attackFlame == this.player.actionNow[1]){
+                this.player.attackFlame = 0;
+                
+                return 0
+            }
+
+            this.player.attackFlame += 1;
+
+            if(this.player.actionNow[0] == "wait"){
+                return 0
+            }
+            else if(this.player.actionNow[0] == "heal"){
+                this.player.heal(this.player.actionNow[2]);
+                return 0;
+            }
+            else{//現時点ではattack
+                var aC = new AttackCollider();
+
+                var data = this.player.actionNow[3];
+
+                if(data[0] == "move"){
+                    //仮
+                    data[2][1].addPos(data[1],0,0);
+                }
+
+
+                var hit = aC.isHitted(this.player,data[2],this.enemyList);
+
+                for(var i = 0;i < hit.length;i++){
+                    var e = hit[i];
+                    var f = false;
+                    for(var j = 0;j < this.player.attackedE.length;j++){
+                        if(e == this.player.attackedE[j]){
+                            f = true;
+                            break;
+                        }
+
+                    }
+                    if(f){
                         break;
                     }
-
+                    e.damage(this.player.attackData[2]);
+                    this.player.attackedE.push(e);
+                    
                 }
-                if(f){
-                    break;
-                }
-                e.damage(this.player.attackData[1]);
-                this.player.attackedE.push(e);
-                
             }
-            this.player.attackFlame += 1;
         }
 
     }

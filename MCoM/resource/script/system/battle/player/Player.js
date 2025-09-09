@@ -4,6 +4,8 @@ import Deck from "../../../card/Deck.js"
 import Position from "../../base/Position.js"
 import ConvertPos from "../../base/ConvertPos.js"
 import AttackInfo from "./AttackInfo.js"
+import MagicInfo from "./MagicInfo.js"
+import ItemInfo from "./ItemInfo.js"
 
 import HpBar from "../../../ui/normal/player/HpBar.js"
 import DeckShow from "../../../ui/battle/DeckShow.js"
@@ -40,10 +42,14 @@ class Player{
         this.direction = "R";
 
         this.attackInfo = new AttackInfo();
+        this.magicInfo = new MagicInfo();
+        this.itemkInfo = new ItemInfo();
         this.attacking = false;
         this.attackId = 0;
         this.attackFlame = 0;
         this.attackedE = new Array();
+
+        this.actionNow = null;
 
 
         this.ticker = PIXI.Ticker.shared;
@@ -180,13 +186,40 @@ class Player{
     }
 
     attack(){
-        this.attackData = this.attackInfo.getInfo(0);
+        var cardIndex = this.deckset.getCardIndex();
+        var card = this.deck.deck[cardIndex];
+
+        switch(card.cardClass){
+            case "attack":
+                this.attackData = this.attackInfo.getInfo(0);
+
+            case "magic":
+                this.attackData = this.magicInfo.getInfo(0);
+
+            case "item":
+                this.attackData = this.itemInfo.getInfo(0);
+
+            case "special":
+                0
+
+
+        }
+
+        this.attackData.shift();
         this.attacking = true;
+
+    }
+
+    heal(num){
+        this.status.heal(num);
+        this.hpBar.heal(num);
+
     }
     
     damage(num){
         this.status.damage(num);
-        console.log(this.status);
+        this.hpBar.damage(num);
+        //console.log(this.status);
     }
 }
 

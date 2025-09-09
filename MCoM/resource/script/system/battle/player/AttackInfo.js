@@ -17,6 +17,8 @@ class AttackInfo{
                 var box = new AttackBox(position,body);
                 return [60,50,[box]];
 
+                return [1,["attack",50,["stay",60,box]]];
+
         }
 
     }
