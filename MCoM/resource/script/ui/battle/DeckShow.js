@@ -78,6 +78,9 @@ class DeckShow{
             this.deckList[i].cardGraphic.x = this.R*Math.cos(this.startangle+i * (360/circleCardNum) * (Math.PI/180));
             this.deckList[i].cardGraphic.y = this.R*Math.sin(this.startangle+i * (360/circleCardNum) * (Math.PI/180));
             this.deckCircle.addChild(this.deckList[i].cardGraphic) 
+            if(this.side == "R"){
+                this.deckList[i].cardGraphic.visible = false;   
+            }
             if(i == 0){
                 if(this.side == "L"){
                     this.deckList[i].cardGraphic.x += 50;
@@ -96,6 +99,8 @@ class DeckShow{
         }
 
         this.deckCircle.y = 330;
+
+        
 
     }
 

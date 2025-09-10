@@ -6,6 +6,7 @@ class CardBase{
     cardGraphic;
     type;
     cost;
+    side;
 
     constructor(type){
         this.cardClass = type;
@@ -15,6 +16,7 @@ class CardBase{
         this.reloadFlame = 0;
         this.cost = 0;
 
+        this.side = null;
     }
 
     setBaseInfo(cardId,cardDeckId){
@@ -26,6 +28,10 @@ class CardBase{
         return String(this.cardId) + String(this.cardDeckId);
     }
 
+    setSide(side){
+        this.side = side;
+    }
+    
     chargeReload(){
         this.reloadFlame += 1;
         var chargePar = this.reloadFlame % 30;
@@ -51,7 +57,7 @@ class CardBase{
         if(this.cost == 0){
             this.cost = cost;
         }
-        
+
         switch (this.cardClass) {
             case 'attack':
                 

@@ -149,6 +149,7 @@ class ShopScene{
             var cost = this.selectCost();
             card.setCost(cost);
             card.drawCard(cost);
+            card.setSide("player");
             var price = this.selectPrice();
 
             this.itemSell.push([card,price]);

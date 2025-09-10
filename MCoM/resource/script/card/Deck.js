@@ -13,30 +13,35 @@ class Deck{
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard(9);
+        atCard.setSide("player");
         this.deck.push(atCard);
         }
         var atCard = new CardBase("magic");
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard(5);
+        atCard.setSide("player");
         this.deck.push(atCard);
 
         var atCard = new CardBase("item");
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard();
+        atCard.setSide("player");
         this.deck.push(atCard);
 
         var atCard = new CardBase("special");
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard();
+        atCard.setSide("player");
         this.deck.push(atCard);
 
         var atCard = new CardBase("reload");
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard();
+        atCard.setSide("player");
         this.deck.push(atCard);
     }
 
@@ -47,12 +52,14 @@ class Deck{
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard();
+        atCard.setSide("enemy");
         this.deck.push(atCard);
         }
         var atCard = new CardBase("reload");
         atCard.setBaseInfo(num,num);
         num += 1;
         atCard.drawCard();
+        atCard.setSide("enemy");
         this.deck.push(atCard);
     }
 

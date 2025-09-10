@@ -3,6 +3,7 @@ class CardAnimated{
     constructor(scene){
         this.Scene = scene;
         this.flame = 0;
+        this.allFlame = 120;
         this.a = 0;
 
         this.xSpeed = 2;
@@ -17,6 +18,9 @@ class CardAnimated{
 
     movecC(cards,basecard,goalX,goalY){
         var card = basecard.cardGraphic;
+        if(basecard.side == "enemy"){
+            card.visible = true;
+        }
         //console.log(i)
         if(card.x == goalX && card.y == goalY){
             //card.visible = false;
@@ -28,14 +32,17 @@ class CardAnimated{
                     This.drop(cards,basecard,"");
                 }
                 this.a = fn;
-                cards.animateCard.add(fn);
+                cards.animateCard.add(this.a);
                 return 0;
             }
             
 
             if(this.flame == 40){
-                card.x = -100;
-                card.y = -100;
+                card.x = -1000;
+                card.y = -1000;
+                if(basecard.side == "enemy"){
+                    card.visible = false;
+                }
                 cards.animateCard.remove(this.a);
                 this.flame = 0;
             }
@@ -68,8 +75,11 @@ class CardAnimated{
             this.ySpeed += 2;
         }
         else{
-            card.x = -100;
-            card.y = -100;
+            if(basecard.side == "enemy"){
+                card.visible = false;
+            }
+            card.x = -1000;
+            card.y = -1000;
             cards.animateCard.remove(this.a);
             this.flame = 0;
         }
