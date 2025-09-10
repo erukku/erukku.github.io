@@ -22,6 +22,9 @@ class HpBar{
 
         this.hpBarsNum = 0;
         this.maxHpBars = new PIXI.Container();
+
+        this.maxHpBars.x = 500;
+        this.maxHpBars.y = 30;
     }
 
     setGraphic(){
@@ -30,16 +33,21 @@ class HpBar{
         
             for(var i = 0;i < this.hpBarsNum;i++){
                 var hpContainer = new PIXI.Container();
-                var maxHpFlame = new PIXI.Graphics().rect(0,0,120,20).fill(0xaaaaaa); 
+                var maxHpFlame = new PIXI.Graphics().rect(0,0,110,30).fill(0xaaaaaa);
+                var maxHpBar =  new PIXI.Graphics().rect(0,0,100,20).fill(0x000000);
                 var perHp = this.maxHp - i*100;
                 if(perHp > 100){
                     perHp = 100;
                 }
                 var hpBar = new PIXI.Graphics().rect(0,0,100 * (perHp/100),20).fill(0x00ff00);
-                hpBar.x = 10;
+                hpBar.x = 5;
                 hpBar.y = 5;
+
+                maxHpBar.x = 5;
+                maxHpBar.y = 5;
         
                 hpContainer.addChild(maxHpFlame);
+                hpContainer.addChild(maxHpBar);
                 hpContainer.addChild(hpBar);
 
                 if(i != this.hpBarsNum-1){
@@ -49,6 +57,7 @@ class HpBar{
             }
         this.scene.addChild(this.maxHpBars);
     })();
+        this.maxHpBars.visible = false;
     }
 
     damage(num){
@@ -63,7 +72,7 @@ class HpBar{
             if(ii == -1){
                 continue;
             }
-            var hpBar = this.maxHpBars.getChildAt(ii).getChildAt(1);
+            var hpBar = this.maxHpBars.getChildAt(ii).getChildAt(2);
 
             var perHp = (this.hp - num) - ii*100;
             if(perHp > 100){
@@ -82,6 +91,8 @@ class HpBar{
         }
 
         this.hp = this.hp - num;
+
+        this.maxHpBars.visible = false;
         
     }
 
@@ -96,7 +107,7 @@ class HpBar{
             if(ii == -1){
                 continue;
             }
-            var hpBar = this.maxHpBars.getChildAt(ii).getChildAt(1);
+            var hpBar = this.maxHpBars.getChildAt(ii).getChildAt(2);
 
             var perHp = (this.hp + num) - ii*100;
             if(perHp > 100){
@@ -113,6 +124,8 @@ class HpBar{
 
         this.hp = this.hp + num;
         this.maxHpBars.getChildAt(ii).visible = true;
+
+        this.maxHpBars.visible = false;
         
     }
 

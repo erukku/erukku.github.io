@@ -36,6 +36,9 @@ class Route{
         this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+1) + 60, 180).endFill();
         this.graphicContainer.addChild(this.underMap);
 
+        this.graphicContainer.x = 100;
+    
+
         this.pointList = new Array();
         this.iconList = new Array();
         this.lineList = new Array();

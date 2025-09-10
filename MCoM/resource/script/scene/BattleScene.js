@@ -37,6 +37,10 @@ class BattleScene{
         this.cardAnimationTicker = null;
         this.flame = 0;
         this.keepFlame = -100;
+
+        this.targetFlag = false;
+        this.targetIndex = null;
+        this.targetLockFlame = 0;
     }
     setTest(){
         var This = this;
@@ -59,18 +63,91 @@ class BattleScene{
             this.battleEnd();
         }
         
-        this.enemyThink(); 
+        this.enemyThink();
+        if(this.flame >= this.targetLockFlame){
+            this.target();
+        }
+        
+
         this.move();
         this.card();
         this.useCard();
         this.action();
         this.afterTreat();
+
+        this.targetActivate();
+
     }
 
     enemyThink(){
         for(var i = 0;i < this.enemyList.length;i++){
             this.enemyList[i].think();
         }
+    }
+
+    target(){
+        if(this.keyPressing("1")){
+            if(this.targetFlag){
+                this.targetFlag = false;
+                this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = false;
+                this.targetIndex = null;
+
+                this.targetLockFlame = this.flame + 10;
+            }
+            else{
+                this.targetFlag = true;
+                this.targetInit();
+                this.targetLockFlame = this.flame + 10;
+            }
+        }
+        if(this.keyPressing("2") && this.targetFlag){
+            this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = false;
+            for(var i = this.targetIndex; i < this.enemyList.length * 2;i++){
+                var ii = i % this.enemyList.length;
+                var enemy = this.enemyList[ii];
+                if(enemy.status.hp == 0){
+                    continue
+                }
+                this.targetIndex = ii;
+                break;
+            }
+            this.targetLockFlame = this.flame + 10;
+        }
+        if(this.keyPressing("3")&& this.targetFlag){
+            this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = false;
+            for(var i = 1; i < this.enemyList.length*2;i++){
+                var ii = (this.targetIndex - i) % this.enemyList.length;
+                ii = ii + this.enemyList.length;
+                ii = (ii) % this.enemyList.length;
+                var enemy = this.enemyList[ii];
+                if(enemy.status.hp == 0){
+                    continue
+                }
+                this.targetIndex = ii;
+                break;
+            }
+
+            this.targetLockFlame = this.flame + 10;
+        }
+    }
+
+    targetInit(){
+        for(var i = 0; i < this.enemyList.length;i++){
+            var enemy = this.enemyList[i];
+            if(enemy.status.hp == 0){
+                continue
+            }
+            this.targetIndex = i;
+            break;
+        }
+    }
+
+    targetActivate(){
+        if(this.targetFlag == false || this.enemyList.length == 0){
+            return 0;
+        }
+
+        this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = true;
     }
 
     move(){

@@ -4,18 +4,23 @@ import Deck from "../../../card/Deck.js"
 import Position from "../../base/Position.js"
 import ConvertPos from "../../base/ConvertPos.js"
 import AttackInfo from "./AttackInfo.js"
+import HpBar from "../../../ui/normal/enemy/HpBar.js"
 
 
 import DeckShow from "../../../ui/battle/DeckShow.js"
 class Enemy{
     constructor(){
         this.status = new Status();
+
         this.deck = new Deck();
         this.deck.setEBase();
 
         this.uiContainer = new PIXI.Container();
         this.deckset = new DeckShow(this.uiContainer,"R");
         this.deckset.deckSet(this.deck);
+
+        this.hpBar = new HpBar(this.status.maxHp,this.uiContainer);
+        this.hpBar.setGraphic();
 
         this.position = new Position();
         this.body = new Body();
@@ -99,6 +104,7 @@ class Enemy{
 
     damage(num){
         this.status.damage(num);
+        this.hpBar.damage(num);
         console.log(this.status);
     }
 
