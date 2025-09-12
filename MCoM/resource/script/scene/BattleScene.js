@@ -90,6 +90,7 @@ class BattleScene{
             if(this.targetFlag){
                 this.targetFlag = false;
                 this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = false;
+                this.enemyList[this.targetIndex].targetGraphic.visible = false;
                 this.targetIndex = null;
 
                 this.targetLockFlame = this.flame + 10;
@@ -97,13 +98,16 @@ class BattleScene{
             else{
                 this.targetFlag = true;
                 this.targetInit();
+
+                this.enemyList[this.targetIndex].targetGraphic.visible = true;
                 this.targetLockFlame = this.flame + 10;
             }
         }
         if(this.keyPressing("2") && this.targetFlag){
             this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = false;
-            for(var i = this.targetIndex; i < this.enemyList.length * 2;i++){
-                var ii = i % this.enemyList.length;
+            this.enemyList[this.targetIndex].targetGraphic.visible = false;
+            for(var i = 1; i <= this.enemyList.length;i++){
+                var ii = (this.targetIndex + i) % this.enemyList.length;
                 var enemy = this.enemyList[ii];
                 if(enemy.status.hp == 0){
                     continue
@@ -115,6 +119,7 @@ class BattleScene{
         }
         if(this.keyPressing("3")&& this.targetFlag){
             this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = false;
+            this.enemyList[this.targetIndex].targetGraphic.visible = false;
             for(var i = 1; i < this.enemyList.length*2;i++){
                 var ii = (this.targetIndex - i) % this.enemyList.length;
                 ii = ii + this.enemyList.length;
@@ -148,6 +153,7 @@ class BattleScene{
         }
 
         this.enemyList[this.targetIndex].hpBar.maxHpBars.visible = true;
+        this.enemyList[this.targetIndex].targetGraphic.visible = true;
     }
 
     move(){

@@ -27,6 +27,8 @@ class Enemy{
         this.graphic = new PIXI.Container();
         this.converter = new ConvertPos();
 
+        this.targetGraphic = new PIXI.Graphics();
+
         this.action = "move";
         this.actionPattern = new Array();
         this.actionFlame = 0;
@@ -56,6 +58,13 @@ class Enemy{
         
         this.graphic.addChild(this.graphicShadow);
         this.graphic.addChild(this.graphicMain);
+
+        this.targetGraphic = new PIXI.Graphics().poly([0,0,30,0,15,15]).fill(0x0000ff);
+        this.targetGraphic.y = -40;
+
+        this.targetGraphic.visible = false;
+
+        this.graphicMain.addChild(this.targetGraphic);
 
         this.converter.convert(this);
 
