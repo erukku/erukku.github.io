@@ -6,6 +6,7 @@ import ConvertPos from "../../base/ConvertPos.js"
 import AttackInfo from "./AttackInfo.js"
 import MagicInfo from "./MagicInfo.js"
 import ItemInfo from "./ItemInfo.js"
+import Animation from "./Animation.js"
 
 import HpBar from "../../../ui/normal/player/HpBar.js"
 import DeckShow from "../../../ui/battle/DeckShow.js"
@@ -59,15 +60,13 @@ class Player{
         this.assets = PIXI.Assets;
 
         this.cardIndex = 0;
+
+        this.animation = new Animation(this);
         
     }
 
     setTest(){
         this.assets.add({alias:"player",src:"MCoM/resource/img/player.png"});
-
-        
-        
-
 
         //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0xbbbbbb);
         
@@ -105,7 +104,7 @@ class Player{
         this.position.setPos(50,50,0);
         this.converter.convert(this);
         
-        console.log("a");
+        this.animation.setTest();
     }   
 
     testImage(){
@@ -122,6 +121,7 @@ class Player{
 
     moveX(num){             
         this.position.x += num;
+        this.animation.setStatus("walk");
         if(num > 0){
             this.direction = "R";
             if(this.graphicMain.scale.x < 0){
@@ -146,6 +146,7 @@ class Player{
 
     moveY(num){
         this.position.y += num;
+        this.animation.setStatus("walk");
         if(this.position.y < 0){
             this.position.y = 0;
         }
@@ -156,6 +157,7 @@ class Player{
     }
 
     jump(){
+        this.animation.setStatus("jump");
         if(this.jumping){
 
         }
@@ -188,6 +190,8 @@ class Player{
     attack(){
         var cardIndex = this.deckset.getCardIndex();
         var card = this.deck.deck[cardIndex];
+
+        this.animation.setStatus("attack");
 
         console.log(cardIndex,card.cardClass);
 
