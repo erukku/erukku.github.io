@@ -1,3 +1,4 @@
+import DefaultDict from "../../util/DefaultDict.js";
 class Route{
     constructor(scene){
         this.route = null;
@@ -5,7 +6,14 @@ class Route{
 
         this.scene = scene;
 
+
+        this.assets = PIXI.Assets
+        this.rootIconDict = new DefaultDict(null);
+
         this.count = 0;
+
+
+
     }
 
     setRoute(length){
@@ -30,7 +38,7 @@ class Route{
         this.route.push(["end"]);
     }
 
-    setGraphic(){
+    async setGraphic(){
         this.graphicContainer = new PIXI.Container();
 
         this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+1) + 60, 180).endFill();
@@ -62,7 +70,7 @@ class Route{
             for(var j = 0;j < this.route[i].length;j++){
                 
                 var circle = new PIXI.Graphics().circle(0,0,20);
-                var icon = null;
+                var icon = new PIXI.Sprite();
                 circle.scale.y = 0.3;
                 switch(this.route[i][j]){
                     case "start":
@@ -73,17 +81,36 @@ class Route{
 
                     case "end":
                         circle.fill(0xFEFF00);
-                        icon = new PIXI.Graphics().circle(0,0,20).fill(0xFFFFFF);
+                        //icon = new PIXI.Graphics().circle(0,0,20).fill(0xFFFFFF);
+                        //icon = new PIXI.Sprite(this.rootIconDict["goal"]);
+                        
+                        
+                        icon = new PIXI.Sprite(await this.assets.load("goal"));
+                        icon.scale.x = icon.scale.y =0.15;
+                        icon.anchor.x = icon.anchor.y = 0.5;
                         break;
                     
                     case "battle":
                         circle.fill(0xFF002A);
-                        icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        //icon = new PIXI.Sprite(this.rootIconDict["battle"]);
+                        
+                        icon = new PIXI.Sprite(await this.assets.load("battle"));
+                        
+                        console.log(icon);
+                        icon.scale.x = icon.scale.y =0.15;
+                        icon.anchor.x = icon.anchor.y = 0.5;
                         break;
 
                     case "shop":
                         circle.fill(0x99330A);
-                        icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        icon = new PIXI.Sprite();
+                        
+                        icon = new PIXI.Sprite(await this.assets.load("shop"));
+                        icon.scale.x = icon.scale.y =0.15;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
                         break;
                 }
 
@@ -183,6 +210,24 @@ class Route{
         this.playerIcon.x = po.x;
         this.playerIcon.y = po.y;
         this.iconList[this.now[0]][this.now[1]].destroy();
+    }
+
+    initAsset(){
+        this.assets.add({alias:"battle",src:"MCoM/resource/img/battle.png"});
+        this.assets.add({alias:"shop",src:"MCoM/resource/img/shop.png"});
+        this.assets.add({alias:"goal",src:"MCoM/resource/img/goal.png"});
+    }
+
+
+    initRootIconDict(){
+        
+        (async () => {
+            console.log("aaaå")
+            this.rootIconDict["battle"] = await this.assets.load("battle");
+            this.rootIconDict["shop"] = await this.assets.load("shop");
+            this.rootIconDict["goal"] = await this.assets.load("goal");
+            console.log("aaaå")
+        })();
     }
 }
 

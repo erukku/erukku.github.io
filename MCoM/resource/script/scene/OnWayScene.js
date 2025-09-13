@@ -76,6 +76,8 @@ class OnWayScene{
         */
 
         this.route.setRoute(2);
+        this.route.initAsset();
+        this.route.initRootIconDict();
         this.route.setGraphic();
     }
 
