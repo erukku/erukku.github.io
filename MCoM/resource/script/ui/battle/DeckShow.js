@@ -525,6 +525,7 @@ class DeckShow{
         this.pushcount = 0;
         var po = this.deckList;
         var test = this;
+        this.rolling = true;
         for(var i = 0;i < this.deckList.length;i++){
             if (this.excludedCard[this.deckList[i].getCardIds()] && this.keepCard[this.deckList[i].getCardIds()]){
                 continue
@@ -536,7 +537,7 @@ class DeckShow{
         this.usedCardNum = 0;
         var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
         this.rollFn = function(time){test.rollAll(test,circleCardNum);}
-        this.rolling = true;
+        
         
         
         this.animateCard.add(this.rollFn)

@@ -238,16 +238,20 @@ class BattleScene{
         //enemy
         var animate = null
         for(var i = 0; i < this.enemyList.length;i++){
+            if(i == 0){
+                //console.log(this.enemyList[i].selectCard(0),this.enemyList[i].action);
+                0
+            }
             if(this.enemyList[i].action == "attack"){
                 var card = this.enemyList[i].selectCard(0);
 
-                if(this.enemyList[i].actionFlame % 30 != 1){
-                    break;
+                if(card.cardClass == "reload"){
+                    this.enemyList[i].deckset.use();
+                    continue;
                 }
 
-                if(card.cardClass == "reload"){
-                    this.player.deckset.use();
-                    break;
+                if(this.enemyList[i].actionFlame % 30 != 1){
+                    continue;
                 }
 
                 if(this.fieldCard.isExist(card,"enemy")){

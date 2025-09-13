@@ -98,16 +98,22 @@ class Enemy{
                 }
             }
         }
-        else if(this.actionFlame == 60){
-            
-            this.actionFlame = 0;
-            return 0
+        else if(this.actionFlame >= 60){
+            if(this.action == "attack" && this.selectCard(0).cardClass == "reload"){
+                return 0;
+            }
+            else{
+                console.log(this.action,this.selectCard(0).cardClass);
+                this.actionFlame = 0;
+                return 0
+            }
         }
         this.actionFlame += 1;
     }
 
     selectCard(index){
-        var card = this.deck.deck[index];
+        var i = this.deckset.getCardIndex(index);
+        var card = this.deck.deck[i];
         return card;
     }
 

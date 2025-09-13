@@ -42,6 +42,7 @@ class FieldCard{
         this.fieldCard = null;
         this.cardOwner = null;
         this.cardSide = null;
+        this.cardFn = null;
         
         this.flame = 0;
     }
