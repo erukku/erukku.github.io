@@ -25,7 +25,7 @@ class Route{
         for(var i = 0;i < this.length;i++){
             var data = new Array();
             var randomNum = Math.random();
-            var num = Math.floor(randomNum / 0.334) + 1;
+            var num = Math.floor(randomNum / 0.5) + 1;
             for(var j = 0; j < num;j++){
                 data.push("battle");
             }
@@ -86,7 +86,7 @@ class Route{
                         
                         
                         icon = new PIXI.Sprite(await this.assets.load("goal"));
-                        icon.scale.x = icon.scale.y =0.15;
+                        icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         break;
                     
@@ -97,8 +97,7 @@ class Route{
                         
                         icon = new PIXI.Sprite(await this.assets.load("battle"));
                         
-                        console.log(icon);
-                        icon.scale.x = icon.scale.y =0.15;
+                        icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         break;
 
@@ -107,7 +106,7 @@ class Route{
                         icon = new PIXI.Sprite();
                         
                         icon = new PIXI.Sprite(await this.assets.load("shop"));
-                        icon.scale.x = icon.scale.y =0.15;
+                        icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
                         //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);

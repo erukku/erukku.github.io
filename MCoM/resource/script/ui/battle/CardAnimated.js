@@ -1,9 +1,9 @@
 class CardAnimated{
 
-    constructor(scene){
-        this.Scene = scene;
+    constructor(allFlame){
+        //this.Scene = scene;
         this.flame = 0;
-        this.allFlame = 120;
+        this.allFlame = allFlame;
         this.a = 0;
 
         this.xSpeed = 2;
@@ -37,7 +37,7 @@ class CardAnimated{
             }
             
 
-            if(this.flame == 40){
+            if(this.flame == this.allFlame){
                 card.x = -1000;
                 card.y = -1000;
                 if(basecard.side == "enemy"){

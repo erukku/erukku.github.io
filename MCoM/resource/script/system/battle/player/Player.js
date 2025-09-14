@@ -20,7 +20,7 @@ class Player{
         this.deck = new Deck();
         this.deck.setBase();
 
-        this.deckset = new DeckShow(this.uiContainer,"L");
+        this.deckset = new DeckShow(this.uiContainer,"L",this);
         this.deckset.deckSet(this.deck);
 
         this.position = new Position();
@@ -211,14 +211,37 @@ class Player{
             case "special":
                 0
                 break;
-
-
         }
 
-        console.log(this.attackData);
+        //console.log(this.attackData);
 
         this.attackData.shift();
         this.attacking = true;
+
+    }
+
+    getAttackInfo(index){
+        var card = this.deck.deck[index];
+        var data = null;
+        switch(card.cardClass){
+            case "attack":
+                data = this.attackInfo.getInfo(0);
+                break;
+
+            case "magic":
+                data = this.magicInfo.getInfo(0);
+                break;
+
+            case "item":
+                data = this.itemInfo.getInfo(0);
+                break;
+
+            case "special":
+                0
+                break;
+        }
+
+        return data;
 
     }
 

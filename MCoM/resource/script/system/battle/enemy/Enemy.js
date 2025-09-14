@@ -6,6 +6,7 @@ import ConvertPos from "../../base/ConvertPos.js"
 import AttackInfo from "./AttackInfo.js"
 import HpBar from "../../../ui/normal/enemy/HpBar.js"
 
+import Animation from "../player/Animation.js"
 
 import DeckShow from "../../../ui/battle/DeckShow.js"
 class Enemy{
@@ -16,7 +17,7 @@ class Enemy{
         this.deck.setEBase();
 
         this.uiContainer = new PIXI.Container();
-        this.deckset = new DeckShow(this.uiContainer,"R");
+        this.deckset = new DeckShow(this.uiContainer,"R",this);
         this.deckset.deckSet(this.deck);
 
         this.hpBar = new HpBar(this.status.maxHp,this.uiContainer);
@@ -41,6 +42,18 @@ class Enemy{
         this.attackId = 0;
         this.attackFlame = 0;
         this.attackedE = new Array();
+
+        this.actionNow = null;
+
+
+        this.ticker = PIXI.Ticker.shared;
+
+        this.breaked = false;
+
+        this.assets = PIXI.Assets;
+
+
+        //this.animation = new Animation(this);
 
         this.cardIndex = 0;
 
@@ -125,7 +138,33 @@ class Enemy{
 
     attack(){
         this.attackData = this.attackInfo.getInfo(0);
+        this.attackData.shift();
         this.attacking = true;   
+    }
+
+    getAttackInfo(index){
+        var card = this.deck.deck[index];
+        var data = null;
+        switch(card.cardClass){
+            case "attack":
+                data = this.attackInfo.getInfo(0);
+                break;
+
+            case "magic":
+                data = this.magicInfo.getInfo(0);
+                break;
+
+            case "item":
+                data = this.itemInfo.getInfo(0);
+                break;
+
+            case "special":
+                0
+                break;
+        }
+
+        return data;
+
     }
 
     destroy(){

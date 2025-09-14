@@ -343,7 +343,7 @@ class BattleScene{
         for(var i = 0;i < this.enemyList.length;i++){
             var enemy = this.enemyList[i];
             if(enemy.action == "attack" && enemy.attacking){
-                if(enemy.attackFlame == enemy.attackData[0]){
+                if(enemy.actionNow == null && enemy.attackData.length == 0){
                    
                     enemy.attackFlame = 0;
                     enemy.attacking = false;
@@ -353,8 +353,28 @@ class BattleScene{
 
                     return 0
                 }
+
+                else if(enemy.actionNow == null){
+                    enemy.actionNow = enemy.attackData.shift();
+                    
+                }
+
+                if(enemy.attackFlame == enemy.actionNow[1]){
+                    enemy.attackFlame = 0;
+                    enemy.actionNow = null;
+                    return 0
+                }
+
+                enemy.attackFlame += 1;
+
                 var aC = new AttackCollider();
-                var hit = aC.isHitted(enemy,enemy.attackData[2],new Array(this.player));
+
+                var data = enemy.actionNow[3];
+                if(data[0] == "move"){
+                    //仮
+                    data[2][0][1].addPos(data[1],0,0);
+                }
+                var hit = aC.isHitted(enemy,data[2],new Array(this.player));
     
                 for(var ii = 0;ii < hit.length;ii++){
                     var e = hit[ii];
@@ -369,14 +389,13 @@ class BattleScene{
                     if(f){
                         break;
                     }
-                    e.damage(enemy.attackData[1]);
+                    e.damage(enemy.actionNow[2]);
                     this.player.hpBar.damage(enemy.attackData[1]);
                     enemy.attackedE.push(e);
                     
                     
                 }
 
-                enemy.attackFlame += 1;
 
             }
         }

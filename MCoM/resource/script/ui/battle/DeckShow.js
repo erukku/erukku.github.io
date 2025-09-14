@@ -26,13 +26,15 @@ class DeckShow{
 
 
 
-    constructor(scene,side){
+    constructor(scene,side,master){
         this.R = 80;
         this.pushcount = 0;
         this.deckList;
         this.scene = scene;
         this.deckCircle = new PIXI.Container();
         this.deckCircle.sortableChildren = true;
+
+        this.master =master;
 
         this.cost = 0;
         this.costGraphic = new PIXI.Text(this.cost, {fontFamily : 'Arial', fontSize: 24, fill : 0xffffff} );
@@ -212,7 +214,8 @@ class DeckShow{
                 var po = this.deckList;
                 var test = this;
                 var index = i;
-                var animate = new CardAnimated();
+                var data = this.master.getAttackInfo(index);
+                var animate = new CardAnimated(data[1][1]);
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
                 if(this.side == "R"){
