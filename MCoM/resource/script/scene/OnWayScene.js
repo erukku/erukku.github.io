@@ -4,6 +4,7 @@ import ShopScene from "./ShopScene.js"
 import ConvertPos from "../system/base/ConvertPos.js"
 
 import Route from "../system/base/Route.js"
+import BackGroundManager from "../system/base/BackGroundManager.js"
 
 import Enemy from "../system/battle/enemy/Enemy.js"
 import ShopShow from "../ui/shop/showShow.js"
@@ -32,6 +33,12 @@ class OnWayScene{
         this.leftWall.x = 0;
         this.rightWall.x = 320;
 
+
+        this.bgManager = new BackGroundManager(this);
+        this.bgGraphic = new PIXI.Sprite();
+
+        //this.container.addChild(this.bgGraphic);
+
         this.container.addChild(this.leftWall);
         this.container.addChild(this.rightWall);
 
@@ -57,6 +64,7 @@ class OnWayScene{
         this.baseStage = new PIXI.Container();
         this.baseStage.sortableChildren = true;
         this.baseStage.y = 210;
+        
 
         this.player.position.setPos(50,0,0);
         this.convertPos.convert(this.player);
@@ -69,6 +77,9 @@ class OnWayScene{
         }
 
         this.ticker.add(this.keyFn);
+
+        console.log(1)
+        this.bgManager.setBG("forest");
         /*
         var This = this;
         this.transformFn = function(time){This.transformGround()};
@@ -85,6 +96,8 @@ class OnWayScene{
         if(this.transformFlame < 30){
             this.stage.stage.scale.x = 1.3 - (this.transformFlame+1)/100;
             this.stage.stage.scale.y = 0.1 + 0.9*(this.transformFlame/29);
+
+            this.stage.bg.scale.y = 0.5 * (1+0.001*this.transformFlame) / (0.1 + 0.9*(this.transformFlame/29));
 
 
             this.baseStage.y = 210 + 10*(this.transformFlame/29);
@@ -130,6 +143,8 @@ class OnWayScene{
         if(this.transformFlame < 30){
             this.stage.stage.scale.x = 1.0 + (this.transformFlame+1)/100;
             this.stage.stage.scale.y = 1 - 0.9*(this.transformFlame/29);
+
+            this.stage.bg.scale.y = 0.5 * (1) / (1 - 0.9*(this.transformFlame/29));
 
 
             this.baseStage.y = 220 - 10*(this.transformFlame/29);

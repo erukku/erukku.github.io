@@ -3,6 +3,7 @@ class StageShow{
     Scene;
     constructor(scene){
         this.Scene = scene;
+        this.bg = null;
     }
 
     show(){
@@ -23,9 +24,23 @@ class StageShow{
         base.y = -80;
         
 
+        this.bg = new PIXI.Sprite("");
+        this.bg.anchor.x = 0.5;
+        this.bg.anchor.y = 1;
+
+        //this.bg.x -= 600 + 15;
+        this.bg.y = -80;
+
+        //this.bg.scale.y = 0.3;
+        this.bg.scale.y = 10/2;
+        this.bg.scale.x = 0.55;
+
         this.base = base;
         this.stage = stage;
+        stage.addChild(this.bg);
         stage.addChild(base);
+
+        //stage.addChild(this.bg);
 
         stage.x = 315;
         stage.y = 250;
