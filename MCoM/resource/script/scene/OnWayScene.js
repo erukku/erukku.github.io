@@ -24,9 +24,31 @@ class OnWayScene{
 
         this.convertPos = new ConvertPos();
         this.container = new PIXI.Container();
-        this.leftWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
-        this.rightWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
 
+        this.assets = PIXI.Assets;
+        this.assets.add({alias:"cover",src:"MCoM/resource/img/cover.png"});
+
+        
+        //this.leftWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
+        //this.rightWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
+        this.leftWall = new PIXI.Sprite();
+        this.rightWall = new PIXI.Sprite();
+
+        //this.leftWall.scale.x =this.leftWall.scale.y = 0.7;
+        //this.rightWall.scale.x =this.rightWall.scale.y = 0.7;
+
+        this.leftWall.scale.y = 1.15;
+        this.rightWall.scale.y = 1.15;
+
+
+        //this.leftWall.anchor.x =this.leftWall.anchor.y = 0.5;
+        //this.rightWall.anchor.x =this.rightWall.anchor.y = 0.5;
+
+        (async() => {
+            this.leftWall.texture = await this.assets.load("cover");
+            this.rightWall.texture = await this.assets.load("cover");
+        })();
+        
         this.leftWall.zIndex = 0;
         this.rightWall.zIndex = 0;
 
