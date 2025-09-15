@@ -111,6 +111,17 @@ class Route{
                         //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
                         //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
                         break;
+
+                    case "event":
+                        circle.fill(0xbb330A);
+                        icon = new PIXI.Sprite();
+                        
+                        icon = new PIXI.Sprite(await this.assets.load("event"));
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        break;
                 }
 
                 data.push(circle);
@@ -214,6 +225,7 @@ class Route{
     initAsset(){
         this.assets.add({alias:"battle",src:"MCoM/resource/img/battle.png"});
         this.assets.add({alias:"shop",src:"MCoM/resource/img/shop.png"});
+        this.assets.add({alias:"event",src:"MCoM/resource/img/event.png"});
         this.assets.add({alias:"goal",src:"MCoM/resource/img/goal.png"});
     }
 
@@ -224,6 +236,8 @@ class Route{
             console.log("aaaå")
             this.rootIconDict["battle"] = await this.assets.load("battle");
             this.rootIconDict["shop"] = await this.assets.load("shop");
+            this.rootIconDict["event"] = await this.assets.load("event");
+            
             this.rootIconDict["goal"] = await this.assets.load("goal");
             console.log("aaaå")
         })();

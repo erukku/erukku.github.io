@@ -69,6 +69,7 @@ class BattleScene{
         }
         
 
+
         this.move();
         this.card();
         this.useCard();
@@ -158,32 +159,40 @@ class BattleScene{
 
     move(){
         //player     
-        if(this.keyPressing("j")) { // ③
-            this.player.moveX(-5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
-                this.player.moveX(5);
-            }
-        }
-        if(this.keyPressing("l")) { // ③
-            this.player.moveX(5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
+        console.log(this.player.animation.status)
+        if(this.player.animation.status != "attack"){            
+            if(this.keyPressing("j")) { // ③
                 this.player.moveX(-5);
+                if(this.collider.isCrossed(this.player,this.enemyList)){
+                    this.player.moveX(5);
+                }
             }
-        }
-        if(this.keyPressing("i")) { // ③
-            this.player.moveY(5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
-                this.player.moveY(-5);
+            if(this.keyPressing("l")) { // ③
+                this.player.moveX(5);
+                if(this.collider.isCrossed(this.player,this.enemyList)){
+                    this.player.moveX(-5);
+                }
             }
-        }
-        if(this.keyPressing("k")) { // ③
-            this.player.moveY(-5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
+            if(this.keyPressing("i")) { // ③
                 this.player.moveY(5);
+                if(this.collider.isCrossed(this.player,this.enemyList)){
+                    this.player.moveY(-5);
+                }
             }
-        }
-        if(this.keyPressing("u")) { // ③
-            this.player.jump();
+            if(this.keyPressing("k")) { // ③
+                this.player.moveY(-5);
+                if(this.collider.isCrossed(this.player,this.enemyList)){
+                    this.player.moveY(5);
+                }
+            }
+            if(! this.keyPressing("j") && ! this.keyPressing("k") && ! this.keyPressing("i") && ! this.keyPressing("l")){
+                if(this.player.animation.status == "walk"){
+                    this.player.animation.setStatus("wait");
+                }
+            }
+            if(this.keyPressing("u")) { // ③
+                this.player.jump();
+            }
         }
         //enemy
         var test = [this.player,this.enemyList];
@@ -193,6 +202,7 @@ class BattleScene{
         for(var i = 0;i < this.enemyList.length;i++){
             var enemy = this.enemyList[i]
             //console.log(enemy.action);
+            
             if(enemy.action == "move"){
                 var num = 1;
                 if(enemy.actionFlame <= 10){

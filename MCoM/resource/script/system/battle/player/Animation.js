@@ -40,6 +40,11 @@ class Animation{
     initAsset(){
         this.assets.add({alias:"player2",src:"MCoM/resource/img/player2.png"});
         this.assets.add({alias:"player3",src:"MCoM/resource/img/player3.png"});
+        this.assets.add({alias:"breaked",src:"MCoM/resource/img/p_breaked.png"});
+        this.assets.add({alias:"walk1",src:"MCoM/resource/img/p_walk1.png"});
+        this.assets.add({alias:"walk2",src:"MCoM/resource/img/p_walk2.png"});
+        this.assets.add({alias:"walk3",src:"MCoM/resource/img/p_walk3.png"});
+        this.assets.add({alias:"walk4",src:"MCoM/resource/img/p_walk4.png"});
 
     }
 
@@ -58,9 +63,10 @@ class Animation{
 
     initAnimationFlameDict(){
         this.animationFlameDict["wait"] = [["player",60]];
-        this.animationFlameDict["walk"] = [["player",60]];
+        this.animationFlameDict["walk"] = [["walk1",5],["walk2",10],["walk3",15],["walk4",20]];
         this.animationFlameDict["stand"] = [["player",60]];
         this.animationFlameDict["jump"] = [["player",60]];
+        this.animationFlameDict["breaked"] = [["breaked",60]];
         this.animationFlameDict["damaged"] = [["player",60]];
         this.animationFlameDict["heal"] = [["player",60]];
 
@@ -74,6 +80,12 @@ class Animation{
             this.animationLoadDict["player"] = await this.assets.load("player");
             this.animationLoadDict["player2"] = await this.assets.load("player2");
             this.animationLoadDict["player3"] = await this.assets.load("player3");
+            this.animationLoadDict["breaked"] = await this.assets.load("breaked");
+            this.animationLoadDict["walk1"] = await this.assets.load("walk1");
+            this.animationLoadDict["walk2"] = await this.assets.load("walk2");
+            this.animationLoadDict["walk3"] = await this.assets.load("walk3");
+            this.animationLoadDict["walk4"] = await this.assets.load("walk4");
+            
         })();
         
         /*
@@ -103,6 +115,14 @@ class Animation{
         //console.log(this.status,10);
         if(this.animationData[1] == this.flame){
             if(this.animationDataArray.length == 0){
+                if(this.status == "walk"){
+                    this.setAnimationArray();
+                    this.nextAnimationData();
+                    this.player.graphicMain.texture = this.getAnimationGraphic();   
+                    this.flame = 0;
+                    return 0; 
+                }
+
                 this.status = "wait";
                 this.setAnimationArray();
                 this.nextAnimationData();
