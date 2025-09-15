@@ -160,7 +160,7 @@ class BattleScene{
     move(){
         //player     
         console.log(this.player.animation.status)
-        if(this.player.animation.status != "attack"){            
+        if(this.player.animation.status != "attack" || this.player.animation.status != "breaked"){            
             if(this.keyPressing("j")) { // ③
                 this.player.moveX(-5);
                 if(this.collider.isCrossed(this.player,this.enemyList)){
@@ -283,6 +283,8 @@ class BattleScene{
                     //this.cardAnimationTicker.breaked = true;
                     if(this.fieldCard.cardFn != 0){
                         this.fieldCard.cardFn.breaked = true;
+
+                        this.player.animation.setStatus("breaked");
                     }
                     animate = this.enemyList[i].deckset.use();
                     this.enemyList[i].attack();
@@ -305,6 +307,10 @@ class BattleScene{
             var card = this.player.deck.deck[cardIndex];
             //console.log(this.player.deck.deck);
 
+            if(this.player.animation.status == "breaked"){
+                return 0;
+            }
+
             //仮
             if(this.player.deckset.keepCardNum == 3){
                 card = new CardBase("attack");
@@ -313,8 +319,7 @@ class BattleScene{
             
             if(card.cardClass == 'reload'){
                 this.player.deckset.use();
-                //console.log(card.cardClass)
-                //console.log(21313)
+
                 return 0;
             }
 
@@ -335,6 +340,8 @@ class BattleScene{
 
                 if(this.fieldCard.cardFn != 0){
                     this.fieldCard.cardFn.breaked = true;
+
+                    //仮 need enemy breaked
                 }
                 
                 animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述

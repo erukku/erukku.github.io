@@ -1,5 +1,5 @@
 - 現時点でやるべき事(この辺ができれば最低限遊べる)
-    - player,enemyのグラフィック
+    - enemyのグラフィック
 
 - おそらく起きる修正
     - enemyのattackinfo + animation
