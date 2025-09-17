@@ -10,6 +10,10 @@ class Status{
     heal(num){
         this.hp += num;
     }
+
+    extendHp(num){
+        this.maxHp += num;
+    }
 }
 
 

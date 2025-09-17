@@ -1,6 +1,8 @@
 import StageShow from "../ui/battle/StageShow.js"
 import BattleScene from "./BattleScene.js"
 import ShopScene from "./ShopScene.js"
+import EventScene from "./EventScene.js"
+
 import ConvertPos from "../system/base/ConvertPos.js"
 
 import Route from "../system/base/Route.js"
@@ -8,6 +10,7 @@ import BackGroundManager from "../system/base/BackGroundManager.js"
 
 import Enemy from "../system/battle/enemy/Enemy.js"
 import ShopShow from "../ui/shop/showShow.js"
+
 
 import Window from "../ui/window/Window.js"
 import Message from "../ui/window/Message.js"
@@ -82,6 +85,7 @@ class OnWayScene{
 
     setView(){
 
+        /*
         var window = new Window(this.container);
         window.graphicContainer.zIndex = 10000;
         window.graphicContainer.x = 150;
@@ -91,6 +95,7 @@ class OnWayScene{
         var message = new Message(window);
         message.setMessage([1,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);
         message.startMessage();
+        */
 
         this.stage = new StageShow(this.stageContainer);
         this.stage.show();
@@ -226,6 +231,13 @@ class OnWayScene{
                 this.ticker.remove(this.keyFn);
 
             }
+            else if(nextEvent == "event"){
+                this.route.removeContainer(this.appStage);
+                
+                this.testEvent();
+
+                this.ticker.remove(this.keyFn);
+            }
             else if(nextEvent == "end"){
                 this.removeTicker();
                 this.manager.changeScene("end");
@@ -313,6 +325,12 @@ class OnWayScene{
         this.ticker.add(this.transformFn);
     }
 
+    testEvent(){
+        var This = this;
+        this.transformFn = function(time){This.wallOpen("event")};
+        this.ticker.add(this.transformFn);
+
+    }
     wallClose(){
         if(this.transformFlame < 30){
             this.leftWall.x += 320/30;
@@ -360,6 +378,10 @@ class OnWayScene{
             else if(type == "shop"){
                 var shop = new ShopScene(this.player,null,this.baseStage,this.keyList,this)
                 shop.setTest();
+            }
+            else if(type == "event"){
+                var event = new EventScene(this.player,null,this.baseStage,this.keyList,this)
+                event.setTest();
             }
         }
     }

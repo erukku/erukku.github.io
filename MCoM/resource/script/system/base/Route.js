@@ -25,10 +25,11 @@ class Route{
         for(var i = 0;i < this.length;i++){
             var data = new Array();
             var randomNum = Math.random();
-            var num = Math.floor(randomNum / 0.5) + 1;
+            var num = Math.floor(randomNum / 1.1) + 1;
             for(var j = 0; j < num;j++){
                 data.push("battle");
             }
+            data.push("event");
             data.push("shop");
             this.route.push(data);
         }

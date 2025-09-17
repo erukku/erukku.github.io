@@ -16,9 +16,9 @@ class EventInfo{
                 var effect = [2,[1,["extend_HP",100]],[1,["heal",10000]]];
 
 
-                eventArray.add(text);
-                eventArray.add(choices);
-                eventArray.add(effect);
+                eventArray.push(text);
+                eventArray.push(choices);
+                eventArray.push(effect);
                 break;
 
 
@@ -29,9 +29,9 @@ class EventInfo{
 
                 var effect = [2,[1,["gacha_all",1]],[1,["none"]]];
 
-                eventArray.add(text);
-                eventArray.add(choices);
-                eventArray.add(effect);
+                eventArray.push(text);
+                eventArray.push(choices);
+                eventArray.push(effect);
                 break;
         }
         return eventArray;

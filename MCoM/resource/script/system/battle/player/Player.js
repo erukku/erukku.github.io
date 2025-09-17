@@ -256,6 +256,11 @@ class Player{
         this.hpBar.damage(num);
         //console.log(this.status);
     }
+
+    extendHp(num){
+        this.status.extendHp(num);
+        this.hpBar.extendHp(num);
+    }
 }
 
 export default Player;

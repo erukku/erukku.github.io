@@ -38,6 +38,21 @@ class Message{
         //console.log(this.text);
 
         this.textGraphic.style = this.style;
+        this.window.graphicContainer.addChild(this.textGraphic);
+    }
+
+    setSelect(text){
+        var style = {
+            font:'12pt Arial',
+            fill:'black',
+            align: 'center',
+            wordWrap:true,
+            wordWrapWidth:400,
+            breakWords: true
+            };
+        this.textGraphic.style = style;
+        this.textGraphic.text = text;
+        this.window.graphicContainer.addChild(this.textGraphic);
     }
 
     nextText(){
@@ -81,8 +96,17 @@ class Message{
     }
 
     textFull(){
-        this.textGraphic.text = this.message;
-        this.textLength = this.message.length;
+        console.log(this.textIndex);
+        if (this.textGraphic.text.length != this.text.length){
+            this.textGraphic.text = this.text;
+            this.textIndex = this.text.length + 1;
+            return 0;
+        }
+        else{
+            return 1;
+        }
+        
+        
     }
 
 
