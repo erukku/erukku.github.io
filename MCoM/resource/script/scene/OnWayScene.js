@@ -9,6 +9,9 @@ import BackGroundManager from "../system/base/BackGroundManager.js"
 import Enemy from "../system/battle/enemy/Enemy.js"
 import ShopShow from "../ui/shop/showShow.js"
 
+import Window from "../ui/window/Window.js"
+import Message from "../ui/window/Message.js"
+
 class OnWayScene{
     constructor(stage,player,key,app){
         console.log("onway")
@@ -37,8 +40,8 @@ class OnWayScene{
         //this.leftWall.scale.x =this.leftWall.scale.y = 0.7;
         //this.rightWall.scale.x =this.rightWall.scale.y = 0.7;
 
-        this.leftWall.scale.y = 1.15;
-        this.rightWall.scale.y = 1.15;
+        this.leftWall.scale.y = 1.05;
+        this.rightWall.scale.y = 1.05;
 
 
         //this.leftWall.anchor.x =this.leftWall.anchor.y = 0.5;
@@ -78,6 +81,17 @@ class OnWayScene{
     }
 
     setView(){
+
+        var window = new Window(this.container);
+        window.graphicContainer.zIndex = 10000;
+        window.graphicContainer.x = 150;
+        window.graphicContainer.y = 50;
+        window.initWindow(150,400);
+
+        var message = new Message(window);
+        message.setMessage([1,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);
+        message.startMessage();
+
         this.stage = new StageShow(this.stageContainer);
         this.stage.show();
         this.stage.stage.scale.x = 1.3;

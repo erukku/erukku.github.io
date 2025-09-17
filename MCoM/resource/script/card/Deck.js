@@ -1,9 +1,11 @@
 import CardBase from "./CardBase.js"
+import RandomInt from "../util/RandomInt.js";
 class Deck{
     deck;
 
     constructor(){
         this.deck = [];
+        this.rand = new RandomInt();
     }
 
     setBase(){
@@ -12,7 +14,7 @@ class Deck{
         var atCard = new CardBase("attack");
         atCard.setBaseInfo(num,num);
         num += 1;
-        atCard.drawCard(9);
+        atCard.drawCard(5);
         atCard.setSide("player");
         this.deck.push(atCard);
         }
@@ -50,8 +52,9 @@ class Deck{
         for(var i = 0;i < 10;i++){
         var atCard = new CardBase("attack");
         atCard.setBaseInfo(num,num);
+        //atCard.cost = this.rand.getRandomInt(1,9);
         num += 1;
-        atCard.drawCard();
+        atCard.drawCard(this.rand.getRandomInt(1,9));
         atCard.setSide("enemy");
         this.deck.push(atCard);
         }

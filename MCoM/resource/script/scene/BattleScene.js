@@ -10,6 +10,7 @@ import Collider from "../system/base/Collider.js"
 import AttackCollider from "../system/battle/base/AttackCollider.js"
 import FieldCard from "../system/battle/base/FieldCard.js"
 
+
 class BattleScene{
     constructor(player,enemyList,stage,key,onWay,app){
         this.player = player;
@@ -603,11 +604,6 @@ class BattleScene{
         
 
       }
-    
-
-
-
-
 
 
     }
