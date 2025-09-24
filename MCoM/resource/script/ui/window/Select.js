@@ -22,10 +22,10 @@ class Select{
             window.initWindow(30,100);
             window.graphicContainer.y = 100 + i*100; 
 
-            var message = new Message(window);
+            var message = new Message(window,false);
             message.setSelect(text);
 
-            window.graphicContainer.alpha = 0.5;
+            container.alpha = 0.5;
 
             this.graphic.addChild(container);
         }

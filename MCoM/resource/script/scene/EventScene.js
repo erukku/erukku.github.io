@@ -82,7 +82,7 @@ class EventScene{
 
         var text = this.eventArray.shift();
 
-        this.message = new Message(window);
+        this.message = new Message(window,true);
         this.message.setMessage(text);
         this.message.startMessage();
 

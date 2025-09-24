@@ -1,6 +1,6 @@
 
 class Message{
-    constructor(window){
+    constructor(window,icon){
         this.window = window;
         this.message = null;
         this.text = "";
@@ -21,6 +21,18 @@ class Message{
             };
 
         this.function = null;
+        
+        if(icon == true){
+            this.nextIcon = new PIXI.Text("...", {fontFamily : 'Arial', fontSize: 20, fill : 0x000000});
+            this.nextIcon.x = this.window.width - 40;
+            this.nextIcon.y = this.window.height - 30;
+        }
+        else{
+            this.nextIcon = new PIXI.Text();
+        }
+        //this.nextIcon.visible = false;
+
+        this.window.graphicContainer.addChild(this.nextIcon);
 
         this.flame = 0;
     }
@@ -83,12 +95,25 @@ class Message{
 
     textAuto(){
         this.flame += 1;
+        
         if(this.flame %2 != 0){
             return 0;
         }
+
+        if(this.nextIcon.text == "▼"){
+            if(this.flame %16 == 0){
+                this.nextIcon.y += 5;
+            }
+            else if(this.flame %8 == 0){
+                this.nextIcon.y -= 5;
+            }
+        }
+
+
         if(this.text.length == this.textGraphic.text.length){
-            this.ticker.remove(this.function);
-            this.function = null;
+            this.nextIcon.text = "▼";
+            //this.ticker.remove(this.function);
+            //this.function = null;
         }
         else{
             this.textGraphic.text += this.text[this.textIndex];
@@ -104,6 +129,9 @@ class Message{
             return 0;
         }
         else{
+            this.nextIcon.visible = false;
+            this.ticker.remove(this.function);
+            this.function = null;
             return 1;
         }
         

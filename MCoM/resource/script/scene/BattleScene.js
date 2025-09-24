@@ -235,12 +235,6 @@ class BattleScene{
               this.player.deckset.keep();
               this.keepFlame = this.flame + 10;
           }
-          if(this.keyPressing("x")) { // ③
-              this.player.deckset.alluse();
-          }
-          if(this.keyPressing("c")) { // ③
-              this.player.deckset.reload();
-          }
 
     }
     
@@ -518,6 +512,7 @@ class BattleScene{
         return this.keyList[1][key]
     }
 
+    /*
     keydownEvent(){ // ②
         if(this.keyPressing("a")) { // ③
           this.player.deckset.use();// Aが押された時に実行したい処理を記述
@@ -566,7 +561,7 @@ class BattleScene{
         if(this.keyPressing("u")) { // ③
             this.player.jump();
         }
-        /*
+        
         if(this.player.attacking){
             if(this.player.attackFlame == this.player.attackData[0]){
                 this.player.attackFlame = 0;
@@ -601,12 +596,12 @@ class BattleScene{
 
             this.player.attackFlame += 1;
         }
-        */
+        
 
         
 
       }
-
+      */
 
     }
 
