@@ -19,7 +19,7 @@ class Select{
 
             var text = data[i];
             var window = new Window(container);
-            window.initWindow(50,100);
+            window.initWindow(30,100);
             window.graphicContainer.y = 100 + i*100; 
 
             var message = new Message(window);

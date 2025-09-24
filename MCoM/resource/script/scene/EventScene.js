@@ -77,7 +77,7 @@ class EventScene{
         this.eventContainer.y = -100;
 
         var window = new Window(this.eventContainer);
-        window.initWindow(150,200);
+        window.initWindow(100,200);
 
 
         var text = this.eventArray.shift();

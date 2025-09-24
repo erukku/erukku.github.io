@@ -33,6 +33,10 @@ class OnWayScene{
 
         this.assets = PIXI.Assets;
         this.assets.add({alias:"cover",src:"MCoM/resource/img/cover.png"});
+        this.assets.add({alias:"seat",src:"MCoM/resource/img/seat.png"});
+
+        this.seat = new PIXI.Sprite();
+        this.base = new PIXI.Graphics().rect(0,0,640,240).fill(0x000000).endFill();
 
         
         //this.leftWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
@@ -53,6 +57,7 @@ class OnWayScene{
         (async() => {
             this.leftWall.texture = await this.assets.load("cover");
             this.rightWall.texture = await this.assets.load("cover");
+            this.seat.texture = await this.assets.load("seat");
         })();
         
         this.leftWall.zIndex = 0;
@@ -61,12 +66,18 @@ class OnWayScene{
         this.leftWall.x = 0;
         this.rightWall.x = 320;
 
+        this.base.y = 250;
+
+        this.seat.scale.x = 1;
+        this.seat.y = 100;
 
         this.bgManager = new BackGroundManager(this);
         this.bgGraphic = new PIXI.Sprite();
 
         //this.container.addChild(this.bgGraphic);
 
+        this.container.addChild(this.base);
+        this.container.addChild(this.seat);
         this.container.addChild(this.leftWall);
         this.container.addChild(this.rightWall);
 
@@ -149,6 +160,8 @@ class OnWayScene{
             this.e2.setPos(350,50 * (this.transformFlame/29),0);
             this.e3.setPos(400,80 * (this.transformFlame/29),0);
 
+            this.seat.y += 1.5;
+
             this.transformFlame += 1;
         }
         else{
@@ -192,6 +205,11 @@ class OnWayScene{
             this.player.position.setPos(50,50 - 50 * (this.transformFlame/29),0);
             this.convertPos.convert(this.player);
             this.transformFlame += 1;
+
+            if(this.seat.y > 250){
+                this.seat.y -= 1.5;
+            }
+            
         }
         else{
             this.transformFlame = 0;

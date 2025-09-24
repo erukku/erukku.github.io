@@ -1,3 +1,4 @@
+
 class Message{
     constructor(window){
         this.window = window;
