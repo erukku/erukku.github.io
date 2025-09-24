@@ -360,7 +360,7 @@ class BattleScene{
 
         for(var i = 0;i < this.enemyList.length;i++){
             var enemy = this.enemyList[i];
-            if(enemy.action == "attack" && enemy.attacking){
+            if(enemy.attacking){
                 if(enemy.actionNow == null && enemy.attackData.length == 0){
                    
                     enemy.attackFlame = 0;
@@ -369,6 +369,7 @@ class BattleScene{
 
                     this.fieldCard.reset();
 
+                    continue;
                     return 0
                 }
 
@@ -380,6 +381,7 @@ class BattleScene{
                 if(enemy.attackFlame == enemy.actionNow[1]){
                     enemy.attackFlame = 0;
                     enemy.actionNow = null;
+                    continue;
                     return 0
                 }
 

@@ -33,16 +33,22 @@ class OnWayScene{
 
         this.assets = PIXI.Assets;
         this.assets.add({alias:"cover",src:"MCoM/resource/img/cover.png"});
+        this.assets.add({alias:"bgL",src:"MCoM/resource/img/bg_forestL.png"});
+        this.assets.add({alias:"bgR",src:"MCoM/resource/img/bg_forestR.png"});
         this.assets.add({alias:"seat",src:"MCoM/resource/img/seat.png"});
 
         this.seat = new PIXI.Sprite();
         this.base = new PIXI.Graphics().rect(0,0,640,240).fill(0x000000).endFill();
+        this.bgBase = new PIXI.Graphics().rect(0,0,640,480).fill(0x8b4513).endFill();
 
         
         //this.leftWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
         //this.rightWall = new PIXI.Graphics().beginFill(0x111111).drawRect(0, 0, 320, 240).endFill();
         this.leftWall = new PIXI.Sprite();
         this.rightWall = new PIXI.Sprite();
+
+        this.bgL = new PIXI.Sprite();
+        this.bgR = new PIXI.Sprite();
 
         //this.leftWall.scale.x =this.leftWall.scale.y = 0.7;
         //this.rightWall.scale.x =this.rightWall.scale.y = 0.7;
@@ -55,6 +61,8 @@ class OnWayScene{
         //this.rightWall.anchor.x =this.rightWall.anchor.y = 0.5;
 
         (async() => {
+            this.bgL.texture = await this.assets.load("bgR");
+            this.bgR.texture = await this.assets.load("bgR");
             this.leftWall.texture = await this.assets.load("cover");
             this.rightWall.texture = await this.assets.load("cover");
             this.seat.texture = await this.assets.load("seat");
@@ -66,6 +74,16 @@ class OnWayScene{
         this.leftWall.x = 0;
         this.rightWall.x = 320;
 
+        this.bgL.scale.x = this.bgL.scale.y = 0.5;
+        this.bgL.scale.x = -0.5;
+        this.bgR.scale.x = this.bgR.scale.y = 0.5;
+
+        this.bgL.x = 40;
+        this.bgL.y = 170;
+
+        this.bgR.x = 600;
+        this.bgR.y = 170;
+
         this.base.y = 250;
 
         this.seat.scale.x = 1;
@@ -76,7 +94,11 @@ class OnWayScene{
 
         //this.container.addChild(this.bgGraphic);
 
+        this.stageContainer.addChild(this.bgBase);
         this.container.addChild(this.base);
+        this.container.addChild(this.bgL);
+        this.container.addChild(this.bgR);
+
         this.container.addChild(this.seat);
         this.container.addChild(this.leftWall);
         this.container.addChild(this.rightWall);
@@ -138,7 +160,7 @@ class OnWayScene{
         this.ticker.add(this.transformFn);
         */
 
-        this.route.setRoute(2);
+        this.route.setRoute(5);
         this.route.initAsset();
         this.route.initRootIconDict();
         this.route.setGraphic();
