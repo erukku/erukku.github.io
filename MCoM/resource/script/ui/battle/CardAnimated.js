@@ -1,6 +1,6 @@
 class CardAnimated{
 
-    constructor(allFlame){
+    constructor(allFlame,audio){
         //this.Scene = scene;
         this.flame = 0;
         this.allFlame = allFlame;
@@ -10,6 +10,8 @@ class CardAnimated{
         this.ySpeed = -10;
 
         this.breaked = false;
+
+        this.audio = audio;
     }
 
     setSelf(a){
@@ -26,6 +28,9 @@ class CardAnimated{
             //card.visible = false;
             
             if(this.breaked){
+                this.audio.currentTime = 0;
+
+                this.audio.play();
                 cards.animateCard.remove(this.a);
                 var This = this;
                 var fn = function(time){

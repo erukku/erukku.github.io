@@ -67,6 +67,11 @@ class DeckShow{
         if(this.side == "R"){
             this.startangle = - (135/180 * Math.PI);
         }
+
+        this.audioDict = new DefaultDict(null);
+
+        this.audioDict["roll"] = new Audio("MCoM/resource/se/deckmove.mp3");
+        this.audioDict["waste"] = new Audio("MCoM/resource/se/waste.mp3");
     }
 
     deckSet(deck){
@@ -129,8 +134,9 @@ class DeckShow{
 
         }
         else{
+            this.audioDict["roll"].currentTime = 0;
+            this.audioDict["roll"].play();
             if(way == "R"){
-                
                 var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
                 this.pushcount %= (circleCardNum);
                 this.pushcount += 1;
@@ -215,7 +221,7 @@ class DeckShow{
                 var test = this;
                 var index = i;
                 var data = this.master.getAttackInfo(index);
-                var animate = new CardAnimated(data[1][1]);
+                var animate = new CardAnimated(data[1][1],this.audioDict["waste"]);
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
                 if(this.side == "R"){
@@ -284,6 +290,8 @@ class DeckShow{
         if(this.attacking)
 
         //this.usedCardNum += 1;
+        //this.audioDict["waste"].currentTime = 0;
+        //this.audioDict["waste"].play();
 
         var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
         var count = 0;
@@ -303,7 +311,7 @@ class DeckShow{
                 var po = this.deckList;
                 var test = this;
                 var index = i;
-                var animate = new CardAnimated();
+                var animate = new CardAnimated(0,this.audioDict["waste"]);
                 animate.breaked = true;
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
@@ -338,6 +346,8 @@ class DeckShow{
         this.animateCard.add(
             this.rollFn
         )
+
+        
       
     }
     keep(){

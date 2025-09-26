@@ -74,7 +74,7 @@ class EventScene{
         this.step = "wait";
 
         this.eventContainer.x = 200;
-        this.eventContainer.y = -100;
+        this.eventContainer.y = -160;
 
         var window = new Window(this.eventContainer);
         window.initWindow(100,200);

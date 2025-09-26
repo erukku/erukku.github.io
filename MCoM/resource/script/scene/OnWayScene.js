@@ -36,6 +36,7 @@ class OnWayScene{
         this.assets.add({alias:"bgL",src:"MCoM/resource/img/bg_forestL.png"});
         this.assets.add({alias:"bgR",src:"MCoM/resource/img/bg_forestR.png"});
         this.assets.add({alias:"seat",src:"MCoM/resource/img/seat.png"});
+        
 
         this.seat = new PIXI.Sprite();
         this.base = new PIXI.Graphics().rect(0,0,640,240).fill(0x000000).endFill();
@@ -87,7 +88,8 @@ class OnWayScene{
         this.base.y = 250;
 
         this.seat.scale.x = 1;
-        this.seat.y = 100;
+        //this.seat.y = 100;
+        this.seat.y = 120;
 
         this.bgManager = new BackGroundManager(this);
         this.bgGraphic = new PIXI.Sprite();
