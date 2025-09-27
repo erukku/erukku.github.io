@@ -6,7 +6,7 @@ import ConvertPos from "../../base/ConvertPos.js"
 import AttackInfo from "./AttackInfo.js"
 import HpBar from "../../../ui/normal/enemy/HpBar.js"
 
-import Animation from "../player/Animation.js"
+import Animation from "./Animation.js"
 
 import DeckShow from "../../../ui/battle/DeckShow.js"
 class Enemy{
@@ -53,38 +53,59 @@ class Enemy{
         this.assets = PIXI.Assets;
 
 
-        //this.animation = new Animation(this);
+        this.animation = new Animation(this);
 
         this.cardIndex = 0;
 
         this.useLock = false;
+
+        
     }
     setTest(){
-        this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
+        this.assets.add({alias:"slime",src:"MCOM/resource/img/slime.png"});
+        //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
+        this.graphicMain = new PIXI.Graphics();
         this.graphicShadow = new PIXI.Graphics().circle(0,0,15).fill(0x000000);
         //this.graphicShadow.scale.y = 0.7;
         //this.graphicShadow.y +=  (1-this.graphicShadow.scale.y)*30
+        (async() =>{
+            this.graphicMain = new PIXI.Sprite(await this.assets.load("slime"));
+            this.graphicMain.anchor.x = this.graphicMain.anchor.y = 0.5;
+            this.graphicMain.anchor.set(0.5,0.5);
+            this.graphicMain.scale.set(-0.5,0.5);
+            this.graphicMain.y = 20;
+            this.targetGraphic = new PIXI.Graphics().poly([0,0,30,0,15,15]).fill(0x0000ff);
+            this.targetGraphic.y = -40;
+
+            this.targetGraphic.visible = false;
+
+            this.graphicMain.addChild(this.targetGraphic);
+            this.graphic.addChild(this.graphicMain);
+            
+            this.converter.convert(this);
+        })();
 
         this.body.setBody(30,10,30);
 
         this.graphicMain.x -= 15;
         
         this.graphic.addChild(this.graphicShadow);
-        this.graphic.addChild(this.graphicMain);
 
-        this.targetGraphic = new PIXI.Graphics().poly([0,0,30,0,15,15]).fill(0x0000ff);
-        this.targetGraphic.y = -40;
+        
+        //this.graphicMain.addChild(this.targetGraphic);
 
-        this.targetGraphic.visible = false;
-
-        this.graphicMain.addChild(this.targetGraphic);
-
-        this.converter.convert(this);
+        
 
         this.actionPattern = [["move",50],["attack",50]];
         //this.actionPattern = [["move",50]];
+
+        this.animation.setTest();
         
     }
+
+
+
+
 
     setPos(x,y,z){
         this.position.setPos(x,y,z);
@@ -92,6 +113,7 @@ class Enemy{
     }
 
     addPos(x,y,z){
+        this.animation.setStatus("move");
         this.position.addPos(x,y,z);
         this.converter.convert(this);
     }
@@ -137,6 +159,7 @@ class Enemy{
     }
 
     attack(){
+        this.animation.setStatus("attack");
         this.attackData = this.attackInfo.getInfo(0);
         this.attackData.shift();
         this.attacking = true;   
