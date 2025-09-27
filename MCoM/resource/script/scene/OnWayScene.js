@@ -205,6 +205,9 @@ class OnWayScene{
     }
 
     backOnWay(){
+        if(this.route.route[this.route.now[0]][this.route.now[1]] != "battle"){
+            this.transformFlame = 30;
+        }
         var This = this;
         var fn = function(time){
             This.transformLine();
@@ -230,9 +233,9 @@ class OnWayScene{
             this.convertPos.convert(this.player);
             this.transformFlame += 1;
 
-            if(this.seat.y > 250){
-                this.seat.y -= 1.5;
-            }
+            
+            this.seat.y -= 1.5;
+            
             
         }
         else{

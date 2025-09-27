@@ -9,7 +9,7 @@ import Enemy from "../system/battle/enemy/Enemy.js"
 import Collider from "../system/base/Collider.js"
 import AttackCollider from "../system/battle/base/AttackCollider.js"
 import FieldCard from "../system/battle/base/FieldCard.js"
-
+import DefaultDict from "../util/DefaultDict.js"
 
 class BattleScene{
     constructor(player,enemyList,stage,key,onWay,app){
@@ -42,6 +42,9 @@ class BattleScene{
         this.targetFlag = false;
         this.targetIndex = null;
         this.targetLockFlame = 0;
+
+        this.audioDict = new DefaultDict(null);
+        this.audioDict["sword"] = new Audio("MCoM/resource/se/sword.mp3");
     }
     setTest(){
         var This = this;
@@ -161,7 +164,7 @@ class BattleScene{
     move(){
         //player     
         console.log(this.player.animation.status)
-        if(this.player.animation.status != "attack" || this.player.animation.status != "breaked"){            
+        if(this.player.animation.status != "attack" && this.player.animation.status != "breaked"){            
             if(this.keyPressing("j")) { // ③
                 this.player.moveX(-5);
                 if(this.collider.isCrossed(this.player,this.enemyList)){
@@ -471,6 +474,9 @@ class BattleScene{
                     if(f){
                         break;
                     }
+
+                    this.audioDict["sword"].currentTime = 0;
+                    this.audioDict["sword"].play();
                      
                     e.damage(this.player.actionNow[2]);
                     this.player.attackedE.push(e);
