@@ -250,10 +250,15 @@ class BattleScene{
                 //console.log(this.enemyList[i].selectCard(0),this.enemyList[i].action);
                 0
             }
-            if(this.enemyList[i].action == "attack"){
+            if(this.enemyList[i].deckset.rolling == true){
+                console.log(i,this.enemyList[i].deckset.rolling);
+            }
+            
+            if(this.enemyList[i].action == "attack" && this.enemyList[i].deckset.rolling == false){
+                
                 var card = this.enemyList[i].selectCard(0);
 
-                if(card.cardClass == "reload"){
+                if(card.cardClass == "reload" && this.fieldCard.cardHolder != this.enemyList[i]){
                     this.enemyList[i].deckset.use();
                     continue;
                 }
@@ -262,7 +267,7 @@ class BattleScene{
                     continue;
                 }
 
-                if(this.fieldCard.isExist(card,"enemy")){
+                if(this.fieldCard.isExist(card,"enemy",this.enemyList[i])){
 
                     animate = this.enemyList[i].deckset.use();
                     this.enemyList[i].attack();
@@ -277,7 +282,7 @@ class BattleScene{
                 }
 
 
-                if(this.fieldCard.checkCard(card,"enemy")){
+                if(this.fieldCard.checkCard(card,"enemy",this.enemyList[i])){
                     //this.cardAnimationTicker.breaked = true;
                     if(this.fieldCard.cardFn != 0){
                         this.fieldCard.cardFn.breaked = true;
@@ -321,7 +326,7 @@ class BattleScene{
                 return 0;
             }
 
-            if(this.fieldCard.isExist(card,"player")){
+            if(this.fieldCard.isExist(card,"player",this.player)){
                 animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
                 this.player.attack();
                 this.fieldCard.cardFn = animate;
@@ -332,7 +337,7 @@ class BattleScene{
                 return 0;
             }
             
-            if(this.fieldCard.checkCard(card,"player")){
+            if(this.fieldCard.checkCard(card,"player",this.player)){
                 //this.cardAnimationTicker.breaked = true;
                 console.log(this.fieldCard.cardFn);
 
@@ -340,6 +345,7 @@ class BattleScene{
                     this.fieldCard.cardFn.breaked = true;
 
                     //仮 need enemy breaked
+                    this.fieldCard.cardHolder.animation.setStatus("breaked");
                 }
                 
                 animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述

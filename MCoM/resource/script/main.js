@@ -74,9 +74,10 @@ import DefaultDict from "./util/DefaultDict.js"
     */
 
 
-    var input_key_buffer = new Array();
+    var input_key_buffer = new DefaultDict(false);
     var input_key_buffer_time = new DefaultDict(0);
-    var input_key_buffer_push = new Array();
+    //var input_key_buffer_push = new Array();
+    var input_key_buffer_push = new DefaultDict(false);
     
     //this.ticker = PIXI.Ticker.shared;
     

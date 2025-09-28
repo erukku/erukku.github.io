@@ -4,14 +4,16 @@ class FieldCard{
         this.cardOwner = null;
         this.cardSide = null;
         this.cardFn = null;
+        this.cardHolder = null;
         this.flame = 0;
     }
 
-    isExist(card,side){
+    isExist(card,side,holder){
         //console.log(this.fieldCard == null && this.cardSide == null);
         if(this.fieldCard == null && this.cardSide == null){
             this.fieldCard = card;
             this.cardSide = side;
+            this.cardHolder = holder;
             return true;
         }
         else{
@@ -20,7 +22,7 @@ class FieldCard{
     }
 
 
-    checkCard(card,side){
+    checkCard(card,side,holder){
 
         if(card.cost > this.fieldCard.cost){
             //break preside
@@ -28,6 +30,7 @@ class FieldCard{
             //set side
             this.fieldCard = card;
             this.cardSide = side;
+            this.cardHolder = holder;
             return true;
         }
         else{
@@ -43,6 +46,7 @@ class FieldCard{
         this.cardOwner = null;
         this.cardSide = null;
         this.cardFn = null;
+        this.cardHolder = null;
         
         this.flame = 0;
     }

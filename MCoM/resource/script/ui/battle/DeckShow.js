@@ -72,6 +72,7 @@ class DeckShow{
 
         this.audioDict["roll"] = new Audio("MCoM/resource/se/deckmove.mp3");
         this.audioDict["waste"] = new Audio("MCoM/resource/se/waste.mp3");
+        this.audioDict["use"] = new Audio("MCoM/resource/se/use.mp3");
     }
 
     deckSet(deck){
@@ -173,6 +174,8 @@ class DeckShow{
             this.keepUse();
             return 0;
         }
+        this.audioDict["use"].currentTime = 0;
+        this.audioDict["use"].play();
         var count = 0
         var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
         for(var i = 0;i < this.deckList.length;i++){

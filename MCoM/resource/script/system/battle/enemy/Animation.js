@@ -59,6 +59,7 @@ class Animation{
     initAnimationFlameDict(){
         this.animationFlameDict["wait"] = [["slime",60]];
         this.animationFlameDict["move"] = [["slime",60]];
+        this.animationFlameDict["breaked"] = [["slime",60]];
 
         this.animationFlameDict["attack"] = [["slime",10],["slime1",20],["slime2",60]];
 
@@ -99,7 +100,7 @@ class Animation{
         //console.log(this.status,10);
         if(this.animationData[1] == this.flame){
             if(this.animationDataArray.length == 0){
-                if(this.status == "walk"){
+                if(this.status == "move"){
                     this.setAnimationArray();
                     this.nextAnimationData();
                     this.enemy.graphicMain.texture = this.getAnimationGraphic();   
