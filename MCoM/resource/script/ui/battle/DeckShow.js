@@ -481,7 +481,7 @@ class DeckShow{
 
         var po = this.deckList;
         var test = this;
-        var animate = new CardAnimated();
+        var animate = new CardAnimated(60,this.audioDict["waste"]);
         //console.log(index,ii % (circleCardNum+1) == 0);
         //this.a = function(time){test.movecC(test,index,300,-80,this);}
         if(this.side == "R"){

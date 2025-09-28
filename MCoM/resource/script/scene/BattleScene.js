@@ -45,6 +45,8 @@ class BattleScene{
 
         this.audioDict = new DefaultDict(null);
         this.audioDict["sword"] = new Audio("MCoM/resource/se/sword.mp3");
+
+        this.wasteFlame = -1;
     }
     setTest(){
         var This = this;
@@ -353,8 +355,10 @@ class BattleScene{
                 this.fieldCard.cardFn = animate;
             }
             else{
-                console.log(1,1,1,this.fieldCard.cardSide)
-                this.player.deckset.waste();
+                if( this.wasteFlame < this.flame){
+                    this.player.deckset.waste();
+                    this.wasteFlame = this.flame + 20;
+                }
             }
         }
     }
