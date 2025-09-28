@@ -9,7 +9,7 @@ import Route from "../system/base/Route.js"
 import BackGroundManager from "../system/base/BackGroundManager.js"
 
 import Enemy from "../system/battle/enemy/Enemy.js"
-import ShopShow from "../ui/shop/showShow.js"
+import ShopShow from "../ui/shop/ShowShow.js"
 
 
 import Window from "../ui/window/Window.js"
