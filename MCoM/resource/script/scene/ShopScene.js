@@ -6,7 +6,7 @@ import DeckShow from "../ui/battle/DeckShow.js"
 import StageShow from "../ui/battle/StageShow.js"
 import Player from "../system/battle/player/Player.js"
 import RandomInt from "../util/RandomInt.js"
-import ShopShow from "../ui/shop/showShow.js"
+import ShopShow from "../ui/shop/ShowShow.js"
 
 class ShopScene{
     constructor(player,enemyList,stage,key,onWay,app){
