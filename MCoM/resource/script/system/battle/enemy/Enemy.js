@@ -62,7 +62,7 @@ class Enemy{
         
     }
     setTest(){
-        this.assets.add({alias:"slime",src:"MCOM/resource/img/slime.png"});
+        this.assets.add({alias:"slime",src:"MCoM/resource/img/slime.png"});
         //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
         this.graphicMain = new PIXI.Graphics();
         this.graphicShadow = new PIXI.Graphics().circle(0,0,15).fill(0x000000);
