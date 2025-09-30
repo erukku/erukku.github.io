@@ -1,5 +1,7 @@
 import ManageScene from "./ManageScene.js"
 
+import LoadDict from "../util/LoadDict.js"
+
 class StartScene{
     constructor(key,app){ 
         console.log("start");
@@ -26,6 +28,8 @@ class StartScene{
             fontSize: 50,
             fill : 0xaaaaaa
         });
+
+        
         
     }
 
@@ -54,26 +58,24 @@ class StartScene{
             This.selectList[0][This.selectNum].style = This.downStyle;
 
             if(This.keyPrssing("k")){
-                This.selectNum += 1;
+                This.selectNum -= 1;
             }
             else if(This.keyPrssing("i")){
                 This.selectNum += 1;
             }
+            This.selectNum += 2;
             This.selectNum %= 2;
 
             if(This.selectNum == 0 && This.keyPrssing("a")){
                 This.removeTicker();
                 This.manager.changeScene("onway");
             }
-
             This.selectList[0][This.selectNum].style = This.upStyle;
             
         };
         this.selectFn = fn;
         this.ticker.add(fn);
         
-        
-
     }
 
     keyPrssing(key){

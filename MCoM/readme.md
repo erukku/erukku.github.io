@@ -8,3 +8,7 @@
 ## 裏事情
 - 画面サイズがちっちゃい理由
     - 現時点でgithubで動かすことしか考えていないのでダウンロードされる画像などをできるだけ軽くしたい
+
+- https://pixijs.com/8.x/guides/components/assets/manifest
+    - 公式ゴミ解説 Assets.init()に与えられる引数にて{manifest:~}にしなければならないのにもかかわらず{~}で表記していた
+    - ここで1日とられた
