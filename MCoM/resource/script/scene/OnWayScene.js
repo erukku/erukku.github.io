@@ -32,12 +32,8 @@ class OnWayScene{
         this.convertPos = new ConvertPos();
         this.container = new PIXI.Container();
 
+
         this.assets = PIXI.Assets;
-        this.assets.add({alias:"cover",src:"MCoM/resource/img/cover.png"});
-        this.assets.add({alias:"bgL",src:"MCoM/resource/img/bg_forestL.png"});
-        this.assets.add({alias:"bgR",src:"MCoM/resource/img/bg_forestR.png"});
-        this.assets.add({alias:"seat",src:"MCoM/resource/img/seat.png"});
-        
 
         this.seat = new PIXI.Sprite();
         this.base = new PIXI.Graphics().rect(0,0,640,240).fill(0x000000).endFill();
@@ -62,13 +58,11 @@ class OnWayScene{
         //this.leftWall.anchor.x =this.leftWall.anchor.y = 0.5;
         //this.rightWall.anchor.x =this.rightWall.anchor.y = 0.5;
 
-        (async() => {
-            this.bgL.texture = await this.assets.load("bgR");
-            this.bgR.texture = await this.assets.load("bgR");
-            this.leftWall.texture = await this.assets.load("cover");
-            this.rightWall.texture = await this.assets.load("cover");
-            this.seat.texture = await this.assets.load("seat");
-        })();
+        this.bgL.texture = this.assets.cache.get('forestL');
+        this.bgR.texture = this.assets.cache.get('forestR');
+        this.leftWall.texture = this.assets.cache.get('cover');
+        this.rightWall.texture = this.assets.cache.get('cover');
+        this.seat.texture = this.assets.cache.get('seat');
         
         this.leftWall.zIndex = 0;
         this.rightWall.zIndex = 0;

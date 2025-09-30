@@ -86,7 +86,8 @@ class Route{
                         //icon = new PIXI.Sprite(this.rootIconDict["goal"]);
                         
                         
-                        icon = new PIXI.Sprite(await this.assets.load("goal"));
+                        //icon = new PIXI.Sprite(await this.assets.load("goal"));
+                        icon = PIXI.Sprite.from('iconGoal');
                         icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         break;
@@ -96,7 +97,7 @@ class Route{
                         //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
                         //icon = new PIXI.Sprite(this.rootIconDict["battle"]);
                         
-                        icon = new PIXI.Sprite(await this.assets.load("battle"));
+                        icon = PIXI.Sprite.from('iconBattle');
                         
                         icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
@@ -106,7 +107,7 @@ class Route{
                         circle.fill(0x99330A);
                         icon = new PIXI.Sprite();
                         
-                        icon = new PIXI.Sprite(await this.assets.load("shop"));
+                        icon = PIXI.Sprite.from('iconShop');
                         icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
@@ -117,7 +118,7 @@ class Route{
                         circle.fill(0xbb330A);
                         icon = new PIXI.Sprite();
                         
-                        icon = new PIXI.Sprite(await this.assets.load("event"));
+                        icon = PIXI.Sprite.from('iconEvent');
                         icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         //icon = new PIXI.Sprite(this.rootIconDict["shop"]);

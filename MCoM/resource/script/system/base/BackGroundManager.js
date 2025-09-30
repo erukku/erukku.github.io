@@ -8,8 +8,8 @@ class BackGroundManager{
 
         this.bgDict = new DefaultDict();
 
-        this.initAsset();
-        this.initBGDictLoad();
+        //this.initAsset();
+        //this.initBGDictLoad();
     }
 
     initAsset(){
@@ -23,6 +23,8 @@ class BackGroundManager{
 
     async setBG(bg){
         console.log(2);
+        this.scene.stage.bg.texture = this.assets.cache.get("forest");
+        /*
         if(this.bgDict[bg] == null){
             console.log(4);
             this.scene.stage.bg.texture= await this.assets.load(bg);  
@@ -33,6 +35,7 @@ class BackGroundManager{
             this.scene.stage.bg.texture = this.bgDict[bg];
         }
         //this.scene.bgGraphic = await new PIXI.Sprite(this.bgDict[bg]);
+        */
     }
 
 }

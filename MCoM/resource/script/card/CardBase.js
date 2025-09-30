@@ -64,10 +64,11 @@ class CardBase{
                 var bottomCard = new PIXI.Graphics().rect(0,0,60,80).fill(0xff0000);
                 var costFlame =  new PIXI.Graphics().circle(60,0,30).stroke({width:3,color:0xff0000});
 
-                var image = await PIXI.Assets.load("MCoM/resource/img/sword.png");
+                //var image = await PIXI.Assets.load("MCoM/resource/img/sword.png");
         
         
-                var cardIcon = new PIXI.Sprite(image);
+                //var cardIcon = new PIXI.Sprite(image);
+                var cardIcon = PIXI.Sprite.from('cardAttack1');
                 cardIcon.scale.x = cardIcon.scale.y = 0.06;
                 cardIcon.y += 18;
 
@@ -76,10 +77,10 @@ class CardBase{
                 var bottomCard = new PIXI.Graphics().rect(0,0,60,80).fill(0x00ff00);
                 var costFlame =  new PIXI.Graphics().circle(60,0,30).stroke({width:3,color:0x00ff00});
                 
-                var image = await PIXI.Assets.load("MCoM/resource/img/medical.png");
+                //var image = await PIXI.Assets.load("MCoM/resource/img/medical.png");
         
         
-                var cardIcon = new PIXI.Sprite(image);
+                var cardIcon = PIXI.Sprite.from('cardItem1');
                 cardIcon.scale.x = cardIcon.scale.y = 0.13;
                 cardIcon.y += 20;
                 cardIcon.x += 5;
@@ -87,10 +88,10 @@ class CardBase{
             case 'magic':
                 var bottomCard = new PIXI.Graphics().rect(0,0,60,80).fill(0x0000ff);
                 var costFlame =  new PIXI.Graphics().circle(60,0,30).stroke({width:3,color:0x0000ff});
-                var image = await PIXI.Assets.load("MCoM/resource/img/boushi.png");
+                //var image = await PIXI.Assets.load("MCoM/resource/img/boushi.png");
         
         
-                var cardIcon = new PIXI.Sprite(image);
+                var cardIcon = PIXI.Sprite.from('cardMagic1');
                 cardIcon.scale.x = cardIcon.scale.y = 0.06;
                 cardIcon.y += 18;
                 break

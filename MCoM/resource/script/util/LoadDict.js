@@ -36,6 +36,19 @@ class LoadDict{
         ],
       },
       {
+        name: 'stage',
+        assets: [
+          {
+            alias: 'cover',
+            src: 'MCoM/resource/img/cover.png',
+          },
+          {
+            alias: 'seat',
+            src: 'MCoM/resource/img/seat.png',
+          },
+        ],
+      },
+      {
         name: 'player',
         assets: [
           {
@@ -152,6 +165,7 @@ class LoadDict{
         
         var alias = [
             'bg',
+            'stage',
             'player',
             'enemy',
             'icon',

@@ -18,6 +18,7 @@ class HpBar{
         this.maxHp = maxHp;
         this.hp = maxHp;
         this.scene = scene;
+        this.assets = PIXI.Assets;
     }
 
     setGraphic(){
@@ -58,10 +59,11 @@ class HpBar{
         
         
         
-        var image = await PIXI.Assets.load("MCoM/resource/img/sword.png");
+        //var image = await PIXI.Assets.load("MCoM/resource/img/sword.png");
         
         
-        var playerIcon = new PIXI.Sprite(image);
+        
+        var playerIcon = PIXI.Sprite.from('cardAttack1');
         playerIcon.scale.x = playerIcon.scale.y = 0.04;
         playerIcon.x -= 16;
         playerIcon.y -= 24;
