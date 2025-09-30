@@ -275,6 +275,13 @@ class BattleScene{
                     this.enemyList[i].attack();
                     this.fieldCard.cardFn = animate;
 
+                    if(this.enemyList[i].position.x < this.player.position.x){
+                        this.enemyList[i].direction = "R";
+                    }
+                    else{
+                        this.enemyList[i].direction = "L";
+                    }
+
                     //console.log(this.fieldCard.cardSide,this.fieldCard.fieldCard,i);
                     continue;
                 }
@@ -295,6 +302,13 @@ class BattleScene{
                     this.enemyList[i].attack();
 
                     this.fieldCard.cardFn = animate;
+
+                    if(this.enemyList[i].position.x < this.player.position.x){
+                        this.enemyList[i].direction = "R";
+                    }
+                    else{
+                        this.enemyList[i].direction = "L";
+                    }
 
                 }else{
                     this.enemyList[i].deckset.waste();

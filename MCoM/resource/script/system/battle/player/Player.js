@@ -66,7 +66,7 @@ class Player{
     }
 
     setTest(){
-        this.assets.add({alias:"player",src:"MCoM/resource/img/player.png"});
+        
 
         //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0xbbbbbb);
         
@@ -74,15 +74,12 @@ class Player{
         //var image = PIXI.Assets.load("./resource/img/player.png");
 
         (async () => {
-            this.graphicMain = new PIXI.Sprite(await this.assets.load("player"));
+            this.graphicMain = await PIXI.Sprite.from("player");
             this.graphic.addChild(this.graphicMain);
             
             this.graphicMain.anchor.x = this.graphicMain.anchor.y = 0.5;
             this.graphicMain.anchor.set(0.5,0.7);
             this.graphicMain.scale.set(0.5,0.5);
-            
-            
-            console.log(this.graphicMain.width);
         })();
         
         
@@ -93,7 +90,7 @@ class Player{
         //this.graphicShadow.y +=  (1-this.graphicShadow.scale.y)*30
 
         this.body.setBody(30,10,30);
-        this.graphicMain.x -= 15;
+        
         //this.graphicShadow.y += 60;
         
         this.graphic.addChild(this.graphicShadow);

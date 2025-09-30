@@ -1,8 +1,11 @@
 - 現時点でやるべき事(この辺ができれば最低限遊べる)
+    - enemyのmove改善
+
     
 
 - おそらく起きる修正
     - enemyのattackinfo + animation
+    - configの実装
 
 - done
     - enemy側のリロード調整(done 全カードが少ない時バグが来る可能性)
@@ -12,3 +15,5 @@
     - enemy側のリロード後の使用ロック
     - useの連打改善
     - keepのカードが固定される
+    - loadの一括化
+    - enemyのattack時の向き

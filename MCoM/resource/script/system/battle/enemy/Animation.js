@@ -27,6 +27,8 @@ class Animation{
         this.initAnimationLoadDict();
         this.setStatus("wait");
 
+        this.enemy.direction = "L";
+
         this.setAnimationArray();
         this.nextAnimationData();
 
@@ -98,6 +100,18 @@ class Animation{
 
     updateAnimation(){
         //console.log(this.status,10);
+
+        if(this.enemy.direction == "L"){
+            if(this.enemy.graphicMain.scale.x > 0){
+                this.enemy.graphicMain.scale.x *= -1;
+            }
+        }
+        else if(this.enemy.direction == "R"){
+            if(this.enemy.graphicMain.scale.x < 0){
+                this.enemy.graphicMain.scale.x *= -1;
+            }
+        }
+
         if(this.animationData[1] == this.flame){
             if(this.animationDataArray.length == 0){
                 if(this.status == "move"){
