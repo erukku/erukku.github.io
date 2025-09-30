@@ -1,4 +1,5 @@
 import StartScene from "./StartScene.js"
+import LoadScene from "./LoadScene.js"
 import BattleScene from "./BattleScene.js"
 import ShopScene from "./ShopScene.js"
 import OnWayScene from "./OnWayScene.js"
@@ -47,7 +48,7 @@ class ManageScene{
     }
 
     changeScene(type){
-        if(type == "onway"){
+        if(type == "load"){
             var This = this;
 
             var fn = function(time){
@@ -56,6 +57,14 @@ class ManageScene{
             this.changeFn = fn;
 
             this.ticker.add(fn);
+        }
+
+        if(type == "onway"){
+            var This = this;
+
+            this.ticker.addOnce(this.betweenSet(type));
+
+            
             /*
             this.now.destroy();
             var player = new Player();
@@ -143,8 +152,10 @@ class ManageScene{
             this.ticker.add(fn);
             
         }
-        else if(type == "shop"){
-
+        else if(type == "load"){
+            var load = new LoadScene(this.stage,this);
+            this.now = load;
+            load.startLoad();
         }
         else if(type == "end"){
             var end = new EndScene();

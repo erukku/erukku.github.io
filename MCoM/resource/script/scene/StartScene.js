@@ -68,7 +68,7 @@ class StartScene{
 
             if(This.selectNum == 0 && This.keyPrssing("a")){
                 This.removeTicker();
-                This.manager.changeScene("onway");
+                This.manager.changeScene("load");
             }
             This.selectList[0][This.selectNum].style = This.upStyle;
             

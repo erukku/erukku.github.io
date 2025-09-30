@@ -2,6 +2,7 @@ import StageShow from "../ui/battle/StageShow.js"
 import BattleScene from "./BattleScene.js"
 import ShopScene from "./ShopScene.js"
 import EventScene from "./EventScene.js"
+import LoadScene from "./LoadScene.js"
 
 import ConvertPos from "../system/base/ConvertPos.js"
 
