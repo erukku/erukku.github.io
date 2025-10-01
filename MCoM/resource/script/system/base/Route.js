@@ -42,8 +42,15 @@ class Route{
     async setGraphic(){
         this.graphicContainer = new PIXI.Container();
 
-        this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+2) + 60, 180).endFill();
+        this.base = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+2) + 60, 180).endFill();
+        this.underMap = new PIXI.Container();
+        //this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(-100, 20, 640, 180).endFill();
+        
+        this.graphicContainer.addChild(this.base);
         this.graphicContainer.addChild(this.underMap);
+
+
+        this.scene.container.addChild(this.graphicContainer);
 
         this.graphicContainer.x = 100;
     
@@ -222,17 +229,19 @@ class Route{
         this.now = next;
 
         this.initCount();
+        
+        this.invisbleBefore();
         return this.route[this.now[0]][this.now[1]];
     }
 
     setContainer(container){
         container.addChild(this.graphicContainer);
-        //console.log("end");
+        
     }
 
     removeContainer(container){
         container.removeChild(this.graphicContainer);
-        //console.log("end");
+        
     }
 
     movePlayerIcon(){
@@ -261,6 +270,23 @@ class Route{
             this.rootIconDict["goal"] = await this.assets.load("goal");
             console.log("aaaå")
         })();
+    }
+
+    invisbleBefore(){
+        for(var i = 0;i < this.pointList[this.now[0]-1].length;i++){
+            this.pointList[this.now[0]-1][i].visible = false;
+            this.iconList[this.now[0]-1][i].visible = false;
+        }
+        if(this.now[0] >= 2){
+            for(var i = 0;i < this.lineList[this.now[0]-2].length;i++){
+                for(var j = 0;j < this.lineList[this.now[0]-2][i].length;j++){
+                    this.lineList[this.now[0]-2][i][j].visible = false;
+                }
+            }
+        }
+        if(this.now[0] >= 2){
+            this.underMap.x -= 100;
+        }
     }
 }
 
