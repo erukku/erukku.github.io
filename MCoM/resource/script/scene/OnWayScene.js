@@ -157,10 +157,12 @@ class OnWayScene{
         this.ticker.add(this.transformFn);
         */
 
-        this.route.setRoute(1);
+        this.route.setRoute(4);
         this.route.initAsset();
         this.route.initRootIconDict();
         this.route.setGraphic();
+
+        this.route.setContainer(this.appStage);
     }
 
     transformGround(){
@@ -255,6 +257,7 @@ class OnWayScene{
     event(){
         if(this.keyPrssing("a") && this.transformFn == null){
             var nextEvent = this.route.selectWay();
+            
             //console.log(this.ticker.FPS);
             if(nextEvent == "battle"){
                 this.route.removeContainer(this.appStage);

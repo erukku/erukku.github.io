@@ -49,9 +49,6 @@ class Route{
         this.graphicContainer.addChild(this.base);
         this.graphicContainer.addChild(this.underMap);
 
-
-        this.scene.container.addChild(this.graphicContainer);
-
         this.graphicContainer.x = 100;
     
 
@@ -274,11 +271,11 @@ class Route{
 
     invisbleBefore(){
         for(var i = 0;i < this.pointList[this.now[0]-1].length;i++){
-            this.pointList[this.now[0]-1][i].visible = false;
             this.iconList[this.now[0]-1][i].visible = false;
         }
         if(this.now[0] >= 2){
             for(var i = 0;i < this.lineList[this.now[0]-2].length;i++){
+                this.pointList[this.now[0]-2][i].visible = false;
                 for(var j = 0;j < this.lineList[this.now[0]-2][i].length;j++){
                     this.lineList[this.now[0]-2][i][j].visible = false;
                 }
