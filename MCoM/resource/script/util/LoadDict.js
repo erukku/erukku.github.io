@@ -158,6 +158,10 @@ class LoadDict{
             alias: 'soldout',
             src: 'MCoM/resource/img/soldout.png',
         },
+        {
+            alias: 'coin',
+            src: 'MCoM/resource/img/coin.png',
+        }
     ],
     },
     ]

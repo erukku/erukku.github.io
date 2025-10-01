@@ -46,7 +46,7 @@ class ShopScene{
         }
         this.ticker.add(this.keyFn);
 
-        this.shopUi = new ShopShow(this.stage);
+        this.shopUi = new ShopShow(this.stage,this.player);
 
         this.prepareItem();
         this.shopUi.setBase(this.itemSell);
@@ -130,7 +130,7 @@ class ShopScene{
             //仮　price無視
             if(this.cersor[0] != 4 && this.canbuy() && (this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] == false)){
                 this.player.money -= this.itemSell[this.cersor[0] + 4*this.cersor[1]][1];
-                
+                this.shopUi.updateMoney();
                 this.shopUi.visibleSoldOut(this.cersor[0] + 4*this.cersor[1]);
 
                 this.player.deck.addCard(this.itemSell[this.cersor[0] + 4*this.cersor[1]][0]);
@@ -183,7 +183,8 @@ class ShopScene{
 
     selectPrice(){
         //仮実装
-        return 0;
+        var price = this.random.getRandomInt(1,100);
+        return price;
     }
 
 

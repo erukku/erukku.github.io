@@ -1,5 +1,5 @@
 class ShopShow{
-    constructor(scene){
+    constructor(scene,player){
         this.scene = scene;
         this.shopUi = new PIXI.Container();
 
@@ -11,6 +11,8 @@ class ShopShow{
         this.cersor = null;
         this.cersorPos = [0,0];
         this.assets = PIXI.Assets;
+
+        this.player = player;
     }
 
     setBase(items){
@@ -28,7 +30,22 @@ class ShopShow{
         this.exitBox.y = 120;
 
         this.shopUi.addChild(this.exitBox);
+
+        this.playerCoin = new PIXI.Container();
+        var coinGraphic = PIXI.Sprite.from('coin');
+        coinGraphic.scale.x = coinGraphic.scale.y = 0.03;
+        this.playerCoin.addChild(coinGraphic);
+
+        var moneyText = new PIXI.Text(this.player.money,{fontFamily : 'Arial', fontSize: 24, fill : 0xffffff});
+        moneyText.x = 20;
+        moneyText.y = 0;
+        this.playerCoin.addChild(moneyText);
+
+        this.playerCoin.x = 300;
+        this.playerCoin.y = 10;
         
+        this.shopUi.addChild(this.playerCoin);
+
         this.initSoldOutGraphic();
         this.setCersor();
         
@@ -67,9 +84,15 @@ class ShopShow{
             cardGraphic.x = 0;
             cardGraphic.y = 0;
 
+            var coin = PIXI.Sprite.from('coin');
+            coin.scale.x = coin.scale.y = 0.03;
+            
+            coin.y = 60;
+            container.addChild(coin);
+
             var cost = new PIXI.Text(this.itemList[i][1],{fontFamily : 'Arial', fontSize: 24, fill : 0xffffff});
-            cost.x = 10;
-            cost.y = 50;
+            cost.x = 20;
+            cost.y = 55;
             if(i >= this.itemList.length/2){
                 container.x = (i - this.itemList.length/2)*80;
                 container.y = 80;
@@ -124,6 +147,10 @@ class ShopShow{
         }
         this.shopUi.destroy();
 
+    }
+
+    updateMoney(){
+        this.playerCoin.getChildAt(1).text = this.player.money;
     }
 
 }

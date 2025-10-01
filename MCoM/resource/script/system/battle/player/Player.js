@@ -68,7 +68,7 @@ class Player{
     }
 
     setTest(){
-        this.money = 10000;
+        this.money = 1000;
 
         //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0xbbbbbb);
         
