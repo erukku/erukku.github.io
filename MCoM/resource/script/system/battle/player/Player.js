@@ -190,25 +190,27 @@ class Player{
         var cardIndex = this.deckset.getCardIndex();
         var card = this.deck.deck[cardIndex];
 
-        this.animation.setStatus("attack");
-
         console.log(cardIndex,card.cardClass);
 
         switch(card.cardClass){
             case "attack":
                 this.attackData = this.attackInfo.getInfo(0);
+                this.animation.setStatus("attack");
                 break;
 
             case "magic":
                 this.attackData = this.magicInfo.getInfo(0);
+                this.animation.setStatus("item");
                 break;
 
             case "item":
                 this.attackData = this.itemInfo.getInfo(0);
+                this.animation.setStatus("item");
                 break;
 
             case "special":
                 0
+                this.animation.setStatus("attack");
                 break;
         }
 
@@ -222,6 +224,7 @@ class Player{
     getAttackInfo(index){
         var card = this.deck.deck[index];
         var data = null;
+        console.log(index,card.cardClass);
         switch(card.cardClass){
             case "attack":
                 data = this.attackInfo.getInfo(0);

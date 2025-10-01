@@ -270,9 +270,9 @@ class BattleScene{
                 }
 
                 if(this.fieldCard.isExist(card,"enemy",this.enemyList[i])){
-
-                    animate = this.enemyList[i].deckset.use();
                     this.enemyList[i].attack();
+                    animate = this.enemyList[i].deckset.use();
+                    
                     this.fieldCard.cardFn = animate;
 
                     if(this.enemyList[i].position.x < this.player.position.x){
@@ -298,9 +298,8 @@ class BattleScene{
 
                         this.player.animation.setStatus("breaked");
                     }
-                    animate = this.enemyList[i].deckset.use();
                     this.enemyList[i].attack();
-
+                    animate = this.enemyList[i].deckset.use();
                     this.fieldCard.cardFn = animate;
 
                     if(this.enemyList[i].position.x < this.player.position.x){
@@ -343,8 +342,9 @@ class BattleScene{
             }
 
             if(this.fieldCard.isExist(card,"player",this.player)){
-                animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
                 this.player.attack();
+                animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
+                
                 this.fieldCard.cardFn = animate;
                 return 0;   
             }
@@ -363,9 +363,8 @@ class BattleScene{
                     //仮 need enemy breaked
                     this.fieldCard.cardHolder.animation.setStatus("breaked");
                 }
-                
-                animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
                 this.player.attack();
+                animate = this.player.deckset.use();// Aが押された時に実行したい処理を記述
                 this.fieldCard.cardFn = animate;
             }
             else{

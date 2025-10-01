@@ -1,8 +1,10 @@
 - 現時点でやるべき事(この辺ができれば遊べる)
     - enemyのmove改善
+    - item/magic infoの改善
     - itemのモーション
     - 魔法のモーション
     - 戦闘終了後の報酬
+    - shop/event windowのグラフィック
 
     
 

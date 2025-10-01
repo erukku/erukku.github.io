@@ -28,7 +28,7 @@ class Deck{
         var atCard = new CardBase("item");
         atCard.setBaseInfo(num,num);
         num += 1;
-        atCard.drawCard();
+        atCard.drawCard(9);
         atCard.setSide("player");
         this.deck.push(atCard);
 

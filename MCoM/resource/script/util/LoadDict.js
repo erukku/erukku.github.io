@@ -83,6 +83,18 @@ class LoadDict{
             alias: 'walk4',
             src: 'MCoM/resource/img/p_walk4.png',
           },
+          {
+            alias: 'item1',
+            src: 'MCoM/resource/img/p_itemwait.png',
+          },
+          {
+            alias: 'item2',
+            src: 'MCoM/resource/img/p_itemuse.png',
+          },
+          {
+            alias: 'magic',
+            src: 'MCoM/resource/img/p_magic.png',
+          }
         ],
       },
       {

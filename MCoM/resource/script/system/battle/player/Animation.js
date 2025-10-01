@@ -68,8 +68,10 @@ class Animation{
         this.animationFlameDict["jump"] = [["player",60]];
         this.animationFlameDict["breaked"] = [["breaked",60]];
         this.animationFlameDict["damaged"] = [["player",60]];
-        this.animationFlameDict["heal"] = [["player",60]];
 
+
+        this.animationFlameDict["heal"] = [["magic",60]];
+        this.animationFlameDict["item"] = [["item1",20],["item2",60]];
 
         this.animationFlameDict["attack"] = [["player2",10],["player3",60]];
 
@@ -85,7 +87,9 @@ class Animation{
             this.animationLoadDict["walk2"] = await this.assets.load("walk2");
             this.animationLoadDict["walk3"] = await this.assets.load("walk3");
             this.animationLoadDict["walk4"] = await this.assets.load("walk4");
-            
+            this.animationLoadDict["item1"] = await this.assets.load("item1");
+            this.animationLoadDict["item2"] = await this.assets.load("item2");
+            this.animationLoadDict["magic"] = await this.assets.load("magic");
         })();
         
         /*
