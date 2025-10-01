@@ -723,7 +723,10 @@ class DeckShow{
 
 
 
-    dropC(){
+    initScale(){
+        for(var i = 0;i < this.deckList.length;i++){
+            this.deckList[i].cardGraphic.scale.x = this.deckList[i].cardGraphic.scale.y = 1;
+        }
 
     }
 }

@@ -151,6 +151,15 @@ class LoadDict{
         },
     ],
     },
+    {
+        name: 'shop',
+        assets: [
+          {
+            alias: 'soldout',
+            src: 'MCoM/resource/img/soldout.png',
+        },
+    ],
+    },
     ]
         };
     }
@@ -171,7 +180,8 @@ class LoadDict{
             'icon',
             'cardAttack',
             'cardMagic',
-            'cardItem'
+            'cardItem',
+            'shop'
         ]
         var fn = function(err){
             console.log("error",err);

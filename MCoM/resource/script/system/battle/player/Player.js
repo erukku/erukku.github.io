@@ -62,11 +62,13 @@ class Player{
         this.cardIndex = 0;
 
         this.animation = new Animation(this);
+
+        this.money = 0;
         
     }
 
     setTest(){
-        
+        this.money = 10000;
 
         //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0xbbbbbb);
         

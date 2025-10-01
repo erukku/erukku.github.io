@@ -65,6 +65,8 @@ class ShopScene{
         //console.log("flame",this.flame)
         if(this.endFlag == true){
             this.shopUi.delete();
+
+            this.player.deckset.initScale();
             this.shopEnd();
         }
 
@@ -127,17 +129,22 @@ class ShopScene{
         else{
             //仮　price無視
             if(this.cersor[0] != 4 && this.canbuy() && (this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] == false)){
+                this.player.money -= this.itemSell[this.cersor[0] + 4*this.cersor[1]][1];
+                
+                this.shopUi.visibleSoldOut(this.cersor[0] + 4*this.cersor[1]);
+
                 this.player.deck.addCard(this.itemSell[this.cersor[0] + 4*this.cersor[1]][0]);
-                console.log(this.itemSell[this.cersor[0] + 4*this.cersor[1]][0]);
+                
                 this.itemSoldOut[this.cersor[0] + 4*this.cersor[1]] = true;
-                //console.log("gagr");
+                
+                
             }
         }
     }
 
     //money実装したら
     canbuy(){
-        return true;
+        return this.player.money >= this.itemSell[this.cersor[0] + 4*this.cersor[1]][1]
     }
 
     prepareItem(){

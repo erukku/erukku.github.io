@@ -10,7 +10,7 @@ class ShopShow{
 
         this.cersor = null;
         this.cersorPos = [0,0];
-        
+        this.assets = PIXI.Assets;
     }
 
     setBase(items){
@@ -28,8 +28,10 @@ class ShopShow{
         this.exitBox.y = 120;
 
         this.shopUi.addChild(this.exitBox);
-
+        
+        this.initSoldOutGraphic();
         this.setCersor();
+        
 
     }
 
@@ -60,11 +62,12 @@ class ShopShow{
 
         for(var i = 0; i < this.itemList.length;i++){
             var cardGraphic = this.itemList[i][0].cardGraphic;
+            cardGraphic.scale.x = cardGraphic.scale.y = 0.7;
             var container = new PIXI.Container();
             cardGraphic.x = 0;
             cardGraphic.y = 0;
 
-            var cost = new PIXI.Text(this.itemList[i][1],{fontFamily : 'Arial', fontSize: 24, fill : 0x111111});
+            var cost = new PIXI.Text(this.itemList[i][1],{fontFamily : 'Arial', fontSize: 24, fill : 0xffffff});
             cost.x = 10;
             cost.y = 50;
             if(i >= this.itemList.length/2){
@@ -73,14 +76,31 @@ class ShopShow{
             }
             else{
                 container.x = i * 80;
-                
-
+            
             }
             container.addChild(cardGraphic);
             container.addChild(cost);
             this.itemGraphicContainer.addChild(container);
+            this.itemGraphicList.push(container);
         }
 
+    }
+
+    initSoldOutGraphic(){
+        this.soldOutGraphicList = new Array();
+        for(var i = 0; i < this.itemList.length;i++){
+            var soldOutGraphic = PIXI.Sprite.from('soldout');
+            soldOutGraphic.visible = false;   
+            soldOutGraphic.scale.x = soldOutGraphic.scale.y = 0.12;
+            //soldOutGraphic.width = 60;
+            //soldOutGraphic.height = 60;
+            this.itemGraphicList[i].addChild(soldOutGraphic);
+            this.soldOutGraphicList.push(soldOutGraphic);
+        }
+    }
+
+    visibleSoldOut(index){
+        this.soldOutGraphicList[index].visible = true;
     }
 
     draw(){
@@ -97,11 +117,13 @@ class ShopShow{
     }
 
 
-    //仮実装
+    //仮実装?
     delete(){
-        this.shopUi.x = -10000;
-        this.shopUi.y = -10000;
-        //this.shopUi.destroy();
+        for(var i = 0;i < this.itemGraphicList.length;i++){
+            this.itemGraphicList[i].destroy();
+        }
+        this.shopUi.destroy();
+
     }
 
 }

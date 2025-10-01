@@ -1,11 +1,16 @@
-- 現時点でやるべき事(この辺ができれば最低限遊べる)
+- 現時点でやるべき事(この辺ができれば遊べる)
     - enemyのmove改善
+    - お金周りの実装
+    - itemのモーション
+    - 魔法のモーション
+    - 戦闘終了後の報酬
 
     
 
 - おそらく起きる修正
     - enemyのattackinfo + animation
     - configの実装
+    
 
 - done
     - enemy側のリロード調整(done 全カードが少ない時バグが来る可能性)
@@ -17,3 +22,4 @@
     - keepのカードが固定される
     - loadの一括化
     - enemyのattack時の向き
+    - shop soldout表示
