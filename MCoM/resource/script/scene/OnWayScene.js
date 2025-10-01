@@ -157,7 +157,7 @@ class OnWayScene{
         this.ticker.add(this.transformFn);
         */
 
-        this.route.setRoute(5);
+        this.route.setRoute(1);
         this.route.initAsset();
         this.route.initRootIconDict();
         this.route.setGraphic();

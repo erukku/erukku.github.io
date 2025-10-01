@@ -34,7 +34,7 @@ class Route{
             this.route.push(data);
         }
 
-        //this.route.push(["boss"])
+        this.route.push(["boss"])
 
         this.route.push(["end"]);
     }
@@ -42,7 +42,7 @@ class Route{
     async setGraphic(){
         this.graphicContainer = new PIXI.Container();
 
-        this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+1) + 60, 180).endFill();
+        this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+2) + 60, 180).endFill();
         this.graphicContainer.addChild(this.underMap);
 
         this.graphicContainer.x = 100;
@@ -63,7 +63,7 @@ class Route{
 
         //console.log(this.route);
 
-        for(var i = 0;i < this.length+2;i++){
+        for(var i = 0;i < this.length+3;i++){
             var data = new Array();
             var icons = new Array();
             var lines = new Array();
@@ -119,6 +119,16 @@ class Route{
                         icon = new PIXI.Sprite();
                         
                         icon = PIXI.Sprite.from('iconEvent');
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        break;
+                    case "boss":
+                        circle.fill(0x8B0000);
+                        icon = new PIXI.Sprite();
+                        
+                        icon = PIXI.Sprite.from('iconBoss');
                         icon.scale.x = icon.scale.y =0.13;
                         icon.anchor.x = icon.anchor.y = 0.5;
                         //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
@@ -192,8 +202,14 @@ class Route{
         this.enLine(before,this.count);
     }
 
+    initCount(){
+        var before = this.count;
+        this.count = 0;
+        
+    }
+
     enLine(before,after){
-        console.log(this.lineList[this.now[0]][this.now[1]][before].strokeStyle);
+        //console.log(this.lineList[this.now[0]][this.now[1]][before].strokeStyle);
         //var beforeStyle = new PIXI.StrokesStyle({color:0x188744});
         this.lineList[this.now[0]][this.now[1]][before].tint = 0x188744;
 
@@ -204,6 +220,8 @@ class Route{
     selectWay(){
         var next = [this.now[0]+1,this.lineNumList[this.now[0]][this.now[1]][this.count]];
         this.now = next;
+
+        this.initCount();
         return this.route[this.now[0]][this.now[1]];
     }
 

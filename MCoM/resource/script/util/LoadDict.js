@@ -133,6 +133,10 @@ class LoadDict{
         {
             alias: 'iconGoal',
             src: 'MCoM/resource/img/goal.png',
+        },
+        {
+            alias: 'iconBoss',
+            src: 'MCoM/resource/img/boss.png',
         }
         ],
     },
