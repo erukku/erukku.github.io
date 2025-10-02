@@ -223,8 +223,9 @@ class DeckShow{
                 var po = this.deckList;
                 var test = this;
                 var index = i;
-                var data = this.master.getAttackInfo(index);
-                var animate = new CardAnimated(data[1][1],this.audioDict["waste"]);
+                //var data = this.master.getAttackInfo(index);
+                
+                var animate = new CardAnimated(this.master.cardAllFlame,this.audioDict["waste"]);
                 //console.log(index,ii % (circleCardNum+1) == 0);
                 //this.a = function(time){test.movecC(test,index,300,-80,this);}
                 if(this.side == "R"){
@@ -481,7 +482,7 @@ class DeckShow{
 
         var po = this.deckList;
         var test = this;
-        var animate = new CardAnimated(60,this.audioDict["waste"]);
+        var animate = new CardAnimated(this.master.cardAllFlame,this.audioDict["waste"]);
         //console.log(index,ii % (circleCardNum+1) == 0);
         //this.a = function(time){test.movecC(test,index,300,-80,this);}
         if(this.side == "R"){

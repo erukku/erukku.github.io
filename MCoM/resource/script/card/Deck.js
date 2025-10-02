@@ -54,7 +54,7 @@ class Deck{
         atCard.setBaseInfo(num,num);
         //atCard.cost = this.rand.getRandomInt(1,9);
         num += 1;
-        atCard.drawCard(this.rand.getRandomInt(1,9));
+        atCard.drawCard(this.rand.getRandomInt(1,4));
         atCard.setSide("enemy");
         this.deck.push(atCard);
         }

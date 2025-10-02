@@ -47,6 +47,8 @@ class BattleScene{
         this.audioDict["sword"] = new Audio("MCoM/resource/se/sword.mp3");
 
         this.wasteFlame = -1;
+
+        this.attackBoxArray = new Array();
     }
     setTest(){
         var This = this;
@@ -214,7 +216,20 @@ class BattleScene{
                 if(enemy.actionFlame <= 10){
                     num *= -1;
                 }
-                enemy.addPos(0,num,0);
+
+                var x = this.player.position.x - enemy.position.x;
+                var y = this.player.position.y - enemy.position.y;
+                //var z = this.player.position.z - enemy.position.z;
+                var dist = Math.sqrt(x*x + y*y);
+
+                enemy.addPos(x/dist * enemy.speed,y/dist * enemy.speed,0);
+                if(x > 0){
+                    enemy.direction = "R";
+                }
+                else if(x < 0){
+                    enemy.direction = "L";
+                }
+
                 if(this.collider.isCrossed(enemy,test)){
                     enemy.addPos(0,-num,0);
                 }
@@ -429,8 +444,10 @@ class BattleScene{
                     if(f){
                         break;
                     }
+
+                    console.log(e);
                     e.damage(enemy.actionNow[2]);
-                    this.player.hpBar.damage(enemy.attackData[1]);
+                    //this.player.damage(enemy.attackData[1]);
                     enemy.attackedE.push(e);
                     
                     
@@ -463,6 +480,54 @@ class BattleScene{
             }
 
             this.player.attackFlame += 1;
+            if(this.attackBoxArray.length > 0){
+                for(var j = 0; j < this.attackBoxArray.length;j++){
+                    
+                    var data = this.attackBoxArray[j];
+                    //[sprite,power,speed,body,hittedArray,allflame,flame]
+                    
+                    var power = data[1];
+                    var speed = data[2];
+                    var body = data[3][0];
+                    var hittedArray = data[4];
+                    data[0].x += speed;
+                    body.position.addPos(speed,0,0);
+
+                    var aC = new AttackCollider();
+                    var hit = aC.isHitted(this.player,[body],this.enemyList);
+
+
+                    for(var i = 0;i < hit.length;i++){
+                        var e = hit[i];
+                        var f = false;
+                        for(var j = 0;j < hittedArray.length;j++){
+                            if(e == hittedArray[j]){
+                                f = true;
+                                break;
+                            }
+
+                        }
+                        if(f){
+                            break;
+                        }
+
+                        this.audioDict["sword"].currentTime = 0;
+                        this.audioDict["sword"].play();
+                        
+                        e.damage(power);
+                        hittedArray.push(e);
+                    }
+
+                    data[6] += 1;
+                    console.log(data[5],data[6]);
+                    if(data[6] >= data[5]){
+                        this.stage.removeChild(data[0]);
+                        this.attackBoxArray.splice(j,1);
+                        j -= 1;
+                    }
+                }
+            }
+
 
             if(this.player.actionNow[0] == "wait"){
                 return 0
@@ -470,6 +535,43 @@ class BattleScene{
             else if(this.player.actionNow[0] == "heal"){
                 this.player.heal(this.player.actionNow[2]);
                 return 0;
+            }
+            else if(this.player.actionNow[0] == "fire"){
+                var power = this.player.actionNow[2];
+                var allFlame = this.player.actionNow[3][0];
+                var flame = 0;
+                var speed = this.player.actionNow[3][1];
+                var body = this.player.actionNow[3][2];
+
+                var hittedArray = new Array();
+                var sprite = PIXI.Sprite.from("fire");
+                sprite.scale.set(0.1,0.1);
+                if(this.player.direction == "R"){
+                    
+                    sprite.scale.x *= -1;
+                    sprite.x += body[0].position.x;
+                    sprite.rotation = -(1/13) * Math.PI ;   
+                }
+                else{
+                    speed *= -1;
+                    sprite.x -= body[0].position.x;
+                    sprite.rotation = (1/13) * Math.PI ;
+                }
+                this.stage.addChild(sprite);
+                sprite.anchor.set(0.5,0.5);
+                
+                console.log(111111111111111,this.player.direction);
+                
+                var fire = new Array(sprite,power,speed,body,hittedArray,allFlame,flame);
+                var stagePos = this.stage.getGlobalPosition();
+                var pos = this.player.graphicMain.getGlobalPosition();
+                sprite.x += pos.x - stagePos.x;
+                
+                sprite.y += pos.y - stagePos.y;
+                console.log("push");
+                this.attackBoxArray.push(fire);
+                
+
             }
             else{//現時点ではattack
                 var aC = new AttackCollider();
@@ -505,6 +607,7 @@ class BattleScene{
                     this.player.attackedE.push(e);
                     
                 }
+            
             }
         }
 

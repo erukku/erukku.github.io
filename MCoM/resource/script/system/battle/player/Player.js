@@ -216,7 +216,9 @@ class Player{
 
         //console.log(this.attackData);
 
-        this.attackData.shift();
+        var data = this.attackData.shift();
+        this.cardAllFlame = data[1];
+        
         this.attacking = true;
 
     }

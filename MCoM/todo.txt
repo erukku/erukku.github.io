@@ -1,14 +1,16 @@
 - 現時点でやるべき事(この辺ができれば遊べる)
-    - enemyのmove改善
     - item/magic infoの改善
     - 魔法のモーション
     - 戦闘終了後の報酬
     - shop/event windowのグラフィック
+    - bossの実装
+    - conbo
 
     
 
 - おそらく起きる修正
     - enemyのattackinfo + animation
+    - enemyのmove改善
     - configの実装
     
 

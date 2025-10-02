@@ -15,7 +15,8 @@ class MagicInfo{
                 position.setPos(30,0,0);
 
                 var box = new AttackBox(position,body);
-                return new Array(2,["wait",30],["attack",60,50,["move",6,[box]]]);
+                //return new Array(2,["wait",30],["attack",60,50,["move",6,[box]]]);
+                return new Array([3,60],["wait",29],["fire",1,50,[30,6,[box]]],["wait",30]);
 
         }
 

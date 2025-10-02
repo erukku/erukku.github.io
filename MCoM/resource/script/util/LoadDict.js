@@ -159,6 +159,15 @@ class LoadDict{
     ],
     },
     {
+        name: 'magic',
+        assets: [
+            {
+            alias: 'fire',
+            src: 'MCoM/resource/img/fire.png',
+        },
+    ],
+    },
+    {
         name: 'cardItem',
         assets: [
           {
@@ -201,6 +210,7 @@ class LoadDict{
             'cardAttack',
             'cardMagic',
             'cardItem',
+            'magic',
             'shop'
         ]
         var fn = function(err){

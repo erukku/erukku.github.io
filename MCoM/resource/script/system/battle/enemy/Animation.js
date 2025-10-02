@@ -140,6 +140,10 @@ class Animation{
         }
     }
 
+    delete(){
+        this.ticker.remove(this.keyFn);
+        //this.destroy();
+    }
 }
 
 export default Animation

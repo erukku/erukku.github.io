@@ -393,11 +393,13 @@ class OnWayScene{
 
     wallOpen(type){
         if(this.transformFlame < 30){
+            this.player.moveX(0);
             this.leftWall.x -= 320/30;
             this.rightWall.x += 320/30;
             this.transformFlame += 1;
         }
         else{
+            this.player.animation.setStatus("wait");
             this.transformFlame = 0;
             this.ticker.remove(this.transformFn);
             this.transformFn = null;

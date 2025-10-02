@@ -59,6 +59,7 @@ class Enemy{
 
         this.useLock = false;
 
+        this.speed = 1;
         
     }
     setTest(){
@@ -161,7 +162,8 @@ class Enemy{
     attack(){
         this.animation.setStatus("attack");
         this.attackData = this.attackInfo.getInfo(0);
-        this.attackData.shift();
+        var data = this.attackData.shift();
+        this.cardAllflame = data[1];
         this.attacking = true;   
     }
 
@@ -191,8 +193,12 @@ class Enemy{
     }
 
     destroy(){
+        this.animation.delete();
+        //delete this.graphic;
         this.graphic.destroy({children : true});
+        this.deckset.deckCircle.destroy();
         console.log(this.graphicShadow);
+        
     }
 }
 
