@@ -45,6 +45,7 @@ class BattleScene{
 
         this.audioDict = new DefaultDict(null);
         this.audioDict["sword"] = new Audio("MCoM/resource/se/sword.mp3");
+        this.audioDict["fire"] = new Audio("MCoM/resource/se/fire.mp3");
 
         this.wasteFlame = -1;
 
@@ -511,8 +512,8 @@ class BattleScene{
                             break;
                         }
 
-                        this.audioDict["sword"].currentTime = 0;
-                        this.audioDict["sword"].play();
+                        this.audioDict["fire"].currentTime = 0;
+                        this.audioDict["fire"].play();
                         
                         e.damage(power);
                         hittedArray.push(e);

@@ -1,6 +1,4 @@
 - 現時点でやるべき事(この辺ができれば遊べる)
-    - item/magic infoの改善
-    - 魔法のモーション
     - 戦闘終了後の報酬
     - shop/event windowのグラフィック
     - bossの実装
@@ -26,3 +24,5 @@
     - enemyのattack時の向き
     - shop soldout表示
     - お金周りの実装
+    - 魔法のモーション
+    - item/magic infoの改善
