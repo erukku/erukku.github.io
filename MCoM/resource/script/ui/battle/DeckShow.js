@@ -722,6 +722,9 @@ class DeckShow{
         return i 
     }
 
+    destroy(){
+        this.deckCircle.visible = false;
+    }
 
 
     initScale(){

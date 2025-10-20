@@ -117,6 +117,16 @@ class Animation{
 
     updateAnimation(){
         //console.log(this.status,10);
+        if(this.player.direction == "R"){
+            if(this.player.graphicMain.scale.x < 0){
+                this.player.graphicMain.scale.x *= -1;
+            }
+        }
+        else{
+            if(this.player.graphicMain.scale.x > 0){
+                this.player.graphicMain.scale.x *= -1;
+            }
+        }
         if(this.animationData[1] == this.flame){
             if(this.animationDataArray.length == 0){
                 if(this.status == "walk"){

@@ -64,6 +64,12 @@ class Player{
         this.animation = new Animation(this);
 
         this.money = 0;
+
+
+        //仮
+        this.level = 1;
+        this.exp = 0;
+
         
     }
 
@@ -190,11 +196,14 @@ class Player{
         var cardIndex = this.deckset.getCardIndex();
         var card = this.deck.deck[cardIndex];
 
-        console.log(cardIndex,card.cardClass);
+        console.log(card.cost);
 
         switch(card.cardClass){
             case "attack":
                 this.attackData = this.attackInfo.getInfo(0);
+                if(card.cost > 10){
+                    this.attackData = this.attackInfo.getInfo(-1);
+                }
                 this.animation.setStatus("attack");
                 break;
 
@@ -212,6 +221,11 @@ class Player{
                 0
                 this.animation.setStatus("attack");
                 break;
+            case "keep":
+                this.attackData = this.attackInfo.getInfo(-1);
+                this.animation.setStatus("attack");
+                break;
+
         }
 
         //console.log(this.attackData);

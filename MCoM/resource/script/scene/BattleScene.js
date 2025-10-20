@@ -61,6 +61,8 @@ class BattleScene{
     }
 
     battleEnd(){
+        this.player.direction = "R";
+        this.player.animation.setStatus("wait");
         this.ticker.remove(this.keyFn);
         this.onWay.backOnWay();
     }
@@ -264,10 +266,6 @@ class BattleScene{
         //enemy
         var animate = null
         for(var i = 0; i < this.enemyList.length;i++){
-            if(i == 0){
-                //console.log(this.enemyList[i].selectCard(0),this.enemyList[i].action);
-                0
-            }
             if(this.enemyList[i].deckset.rolling == true){
                 console.log(i,this.enemyList[i].deckset.rolling);
             }
@@ -327,6 +325,7 @@ class BattleScene{
 
                 }else{
                     this.enemyList[i].deckset.waste();
+                    this.enemyList[i].action = "move";
                 }
 
                 
@@ -631,9 +630,7 @@ class BattleScene{
 
         for(var i = 0; i < this.deadEnemy.length;i++){
             var enemy = this.deadEnemy[i];
-            if(enemy.status.hp <= 0){
-                enemy.destroy();
-            }
+            enemy.destroy();
         }
         
         this.deadEnemy = new Array();

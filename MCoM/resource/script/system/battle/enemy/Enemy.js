@@ -133,6 +133,9 @@ class Enemy{
                     break
                 }
             }
+            if(this.deckset.rolling){
+                this.action = "move";
+            }
         }
         else if(this.actionFlame >= 60){
             if(this.action == "attack" && this.selectCard(0).cardClass == "reload"){
@@ -196,7 +199,7 @@ class Enemy{
         this.animation.delete();
         //delete this.graphic;
         this.graphic.destroy({children : true});
-        this.deckset.deckCircle.destroy();
+        this.deckset.destroy();
         console.log(this.graphicShadow);
         
     }

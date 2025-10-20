@@ -17,6 +17,15 @@ class AttackInfo{
                 var box = new AttackBox(position,body);
 
                 return new Array([1,60],["attack",60,50,["stay",0,[box]]]);
+            case -1:
+                var body = new Body();
+                var position = new Position();
+                body.setBody(60,60,60);
+                position.setPos(30,0,0);
+
+                var box = new AttackBox(position,body);
+
+                return new Array([1,60],["attack",60,1000,["stay",0,[box]]]);
 
         }
 

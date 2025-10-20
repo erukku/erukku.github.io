@@ -3,6 +3,7 @@ class CardAnimated{
     constructor(allFlame,audio){
         //this.Scene = scene;
         this.flame = 0;
+        this.allFlame = 60;
         this.allFlame = allFlame;
         this.a = 0;
 
@@ -89,6 +90,10 @@ class CardAnimated{
             this.flame = 0;
         }
         this.flame += 1;
+    }
+
+    destroy(){
+        cards.animateCard.remove(this.a);
     }
 
     
