@@ -70,6 +70,7 @@ class Player{
         this.level = 1;
         this.exp = 0;
 
+        this.conboInfo = null;
         
     }
 
@@ -201,6 +202,7 @@ class Player{
         switch(card.cardClass){
             case "attack":
                 this.attackData = this.attackInfo.getInfo(0);
+                this.conboInfo = this.attackInfo.getConboInfo(0);
                 if(card.cost > 10){
                     this.attackData = this.attackInfo.getInfo(-1);
                 }
@@ -209,11 +211,13 @@ class Player{
 
             case "magic":
                 this.attackData = this.magicInfo.getInfo(0);
+                this.conboInfo = this.magicInfo.getConboInfo(0);
                 this.animation.setStatus("item");
                 break;
 
             case "item":
                 this.attackData = this.itemInfo.getInfo(0);
+                this.conboInfo = this.itemInfo.getConboInfo(0);
                 this.animation.setStatus("item");
                 break;
 
@@ -244,14 +248,17 @@ class Player{
         switch(card.cardClass){
             case "attack":
                 data = this.attackInfo.getInfo(0);
+                this.conboInfo = this.attackInfo.getConboInfo(0);
                 break;
 
             case "magic":
                 data = this.magicInfo.getInfo(0);
+                this.conboInfo = this.magicInfo.getConboInfo(0);
                 break;
 
             case "item":
                 data = this.itemInfo.getInfo(0);
+                this.conboInfo = this.itemInfo.getConboInfo(0);
                 break;
 
             case "special":

@@ -12,7 +12,7 @@ class TextInfo{
                 break
 
             case 1:
-                var text = "ガチャを引く？"
+                var text = "アビリティガチャを引く？"
                 textArray.push(text);
                 break
         }

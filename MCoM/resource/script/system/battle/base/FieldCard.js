@@ -14,6 +14,7 @@ class FieldCard{
             this.fieldCard = card;
             this.cardSide = side;
             this.cardHolder = holder;
+            this.flame = 0;
             return true;
         }
         else{
@@ -31,6 +32,7 @@ class FieldCard{
             this.fieldCard = card;
             this.cardSide = side;
             this.cardHolder = holder;
+            this.flame = 0;
             return true;
         }
         else{
@@ -39,6 +41,11 @@ class FieldCard{
 
         }
 
+    }
+
+    updateCard(card){
+        this.fieldCard = card;
+        this.flame = 0;
     }
 
     reset(){

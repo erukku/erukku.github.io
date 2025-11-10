@@ -195,7 +195,7 @@ class OnWayScene{
             var enemys = [this.e1,this.e2,this.e3];
 
             this.player.deckset.deckSet(this.player.deck);
-            var battle = new BattleScene(this.player,enemys,this.baseStage,this.keyList,this);
+            var battle = new BattleScene(this.player,enemys,this.baseStage,this.keyList,this,this.app);
             battle.setTest();
         }
         

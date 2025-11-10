@@ -23,7 +23,7 @@ class Window {
     }
 
     setGraphic(){
-        var windowMainGraphic = new PIXI.Graphics().rect(0,0,this.width,this.height).fill(0x8c66ff);
+        var windowMainGraphic = new PIXI.Graphics().rect(0,0,this.width,this.height).fill(0x8b7db3);
 
         windowMainGraphic.alpha = 1;
         var windowSubGraphic = new PIXI.Graphics().rect(0,0,this.width+10,this.height+10).fill(0xaaaaaa).rect(5,5,this.width,this.height).cut();

@@ -38,6 +38,7 @@ class BattleScene{
         this.cardAnimationTicker = null;
         this.flame = 0;
         this.keepFlame = -100;
+        this.comboFlame = -1;
 
         this.targetFlag = false;
         this.targetIndex = null;
@@ -50,6 +51,7 @@ class BattleScene{
         this.wasteFlame = -1;
 
         this.attackBoxArray = new Array();
+
     }
     setTest(){
         var This = this;
@@ -67,11 +69,54 @@ class BattleScene{
         this.onWay.backOnWay();
     }
 
+    gameOver(){
+        this.ticker.remove(this.keyFn);
+
+        this.gameOverCanvas = new PIXI.Container();
+        var bg = new PIXI.Graphics().beginFill(0xffffff).drawRect(0,0,this.app.screen.width,this.app.screen.height).endFill();
+        var text = new PIXI.Text("Game Over",{fontFamily : 'Arial', fontSize: 64, fill : 0xff0000, align : 'center'});
+        text.anchor.set(0.5,0.5);
+        text.x = bg.width / 2;
+        text.y = bg.height / 2;
+        this.gameOverCanvas.addChild(bg);
+        this.gameOverCanvas.addChild(text);
+
+        //this.gameOverCanvas.x = this.app.screen.width / 2;
+        //this.gameOverCanvas.y = this.app.screen.height / 2;
+        
+        this.gameOverCanvas.alpha = 0.0;
+        this.gameOverCanvas.zIndex = 10**10;
+
+        this.app.stage.addChild(this.gameOverCanvas);
+
+        var This = this;
+        var fadeIn = function(time){
+            if(This.gameOverCanvas.alpha < 1.0){
+                This.gameOverCanvas.alpha += 0.01;
+                console.log(This.gameOverCanvas.alpha);
+            }
+            else{
+                This.ticker.remove(This.keyFn);
+                console.log(0);
+            }
+        }
+        this.keyFn = fadeIn;
+
+        this.ticker.add(fadeIn);
+
+
+    }
+
     turn(){
         this.flame += 1;
+        this.fieldCard.flame += 1;
         //console.log("flame",this.flame)
         if(this.enemyList.length == 0){
             this.battleEnd();
+        }
+
+        if(this.player.status.hp <= 0){
+            this.gameOver();
         }
         
         this.enemyThink();
@@ -85,6 +130,7 @@ class BattleScene{
         this.card();
         this.useCard();
         this.action();
+        //console.log(this.enemyList.length);
         this.afterTreat();
 
         this.targetActivate();
@@ -203,6 +249,7 @@ class BattleScene{
             }
             if(this.keyPressing("u")) { // ③
                 this.player.jump();
+                this.player.status.hp = 0;
             }
         }
         //enemy
@@ -309,6 +356,7 @@ class BattleScene{
                     //this.cardAnimationTicker.breaked = true;
                     if(this.fieldCard.cardFn != 0){
                         this.fieldCard.cardFn.breaked = true;
+                        this.player.comboInfo = null;
 
                         this.player.animation.setStatus("breaked");
                     }
@@ -365,7 +413,22 @@ class BattleScene{
             }
             
             if(this.fieldCard.cardSide == "player"){
-                return 0;
+                if(this.player.comboInfo != null){
+                    if(this.fieldCard.flame >= this.player.comboInfo[2]){
+                        if(this.player.comboInfo[0] == card.cardClass){
+                            switch(this.player.comboInfo[0]){
+                                case "attack":
+                                    
+
+                                default:
+                                    0;
+                            }
+
+                            return 0;
+                        }
+                        
+                    }
+                }
             }
             
             if(this.fieldCard.checkCard(card,"player",this.player)){
@@ -463,6 +526,8 @@ class BattleScene{
                 this.player.attackFlame = 0;
                 this.player.attacking = false;
                 this.player.attackedE = new Array();
+
+                this.player.comboInfo = null;
 
                 this.fieldCard.reset();
                 return 0
@@ -615,7 +680,8 @@ class BattleScene{
 
     afterTreat(){
         if(this.player.status.hp <= 0){
-            return 0;
+            //game over処理
+            0;
         }
 
         for(var i = 0;i < this.enemyList.length;i++){
@@ -636,102 +702,13 @@ class BattleScene{
         this.deadEnemy = new Array();
         this.enemyList = this.arriveEnemy.map(data => data);
         this.arriveEnemy = new Array();
+        
     }
 
     keyPressing(key){
         return this.keyList[1][key]
     }
 
-    /*
-    keydownEvent(){ // ②
-        if(this.keyPressing("a")) { // ③
-          this.player.deckset.use();// Aが押された時に実行したい処理を記述
-          this.player.attack();
-        }
-        if(this.keyPressing("q")) { // ③
-            this.player.deckset.move("R");// Aが押された時に実行したい処理を記述
-        }
-        if(this.keyPressing("w")) { // ③
-            this.player.deckset.move("L");// Aが押された時に実行したい処理を記述
-        }
-        if(this.keyPressing("z")) { // ③
-            this.player.deckset.keep();
-        }
-        if(this.keyPressing("x")) { // ③
-            this.player.deckset.alluse();
-        }
-        if(this.keyPressing("c")) { // ③
-            this.player.deckset.reload();
-        }
-
-        if(this.keyPressing("j")) { // ③
-            this.player.moveX(-5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
-                this.player.moveX(5);
-            }
-        }
-        if(this.keyPressing("l")) { // ③
-            this.player.moveX(5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
-                this.player.moveX(-5);
-            }
-        }
-        if(this.keyPressing("i")) { // ③
-            this.player.moveY(5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
-                this.player.moveY(-5);
-            }
-        }
-        if(this.keyPressing("k")) { // ③
-            this.player.moveY(-5);
-            if(this.collider.isCrossed(this.player,this.enemyList)){
-                this.player.moveY(5);
-            }
-        }
-        if(this.keyPressing("u")) { // ③
-            this.player.jump();
-        }
-        
-        if(this.player.attacking){
-            if(this.player.attackFlame == this.player.attackData[0]){
-                this.player.attackFlame = 0;
-                this.player.attacking = false;
-                this.player.attackedE = new Array();
-                return 0
-            }
-            var aC = new AttackCollider();
-            var hit = aC.isHitted(this.player,this.player.attackData[2],[this.e1]);
-
-            for(var i = 0;i < hit.length;i++){
-                var e = hit[i];
-                var f = false;
-                for(var j = 0;j < this.player.attackedE.length;j++){
-                    if(e == this.player.attackedE[j]){
-                        f = true;
-                        break;
-                    }
-
-                }
-                if(f){
-                    break;
-                }
-                e.damage(this.player.attackData[1]);
-                this.player.attackedE.push(e);
-
-            }
-            if(this.e1.status.hp <= 0){
-                this.e1.graphic.visible = false;
-            }
-
-
-            this.player.attackFlame += 1;
-        }
-        
-
-        
-
-      }
-      */
 
     }
 

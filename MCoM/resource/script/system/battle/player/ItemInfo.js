@@ -9,6 +9,14 @@ class ItemInfo{
         }
 
     }
+
+    getConboInfo(id){
+        switch(id){
+
+            default:
+                return null            
+        }
+    }
 }
 
 export default ItemInfo;

@@ -21,6 +21,13 @@ class MagicInfo{
         }
 
     }
+
+    getConboInfo(id){
+        switch(id){
+            default:
+                return null            
+        }
+    }
 }
 
 export default MagicInfo;

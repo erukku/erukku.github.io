@@ -12,11 +12,14 @@ class Message{
 
         this.ticker = PIXI.Ticker.shared;
 
+
+        var width = this.window.width - 20;
+
         this.style = {
-            font:'12pt Arial',
+            font:'6pt Arial',
             fill:'black',
             wordWrap:true,
-            wordWrapWidth:400,
+            wordWrapWidth:width,
             breakWords: true
             };
 
@@ -55,12 +58,15 @@ class Message{
     }
 
     setSelect(text){
+
+        var width = this.window.width - 20;
         var style = {
-            font:'12pt Arial',
+            font:'6pt Arial',
+            size:'6',
             fill:'black',
             align: 'center',
             wordWrap:true,
-            wordWrapWidth:400,
+            wordWrapWidth:width,
             breakWords: true
             };
         this.textGraphic.style = style;

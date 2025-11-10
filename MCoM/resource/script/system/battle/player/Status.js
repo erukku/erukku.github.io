@@ -1,8 +1,8 @@
 
 class Status{
     constructor(){
-        this.maxHp = 150;
-        this.hp = 150;
+        this.maxHp = 100;
+        this.hp = 100;
     }
     damage(num){
         this.hp -= num;

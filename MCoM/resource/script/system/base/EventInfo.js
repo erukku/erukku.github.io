@@ -11,9 +11,9 @@ class EventInfo{
             case 0:
                 var text = this.textInfo.getTextInfo(0);
 
-                var choices = [2,"HPの最大値を100増やす","HPを最大値まで回復"];
+                var choices = [2,"HPの最大値を10増やす\n\n","HPを最大値まで回復\n\n"];
 
-                var effect = [2,[1,["extend_HP",100]],[1,["heal",10000]]];
+                var effect = [2,[1,["extend_HP",10]],[1,["heal",10000]]];
 
 
                 eventArray.push(text);
@@ -25,7 +25,7 @@ class EventInfo{
             case 1:
                 var text = this.textInfo.getTextInfo(1);
 
-                var choices = [2,"はい","いいえ"];
+                var choices = [2,"はい\n\n","いいえ\n\n"];
 
                 var effect = [2,[1,["gacha_all",1]],[1,["none"]]];
 
