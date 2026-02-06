@@ -25,6 +25,10 @@ class HpBar{
 
         this.maxHpBars.x = 500;
         this.maxHpBars.y = 30;
+
+        this.redBar = null;
+
+        this.ticker = PIXI.Ticker.shared;
     }
 
     setGraphic(){
@@ -75,6 +79,8 @@ class HpBar{
             var hpBar = this.maxHpBars.getChildAt(ii).getChildAt(2);
 
             var perHp = (this.hp - num) - ii*100;
+
+
             if(perHp > 100){
                 perHp = 100;
             }
@@ -85,6 +91,32 @@ class HpBar{
             else{
                 this.maxHpBars.getChildAt(ii).visible = true;
             }
+
+
+            var prePerHp = this.hp - ii*100;
+
+            if(prePerHp > 100){
+                prePerHp = 100;
+            }
+            else if(prePerHp < 0){
+                prePerHp = 0;
+            }
+
+            /*
+            if(this.redBar == null){
+                var bar = new PIXI.Graphics().hpBar.clear().rect(100 * (perHp/100),0,100 * (prePerHp/100),20).fill(0xff0000);
+
+                var func = function(bar){
+
+
+                }
+
+            }
+            else{
+
+
+            }
+            */
 
             hpBar.clear().rect(0,0,100 * (perHp/100),20).fill(0x00ff00);
 

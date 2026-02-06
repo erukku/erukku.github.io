@@ -47,6 +47,7 @@ class BattleScene{
         this.audioDict = new DefaultDict(null);
         this.audioDict["sword"] = new Audio("MCoM/resource/se/sword.mp3");
         this.audioDict["fire"] = new Audio("MCoM/resource/se/fire.mp3");
+        this.audioDict["damage"] = new Audio("MCoM/resource/se/damaged.mp3");
 
         this.wasteFlame = -1;
 
@@ -249,7 +250,7 @@ class BattleScene{
             }
             if(this.keyPressing("u")) { // ③
                 this.player.jump();
-                this.player.status.hp = 0;
+                
             }
         }
         //enemy
@@ -512,6 +513,8 @@ class BattleScene{
                     e.damage(enemy.actionNow[2]);
                     //this.player.damage(enemy.attackData[1]);
                     enemy.attackedE.push(e);
+
+                    this.audioDict["damage"].play();
                     
                     
                 }
