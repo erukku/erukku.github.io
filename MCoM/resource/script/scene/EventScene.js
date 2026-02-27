@@ -73,11 +73,11 @@ class EventScene{
         //仮 length == 3
         this.step = "wait";
 
-        this.eventContainer.x = 200;
+        this.eventContainer.x = 150;
         this.eventContainer.y = -160;
 
         var window = new Window(this.eventContainer);
-        window.initWindow(100,200);
+        window.initWindow(100,300);
 
 
         var text = this.eventArray.shift();

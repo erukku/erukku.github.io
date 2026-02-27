@@ -17,6 +17,7 @@ class Message{
 
         this.style = {
             font:'6pt Arial',
+            fontSize:'20',
             fill:'black',
             wordWrap:true,
             wordWrapWidth:width,
@@ -62,7 +63,7 @@ class Message{
         var width = this.window.width - 20;
         var style = {
             font:'6pt Arial',
-            size:'6',
+            fontSize:'15',
             fill:'black',
             align: 'center',
             wordWrap:true,

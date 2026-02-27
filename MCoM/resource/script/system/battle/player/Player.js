@@ -274,6 +274,28 @@ class Player{
         this.status.heal(num);
         this.hpBar.heal(num);
 
+        var sprite = PIXI.Sprite.from("heal");
+        sprite.scale.x = sprite.scale.y = 0.5;
+        sprite.anchor.x = sprite.anchor.y = 0.5;
+        sprite.alpha = 0.7;
+        var timer = 0;
+        var This = this;
+
+        this.graphicMain.addChild(sprite);
+
+        this.func = function(){
+            if(timer == 20){
+                timer = 0;
+                This.graphicMain.removeChild(sprite);
+                This.ticker.remove(This.func);
+            }
+
+            sprite.x = This.graphicMain.x;
+            sprite.y = This.graphicMain.y;
+            timer += 1;
+        }
+
+        this.ticker.add(This.func);
     }
     
     damage(num){

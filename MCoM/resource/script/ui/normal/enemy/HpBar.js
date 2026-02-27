@@ -22,6 +22,7 @@ class HpBar{
 
         this.hpBarsNum = 0;
         this.maxHpBars = new PIXI.Container();
+        this.hpDamageBars = new PIXI.Container();
 
         this.maxHpBars.x = 500;
         this.maxHpBars.y = 30;
@@ -29,10 +30,15 @@ class HpBar{
         this.redBar = null;
 
         this.ticker = PIXI.Ticker.shared;
+
+        this.func = null;
+
+        this.timer = 0;
     }
 
     setGraphic(){
         this.hpBarsNum = Math.ceil(this.maxHp/100);
+        
         (async () =>{
         
             for(var i = 0;i < this.hpBarsNum;i++){
@@ -59,6 +65,7 @@ class HpBar{
                 }
                 this.maxHpBars.addChild(hpContainer);
             }
+        this.maxHpBars.addChild(this.hpDamageBars);
         this.scene.addChild(this.maxHpBars);
     })();
         this.maxHpBars.visible = false;
@@ -83,15 +90,18 @@ class HpBar{
 
             if(perHp > 100){
                 perHp = 100;
+                continue;
             }
             else if(perHp <= 0){
                 perHp = 0;
                 this.maxHpBars.getChildAt(ii).visible = false;
+                hpBar.clear().rect(0,0,100 * (perHp/100),20).fill(0x00ff00);
             }
             else{
+                hpBar.clear().rect(0,0,100 * (perHp/100),20).fill(0x00ff00);
+
                 this.maxHpBars.getChildAt(ii).visible = true;
             }
-
 
             var prePerHp = this.hp - ii*100;
 
@@ -102,21 +112,30 @@ class HpBar{
                 prePerHp = 0;
             }
 
-            /*
-            if(this.redBar == null){
-                var bar = new PIXI.Graphics().hpBar.clear().rect(100 * (perHp/100),0,100 * (prePerHp/100),20).fill(0xff0000);
+            var This = this;
+            if(this.func == null){
+                var bar = new PIXI.Graphics().rect(100 * (perHp/100),0,100 * (prePerHp/100) - 100 * (perHp/100),20).fill(0xff0000);
+                bar.x = bar.y = 5;
 
                 var func = function(bar){
-
-
+                    if(This.timer == 30){
+                        This.hpDamageBars.removeChildren();
+                        This.ticker.remove(This.func);
+                        This.func = null;
+                        This.timer = 0;
+                    }
+                    This.timer += 1;
                 }
-
+                this.hpDamageBars.addChild(bar);
+                this.func = func;
+                this.ticker.add(this.func);
             }
             else{
-
-
+                
+                var bar = new PIXI.Graphics().rect(100 * (perHp/100),0,100 * (prePerHp/100) - 100 * (perHp/100),20).fill(0xff0000);
+                bar.x = bar.y = 5;
+                this.hpDamageBars.addChild(bar);
             }
-            */
 
             hpBar.clear().rect(0,0,100 * (perHp/100),20).fill(0x00ff00);
 

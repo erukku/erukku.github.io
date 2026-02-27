@@ -116,6 +116,16 @@ class LoadDict{
 
       },
       {
+        name: 'effect',
+        assets: [
+          {
+            alias: 'heal',
+            src: 'MCoM/resource/img/ef_heal.png',
+          },
+      ],
+      }
+      ,
+      {
         name: 'icon',
         assets: [
           {
@@ -206,6 +216,7 @@ class LoadDict{
             'stage',
             'player',
             'enemy',
+            'effect',
             'icon',
             'cardAttack',
             'cardMagic',
