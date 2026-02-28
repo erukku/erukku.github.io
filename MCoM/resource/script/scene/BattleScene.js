@@ -67,7 +67,96 @@ class BattleScene{
         this.player.direction = "R";
         this.player.animation.setStatus("wait");
         this.ticker.remove(this.keyFn);
-        this.onWay.backOnWay();
+        this.showResult();
+        //this.onWay.backOnWay();
+    }
+
+    //暫定リザルト
+    showResult(){
+
+
+        var resultContainer = new PIXI.Container();
+
+        //敵事に所持を変更する時は書き換え
+        var money = 100;
+        var exp = 100;
+
+        var moneyContainer = new PIXI.Container();
+
+
+        var text = new PIXI.Text("exp", {fontFamily : 'Arial', fontSize: 20, fill : 0xffffff});
+        
+        text.x += 5;
+        text.y += 10;
+
+        moneyContainer.addChild(text);
+
+        var text = new PIXI.Text(money, {fontFamily : 'Arial', fontSize: 20, align: 'right',fill : 0xffffff});
+
+        text.x += 40;
+        text.y += 10;
+
+        moneyContainer.addChild(text);
+
+        var expContainer = new PIXI.Container();
+
+        //var text = new PIXI.Text("exp", {fontFamily : 'Arial', fontSize: 20, fill : 0xffffff});
+        var icon = PIXI.Sprite.from('coin');
+        icon.scale.x = icon.scale.y = 0.03;
+        icon.x += 5;
+        icon.y += 10 + 30;
+
+        expContainer.addChild(icon);
+
+        var text = new PIXI.Text(exp, {fontFamily : 'Arial', fontSize: 20, align: 'right',fill : 0xffffff});
+
+        text.x += 40;
+        text.y += 10 + 30;
+
+        expContainer.addChild(text);
+
+
+        var board = new PIXI.Graphics().roundRect(0,0,80,140,10).fill(0x000000);
+        var stick = new PIXI.Graphics().rect(0,0,6,40).fill(0x000000);
+
+        stick.x += 37;
+        stick.y += 140;
+
+        var container = new PIXI.Container();
+
+        container.addChild(stick);
+        container.addChild(board);
+
+        container.addChild(moneyContainer);
+        container.addChild(expContainer);
+
+        container.pivot.x = container.width / 2;
+        container.pivot.y = container.height ;
+
+        resultContainer.addChild(container);
+        this.stage.addChild(resultContainer);
+
+        resultContainer.x = 640;
+        resultContainer.y = 0;
+
+        var This = this;
+
+        this.keyFn = function(time){
+            if(container.rotation >= -0.3){
+                container.rotation -= +0.05;
+            }
+            else if(container.rotation >= -0.6){
+                container.rotation -= +0.02;
+            }
+            else{
+                if(This.keyPressing("a")){
+                    This.ticker.remove(This.keyFn);
+                    This.onWay.backOnWay();
+                }
+            }
+        }
+        this.ticker.add(fn);
+        
     }
 
     gameOver(){

@@ -75,6 +75,10 @@ class StartScene{
         };
         this.selectFn = fn;
         this.ticker.add(fn);
+
+
+
+
         
     }
 

@@ -7,8 +7,8 @@ class Message{
         this.textIndex = 0;
         this.textGraphic = new PIXI.Text("");
 
-        this.textGraphic.x = 20;
-        this.textGraphic.y = 20;
+        this.textGraphic.x = 15;
+        this.textGraphic.y = 15;
 
         this.ticker = PIXI.Ticker.shared;
 
