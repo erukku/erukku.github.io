@@ -27,7 +27,7 @@ class DeckShow{
 
 
     constructor(scene,side,master){
-        this.R = 80*2;
+        this.R = 80;
         this.pushcount = 0;
         this.deckList;
         this.scene = scene;
@@ -822,6 +822,7 @@ class DeckShow{
 
     deckScaleSet(num){
         this.cardScale = num;
+        this.R *= 2;
     }
 
 
