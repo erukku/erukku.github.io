@@ -27,12 +27,13 @@ class DeckShow{
 
 
     constructor(scene,side,master){
-        this.R = 80;
+        this.R = 80*2;
         this.pushcount = 0;
         this.deckList;
         this.scene = scene;
         this.deckCircle = new PIXI.Container();
         this.deckCircle.sortableChildren = true;
+        this.cardScale = 1;
 
         this.master =master;
 
@@ -106,9 +107,7 @@ class DeckShow{
             this.deckCircle.x += 640 + 30; 
         }
 
-        this.deckCircle.y = 330;
-
-        
+        this.deckCircle.y = 330;    
 
     }
 
@@ -733,6 +732,100 @@ class DeckShow{
         }
 
     }
+
+
+    roll(cards,circleCardNum){
+        var count = 0;
+        
+        var circleCardNum =  this.deckList.length - this.keepCardNum - this.usedCardNum - this.excludedCardNum;
+        for(var i = 0;i < cards.deckList.length;i++){
+            if (this.isDeck(i)){
+                continue
+            }
+            
+            //var ii = count + (this.pushcount + circleCardNum - 1);
+            var ii = count + (this.pushcount );
+            ii %= circleCardNum;
+            ii += circleCardNum;
+            cards.deckList[i].cardGraphic.x = this.R*Math.cos(this.startangle+(ii + 1 - this.rollFlame/10) * (360/circleCardNum) * (Math.PI/180));
+            cards.deckList[i].cardGraphic.y = this.R*Math.sin(this.startangle+(ii + 1 - this.rollFlame/10) * (360/circleCardNum) * (Math.PI/180));
+            //console.log(ii % circleCardNum)
+            if((ii % circleCardNum == 0) && this.rollFlame >= 10){
+                
+                if(this.side == "L"){
+                    this.deckList[i].cardGraphic.x += 50;
+                }
+                else{
+                    this.deckList[i].cardGraphic.x -= 50;
+                }
+                cards.deckList[i].cardGraphic.y -= 50;
+            }
+            count += 1;
+        }
+        if(this.rollFlame == 10){
+            cards.animateCard.remove(this.rollFn);
+            this.rollFlame = 0;
+            this.rolling = false;
+            return 0;
+        }
+        this.rollFlame += 1;
+    }
+
+    displayOpening(){
+        var count = 0;
+        
+        var This = this;
+
+        var circleCardNum =  this.deckList.length;
+
+        var cards = this;
+
+        this.rollFlame = 120;
+
+        var flame = 0;
+
+        
+        this.rollFn = function(){
+            var count = 0;
+            for(var i = 0;i < cards.deckList.length;i++){
+                cards.deckList[i].cardGraphic.scale.x = cards.deckList[i].cardGraphic.scale.y = 2; 
+                var ii = count;
+                
+                cards.deckList[i].cardGraphic.x = This.R*Math.cos(This.startangle+(ii + 1 - This.rollFlame/60) * (360/circleCardNum) * (Math.PI/180));
+                cards.deckList[i].cardGraphic.y = This.R*Math.sin(This.startangle+(ii + 1 - This.rollFlame/60) * (360/circleCardNum) * (Math.PI/180));
+
+                count += 1;
+
+            }
+
+            This.rollFlame += 1;
+
+        }
+        
+
+    }
+
+    startDisplay(deck){
+        this.deckScaleSet(2);
+        this.deckSet(deck);
+        this.ticker = PIXI.Ticker.shared;
+        this.ticker.maxFPS = 60;
+        this.displayOpening();
+        var This = this;
+        this.ticker.add(This.rollFn);
+        
+    }
+
+    stopDisplay(){
+        this.ticker.remove(this.rollFn);
+    }
+
+    deckScaleSet(num){
+        this.cardScale = num;
+    }
+
+
+    
 }
 
 export default DeckShow;

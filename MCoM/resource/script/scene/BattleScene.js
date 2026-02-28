@@ -152,10 +152,21 @@ class BattleScene{
                 if(This.keyPressing("a")){
                     This.ticker.remove(This.keyFn);
                     This.onWay.backOnWay();
+
+                    This.keyFn = function(){
+                        if(container.rotation <= 0.6){
+                            container.rotation += +0.1;
+                        }
+                        else{
+                            This.ticker.remove(This.keyFn);
+                        }
+                    }
+
+                    This.ticker.add(This.keyFn);
                 }
             }
         }
-        this.ticker.add(fn);
+        this.ticker.add(this.keyFn);
         
     }
 

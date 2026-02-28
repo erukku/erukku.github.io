@@ -2,6 +2,10 @@ import ManageScene from "./ManageScene.js"
 
 import LoadDict from "../util/LoadDict.js"
 
+import Deck from "../card/Deck.js";
+import DeckShow from "../ui/battle/DeckShow.js";
+
+
 class StartScene{
     constructor(key,app){ 
         console.log("start");
@@ -52,6 +56,19 @@ class StartScene{
         this.scene.addChild(startText);
         this.scene.addChild(configText);
 
+        var deck = new Deck();
+        deck.setBase();
+
+        var container = new PIXI.Container();
+        var deckUI = new DeckShow(container,"L","player");
+        //deckUI.deckSet(deck);
+        //container.scale.x = container.scale.y = 1.5;
+
+        this.scene.addChild(container);
+        deckUI.startDisplay(deck);
+
+        
+
         var This = this;
 
         var fn = function(time){
@@ -68,6 +85,7 @@ class StartScene{
 
             if(This.selectNum == 0 && This.keyPrssing("a")){
                 This.removeTicker();
+                deckUI.stopDisplay();
                 This.manager.changeScene("load");
             }
             This.selectList[0][This.selectNum].style = This.upStyle;
@@ -78,7 +96,13 @@ class StartScene{
 
 
 
+        //var load = new LoadDict();
+        //load.startLoad();
 
+ 
+        
+
+        
         
     }
 

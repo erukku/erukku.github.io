@@ -8,6 +8,73 @@ class LoadDict{
         this.loadPer = 0;
     }
 
+    async startLoad(){
+      this.bundle = {
+      bundles: [{
+        name: 'cardAttack',
+        assets: [
+          {
+            alias: 'cardAttack1',
+            src: 'MCoM/resource/img/sword.png',
+        },
+    ],
+    },
+    {
+        name: 'cardMagic',
+        assets: [
+            {
+            alias: 'cardMagic1',
+            src: 'MCoM/resource/img/boushi.png',
+        },
+    ],
+    },
+    {
+        name: 'magic',
+        assets: [
+            {
+            alias: 'fire',
+            src: 'MCoM/resource/img/fire.png',
+        },
+    ],
+    },
+    {
+        name: 'cardItem',
+        assets: [
+          {
+            alias: 'cardItem1',
+            src: 'MCoM/resource/img/medical.png',
+        },
+    ],
+    }]
+      }
+
+      var bundle = this.bundle;
+      
+      await this.assets.init({ manifest:bundle });
+
+        
+        var alias = [
+
+            'cardAttack',
+            'cardMagic',
+            'cardItem',
+            'magic'
+            
+        ]
+
+        var fn = function(err){
+            console.log("error",err);
+        }
+        const This = this;
+        console.log("waiting for load...");
+        await this.assets.loadBundle(alias, (progress) => {
+            console.log(`Loading: ${Math.round(progress * 100)}%`);
+            This.loadPer = Math.round(progress * 100);
+        }).catch(fn);
+        console.log("load end");
+      
+    }
+
 
     testLoad(){
         this.setBundle();
