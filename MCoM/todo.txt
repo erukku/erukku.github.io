@@ -1,0 +1,28 @@
+- 現時点でやるべき事(この辺ができれば遊べる)
+    - 戦闘終了後の報酬
+    - shop/event windowのグラフィック
+    - conbo
+
+    
+
+- おそらく起きる修正
+    - enemyのカード挙動
+    - configの実装
+    - bossの実装
+    - 回復エフェクトの改善
+    
+
+- done
+    - enemy側のリロード調整(done 全カードが少ない時バグが来る可能性)
+    - グラフィックのアニメーション管理(done)
+    - カードの存在時間の調整(done)
+    - enemyのグラフィック
+    - enemy側のリロード後の使用ロック
+    - useの連打改善
+    - keepのカードが固定される
+    - loadの一括化
+    - enemyのattack時の向き
+    - shop soldout表示
+    - お金周りの実装
+    - 魔法のモーション
+    - item/magic infoの改善
