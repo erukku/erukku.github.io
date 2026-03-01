@@ -10,7 +10,11 @@ export default defineConfig({
         // メインページ
         main: resolve(__dirname, 'index.html'),
         // あなたが作成しているゲーム画面
-        game: resolve(__dirname, 'secondRPG.html'), 
+        MCoM: resolve(__dirname, 'MCoM.html'), 
+
+        secondRPG: resolve(__dirname, 'secondRPG.html'), 
+
+        gamecollection: resolve(__dirname, 'gamecollection.html'), 
       },
     },
   },
