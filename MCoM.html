@@ -1,109 +1,220 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-    <!--Let browser know website is optimized for mobile-->
-    <!--meta name="viewport" content="width=device-width, initial-scale=1.0"/ -->
-    <meta charset = "UTF-8">
-    <title>game</title>
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 
-    <script src="https://pixijs.download/release/pixi.min.js"></script>
-    <script src="https://unpkg.com/@pixi/sound/dist/pixi-sound.js"></script>
-    <link rel="stylesheet" href="../styles/style.css">
+  <!--Let browser know website is optimized for mobile-->
+  <!--meta name="viewport" content="width=device-width, initial-scale=1.0"/ -->
+  <meta charset="UTF-8">
+  <title>game</title>
 
-    <style media="screen">
-        img{
-            display: none;
-      }
-        </style>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js"></script>
-  </head>
+  <script src="https://pixijs.download/release/pixi.min.js"></script>
+  <script src="https://unpkg.com/@pixi/sound/dist/pixi-sound.js"></script>
+  <link rel="stylesheet" href="../styles/style.css">
 
-  <body>
-      <img src="MCoM/resource/img/sword.png"></img>
-      <img src="MCoM/resource/img/boushi.png"></img>
-      <img src="MCoM/resource/img/medical.png"></img>
-      <img src="MCoM/resource/img/battle.png"></img>
-      <img src="MCoM/resource/img/shop.png"></img>
-      <img src="MCoM/resource/img/event.png"></img>
-      <img src="MCoM/resource/img/boss.png"></img>
-      <img src="MCoM/resource/img/goal.png"></img>
-      <img src="MCoM/resource/img/player.png"></img>
-      <img src="MCoM/resource/img/player2.png"></img>
-      <img src="MCoM/resource/img/player3.png"></img>
-      <img src="MCoM/resource/img/p_breaked.png"></img>
-      <img src="MCoM/resource/img/p_walk1.png"></img>
-      <img src="MCoM/resource/img/p_walk2.png"></img>
-      <img src="MCoM/resource/img/p_walk3.png"></img>
-      <img src="MCoM/resource/img/p_walk4.png"></img>
-      <img src="MCoM/resource/img/p_itemuse.png"></img>
-      <img src="MCoM/resource/img/p_itemwait.png"></img>
-      <img src="MCoM/resource/img/p_magic.png"></img>
-      <img src="MCoM/resource/img/fire.png"></img>
-      <img src="MCoM/resource/img/bg_forest.png"></img>
-      <img src="MCoM/resource/img/bg_forestL.png"></img>
-      <img src="MCoM/resource/img/bg_forestR.png"></img>
-      <img src="MCoM/resource/img/cover.png"></img>
-      <img src="MCoM/resource/img/seat.png"></img>
-      <img src="MCoM/resource/img/slime.png"></img>
-      <img src="MCoM/resource/img/slime1.png"></img>
-      <img src="MCoM/resource/img/slime2.png"></img>
-      
+  <style media="screen">
+    img {
+      display: none;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js"></script>
+</head>
+
+<body>
+  <img src="MCoM/resource/img/sword.png"></img>
+  <img src="MCoM/resource/img/boushi.png"></img>
+  <img src="MCoM/resource/img/medical.png"></img>
+  <img src="MCoM/resource/img/battle.png"></img>
+  <img src="MCoM/resource/img/shop.png"></img>
+  <img src="MCoM/resource/img/event.png"></img>
+  <img src="MCoM/resource/img/boss.png"></img>
+  <img src="MCoM/resource/img/goal.png"></img>
+  <img src="MCoM/resource/img/player.png"></img>
+  <img src="MCoM/resource/img/player2.png"></img>
+  <img src="MCoM/resource/img/player3.png"></img>
+  <img src="MCoM/resource/img/p_breaked.png"></img>
+  <img src="MCoM/resource/img/p_walk1.png"></img>
+  <img src="MCoM/resource/img/p_walk2.png"></img>
+  <img src="MCoM/resource/img/p_walk3.png"></img>
+  <img src="MCoM/resource/img/p_walk4.png"></img>
+  <img src="MCoM/resource/img/p_itemuse.png"></img>
+  <img src="MCoM/resource/img/p_itemwait.png"></img>
+  <img src="MCoM/resource/img/p_magic.png"></img>
+  <img src="MCoM/resource/img/fire.png"></img>
+  <img src="MCoM/resource/img/bg_forest.png"></img>
+  <img src="MCoM/resource/img/bg_forestL.png"></img>
+  <img src="MCoM/resource/img/bg_forestR.png"></img>
+  <img src="MCoM/resource/img/cover.png"></img>
+  <img src="MCoM/resource/img/seat.png"></img>
+  <img src="MCoM/resource/img/slime.png"></img>
+  <img src="MCoM/resource/img/slime1.png"></img>
+  <img src="MCoM/resource/img/slime2.png"></img>
 
 
-    <script src = "js/move.js">
-    </script>
 
-    <div class="navbar-fixed">
-      <nav>
-        <a href="/" class="brand-logo">Renoyu site</a>
+  <script src="js/move.js">
+  </script>
+
+  <div class="navbar-fixed">
+    <nav>
+      <a href="/" class="brand-logo">Renoyu site</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="">LINK</a></li>
         <li><a href="https://atcoder.jp/users/renoyu">Atcoder</a></li>
         <li><a href="https://github.com/erukku/">Github</a></li>
         <li><a href="https://www.pixiv.net/">pixiv</a></li>
       </ul>
-      </nav>
+    </nav>
+  </div>
+
+  <ul id="slide-out" href="#" class="sidenav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img class="responsive-img" src='image/yukari.jpg'>
+        </div>
+        <a href="#user"><img class="circle" src='image/yukari.jpg'></a>
+        <a href="#name"><span class="black-text name">renoyu</span></a>
+      </div>
+    </li>
+    <li><a href="https://twitter.com/rennoyu/"><i class="material-icons">last_page</i>twitter @rennoyu</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
+  </ul>
+
+  <div class="fixed-action-btn sidenav-trigger" data-target="slide-out">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">menu</i>
+    </a>
+  </div>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <script type="module">
+          import * as PIXI from 'https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js';
+
+        </script>
+
+        <script type="module" src="MCoM/resource/script/main.js"></script>
+        <div class="row"></div>
+
+
+      </div>
     </div>
 
-      <ul id="slide-out" href="#" class="sidenav">
-        <li><div class="user-view">
-          <div class="background">
-            <img class="responsive-img" src = 'image/yukari.jpg'>
-          </div>
-          <a href="#user"><img class="circle" src = 'image/yukari.jpg'></a>
-          <a href="#name"><span class="black-text name">renoyu</span></a>
-        </div></li>
-        <li><a href="https://twitter.com/rennoyu/"><i class="material-icons">last_page</i>twitter @rennoyu</a></li>
-        <li><div class="divider"></div></li>
-        <li><a class="subheader">Subheader</a></li>
-        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-        <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-      </ul>
-    
-      <div class="fixed-action-btn sidenav-trigger" data-target="slide-out">
-        <a class="btn-floating btn-large red">
-          <i class="large material-icons">menu</i>
-        </a>
+    <h1></h1>
+    <div align="center">
+      <h3>操作説明</h5>
+    </div>
+
+
+    <div class="row">
+      <div class="col s6">
+        <div align="center">
+          <h5>通常時</h5>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>effect</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>a</td>
+              <td>決定</td>
+
+            </tr>
+            <tr>
+              <td>d,f</td>
+              <td>地図表示、不表示</td>
+            </tr>
+            <tr>
+              <td>i,j,k,l</td>
+              <td>カーソルの移動</td>
+            </tr>
+            <tr>
+              <td>q,w</td>
+              <td>roll deck</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>watch hp of an enemy</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>switch target of hp</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    
 
-      <script type="module">
-          import * as PIXI from 'https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js';
-          
-  </script>
+      <div class="col s6">
+        <div align="center">
+          <h5>バトル時</h5>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>effect</th>
+            </tr>
+          </thead>
 
-      <script type="module" src="MCoM/resource/script/main.js"></script>
+          <tbody>
+            <tr>
+              <td>i,j,k,l</td>
+              <td>move</td>
+            </tr>
+            <tr>
+              <td>u</td>
+              <td>jump</td>
+            </tr>
+            <tr>
+              <td>a</td>
+              <td>use card</td>
+            </tr>
+            <tr>
+              <td>q,w</td>
+              <td>roll deck</td>
+            </tr>
+            <tr>
+              <td>z</td>
+              <td>stock card</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>watch hp of an enemy</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>switch target of hp</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
 
 
+  <!--JavaScript at end of body for optimized loading-->
 
-    <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="js/materialize.min.js"></script>
 
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
 
-  </body>
 </html>
