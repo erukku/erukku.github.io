@@ -1,6 +1,6 @@
 import type { Application, Container } from "pixi.js";
 import TitleScene from "../scene/TitleScene";
-import type App from "../../../nazo/js/app";
+
 
 class ManageScene{
 
