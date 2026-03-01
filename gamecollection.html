@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 
     <!--Let browser know website is optimized for mobile-->
     <!--meta name="viewport" content="width=device-width, initial-scale=1.0"/ -->
-    <meta charset = "UTF-8">
+    <meta charset="UTF-8">
     <title>game</title>
 
     <script src="https://pixijs.download/release/pixi.min.js"></script>
@@ -16,112 +17,133 @@
     <link rel="stylesheet" href="../styles/style.css">
 
     <style media="screen">
-        img{
+        img {
             display: none;
-      }
-        </style>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js"></script>
-  </head>
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js"></script>
+</head>
 
-  <body>
-      <img src="MCoM/resource/img/sword.png"></img>
-      <img src="MCoM/resource/img/boushi.png"></img>
-      <img src="MCoM/resource/img/medical.png"></img>
-      <img src="MCoM/resource/img/battle.png"></img>
-      <img src="MCoM/resource/img/shop.png"></img>
-      <img src="MCoM/resource/img/event.png"></img>
-      <img src="MCoM/resource/img/boss.png"></img>
-      <img src="MCoM/resource/img/goal.png"></img>
-      <img src="MCoM/resource/img/player.png"></img>
-      <img src="MCoM/resource/img/player2.png"></img>
-      <img src="MCoM/resource/img/player3.png"></img>
-      <img src="MCoM/resource/img/p_breaked.png"></img>
-      <img src="MCoM/resource/img/p_walk1.png"></img>
-      <img src="MCoM/resource/img/p_walk2.png"></img>
-      <img src="MCoM/resource/img/p_walk3.png"></img>
-      <img src="MCoM/resource/img/p_walk4.png"></img>
-      <img src="MCoM/resource/img/p_itemuse.png"></img>
-      <img src="MCoM/resource/img/p_itemwait.png"></img>
-      <img src="MCoM/resource/img/p_magic.png"></img>
-      <img src="MCoM/resource/img/fire.png"></img>
-      <img src="MCoM/resource/img/bg_forest.png"></img>
-      <img src="MCoM/resource/img/bg_forestL.png"></img>
-      <img src="MCoM/resource/img/bg_forestR.png"></img>
-      <img src="MCoM/resource/img/cover.png"></img>
-      <img src="MCoM/resource/img/seat.png"></img>
-      <img src="MCoM/resource/img/slime.png"></img>
-      <img src="MCoM/resource/img/slime1.png"></img>
-      <img src="MCoM/resource/img/slime2.png"></img>
-      
+<body>
+    <img src="MCoM/resource/img/sword.png"></img>
+    <img src="MCoM/resource/img/boushi.png"></img>
+    <img src="MCoM/resource/img/medical.png"></img>
+    <img src="MCoM/resource/img/battle.png"></img>
+    <img src="MCoM/resource/img/shop.png"></img>
+    <img src="MCoM/resource/img/event.png"></img>
+    <img src="MCoM/resource/img/boss.png"></img>
+    <img src="MCoM/resource/img/goal.png"></img>
+    <img src="MCoM/resource/img/player.png"></img>
+    <img src="MCoM/resource/img/player2.png"></img>
+    <img src="MCoM/resource/img/player3.png"></img>
+    <img src="MCoM/resource/img/p_breaked.png"></img>
+    <img src="MCoM/resource/img/p_walk1.png"></img>
+    <img src="MCoM/resource/img/p_walk2.png"></img>
+    <img src="MCoM/resource/img/p_walk3.png"></img>
+    <img src="MCoM/resource/img/p_walk4.png"></img>
+    <img src="MCoM/resource/img/p_itemuse.png"></img>
+    <img src="MCoM/resource/img/p_itemwait.png"></img>
+    <img src="MCoM/resource/img/p_magic.png"></img>
+    <img src="MCoM/resource/img/fire.png"></img>
+    <img src="MCoM/resource/img/bg_forest.png"></img>
+    <img src="MCoM/resource/img/bg_forestL.png"></img>
+    <img src="MCoM/resource/img/bg_forestR.png"></img>
+    <img src="MCoM/resource/img/cover.png"></img>
+    <img src="MCoM/resource/img/seat.png"></img>
+    <img src="MCoM/resource/img/slime.png"></img>
+    <img src="MCoM/resource/img/slime1.png"></img>
+    <img src="MCoM/resource/img/slime2.png"></img>
 
 
-    <script src = "js/move.js">
+
+    <script src="js/move.js">
     </script>
 
     <div class="navbar-fixed">
-      <nav>
-        <a href="/" class="brand-logo">Renoyu site</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="">LINK</a></li>
-        <li><a href="https://atcoder.jp/users/renoyu">Atcoder</a></li>
-        <li><a href="https://github.com/erukku/">Github</a></li>
-        <li><a href="https://www.pixiv.net/">pixiv</a></li>
-      </ul>
-      </nav>
+        <nav>
+            <a href="/" class="brand-logo">Renoyu site</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="">LINK</a></li>
+                <li><a href="https://atcoder.jp/users/renoyu">Atcoder</a></li>
+                <li><a href="https://github.com/erukku/">Github</a></li>
+                <li><a href="https://www.pixiv.net/">pixiv</a></li>
+            </ul>
+        </nav>
     </div>
 
-      <ul id="slide-out" href="#" class="sidenav">
-        <li><div class="user-view">
-          <div class="background">
-            <img class="responsive-img" src = 'image/yukari.jpg'>
-          </div>
-          <a href="#user"><img class="circle" src = 'image/yukari.jpg'></a>
-          <a href="#name"><span class="black-text name">renoyu</span></a>
-        </div></li>
+    <ul id="slide-out" href="#" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img class="responsive-img" src='image/yukari.jpg'>
+                </div>
+                <a href="#user"><img class="circle" src='image/yukari.jpg'></a>
+                <a href="#name"><span class="black-text name">renoyu</span></a>
+            </div>
+        </li>
         <li><a href="https://twitter.com/rennoyu/"><i class="material-icons">last_page</i>twitter @rennoyu</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+            <div class="divider"></div>
+        </li>
         <li><a class="subheader">Subheader</a></li>
         <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
         <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-      </ul>
-    
-      <div class="fixed-action-btn sidenav-trigger" data-target="slide-out">
+    </ul>
+
+    <div class="fixed-action-btn sidenav-trigger" data-target="slide-out">
         <a class="btn-floating btn-large red">
-          <i class="large material-icons">menu</i>
+            <i class="large material-icons">menu</i>
         </a>
-      </div>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="card small">
-        <div class="card-image">
-          <img src="MCoM/resource/img/bg_forest.png"">
-          <span class="card-title">MCoM</span>
-        </div>
-        <div class="card-content">
-          <p>制作途中</p>
-          <p>某作品リスペクト</p>
-        </div>
-        <div class="card-action">
-          <a href="MCoM.html">LINK</a>
-        <span class="new badge" data-badge-caption="">ローグライク</span>
-          <span class="new badge" data-badge-caption="">カード</span>
-          <span class="new badge" data-badge-caption="">アクション</span>
-        </div>
-      </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="MCoM/resource/img/bg_forest.png"">
+          <span class=" card-title">MCoM</span>
+                    </div>
+                    <div class="card-content">
+                        <p>制作途中</p>
+                        <p>某作品リスペクト</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="MCoM.html">LINK</a>
+                        <span class="new badge" data-badge-caption="">ローグライク</span>
+                        <span class="new badge" data-badge-caption="">カード</span>
+                        <span class="new badge" data-badge-caption="">アクション</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="MCoM/resource/img/bg_forest.png"">
+          <span class=" card-title">secondRPG</span>
+                    </div>
+                    <div class="card-content">
+                        <p>制作途中</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="secondRPG.html">LINK</a>
+                        <span class="new badge" data-badge-caption="">RPG</span>
+                        <span class="new badge" data-badge-caption="">周回</span>
+                        <span class="new badge" data-badge-caption="">ガチャ(無料)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
 
 
 
 
 
-  
-  </div>
-    
+
+    </div>
+
 
 
 
@@ -129,5 +151,6 @@
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
-  </body>
+</body>
+
 </html>
