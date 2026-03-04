@@ -1,5 +1,4 @@
 import { Application, Assets, Container, Graphics, Ticker } from "pixi.js";
-import type App from "../../../nazo/js/app";
 import type ManageScene from "../base/ManageScene";
 
 
