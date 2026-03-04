@@ -1,4 +1,5 @@
 import { Application, Text, Graphics, Container, Assets, TextStyle } from 'pixi.js';
+import type ManageScene from '../base/ManageScene';
 
 
 class TitleScene {
@@ -7,10 +8,13 @@ class TitleScene {
     private app: Application;
     private view: Container;
 
-    constructor(stage: Container, app: Application) {
+    private manager: ManageScene;
+
+    constructor(stage: Container, app: Application,manager:ManageScene) {
 
         this.stage = stage;
         this.view = new Container();
+        this.manager = manager;
 
         this.app = app;
 
@@ -67,6 +71,18 @@ class TitleScene {
         continueButton.x = this.app.screen.width / 2;
         continueButton.y = this.app.screen.height * 6 / 8;
 
+        startButton.interactive = true;
+        continueButton.interactive = true;
+
+        // enable button mode (pointer cursor) using a cast to avoid TypeScript error
+        (startButton as any).buttonMode = true;
+        (continueButton as any).buttonMode = true;
+
+
+
+        startButton.on('pointerdown',() => this.startGame());
+        continueButton.on('pointerdown', function(){});
+
         this.view.addChild(startButton);
         this.view.addChild(continueButton);
 
@@ -93,6 +109,17 @@ class TitleScene {
         this.setGraphic();
     }
 
+
+    startGame(){
+
+        this.view.removeChildren();
+
+        this.manager.load();
+
+        console.log("start!");
+
+
+    }
 
 
 }
