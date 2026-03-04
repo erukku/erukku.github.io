@@ -59,6 +59,9 @@ class GameScene {
         //test
         const dungeon = Sprite.from('dungeon1');
 
+        dungeon.eventMode = 'static'; 
+        dungeon.cursor = 'pointer';
+
         dungeon.anchor.x = dungeon.anchor.y = 0.5;
         dungeon.x = this.app.screen.width / 2;
         dungeon.y = this.app.screen.height / 2;
@@ -76,9 +79,8 @@ class GameScene {
         scene.addChild(dungeon);
         this.scene.addChild(scene);
 
-        
-
-        scene.visible = true;
+    
+        scene.visible = false;
 
         this.sceneList.push(scene);
 
