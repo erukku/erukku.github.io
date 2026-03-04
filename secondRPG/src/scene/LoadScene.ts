@@ -27,6 +27,9 @@ class LoadScene {
         this.ticker = Ticker.shared;
         this.fn = undefined;
 
+        this.ticker;
+        this.fn;
+
     }
 
     setBundle() {

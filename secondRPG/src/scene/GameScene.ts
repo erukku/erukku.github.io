@@ -15,6 +15,8 @@ class GameScene {
         this.stage = stage;
         this.manager = manager;
 
+        this.manager;
+
         this.sceneList = [];
         this.sceneIndex = 0;
 
