@@ -30,30 +30,29 @@ class LoadScene {
     }
 
     setBundle() {
-        Assets.addBundle('titleAssets', {
+        Assets.addBundle('title', {
             player: '/secondRPG/resource/img/player.png',
             silmeG: '/secondRPG/resource/img/slimeG.png',
             silmeR: '/secondRPG/resource/img/slimeR.png',
             silmeGL: '/secondRPG/resource/img/slimeGL.png',
             skelton: '/secondRPG/resource/img/skelton.png'
         });
+
+        Assets.addBundle('icon', {
+            home: '/secondRPG/resource/img/home.png',
+            sword: '/secondRPG/resource/img/sword.png',
+            skill: '/secondRPG/resource/img/skill.png',
+            dungeon: '/secondRPG/resource/img/dungeon.png',
+            gacha: '/secondRPG/resource/img/gacha.png'
+        });
+        Assets.addBundle('dungeon', {
+            dungeon1: '/secondRPG/resource/img/dungeon1.png',
+        });
     }
 
     test() {
-
-        /*
-        var per: Number = 0;
-
-        const func = (progress: number) => {
-            per = progress * 100;
-        };
-        */
-
         this.setBundle();
         this.setProgressBar();
-
-
-
     }
 
     async setProgressBar() {
@@ -77,14 +76,17 @@ class LoadScene {
         innerBar.scale.x = 0; // 最初は長さゼロ
         this.view.addChild(innerBar);
 
+
+
         // 3. ロード実行（進捗に合わせて scale.x を更新）
-        await Assets.loadBundle('titleAssets', (progress) => {
+        await Assets.loadBundle(['title','icon','dungeon'], (progress) => {
             innerBar.scale.x = progress;
         });
 
         // 4. ロード完了後にバーを消してボタンを表示
         this.view.removeChild(outerBar, innerBar);
-        //this.showButtons(); // ボタン作成メソッドを呼ぶ
+        
+        this.manager.startGame();
     }
 
 
