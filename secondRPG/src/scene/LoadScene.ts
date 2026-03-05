@@ -50,6 +50,12 @@ class LoadScene {
         Assets.addBundle('dungeon', {
             dungeon1: '/secondRPG/resource/img/dungeon1.png',
         });
+
+        Assets.addBundle('bg', {
+            ground: '/secondRPG/resource/img/ground.png',
+            wall: '/secondRPG/resource/img/wall.png',
+            fire: '/secondRPG/resource/img/fire.png',
+        });
     }
 
     test() {
@@ -81,7 +87,7 @@ class LoadScene {
 
 
         // 3. ロード実行（進捗に合わせて scale.x を更新）
-        await Assets.loadBundle(['title','icon','dungeon'], (progress) => {
+        await Assets.loadBundle(['title','icon','dungeon','bg'], (progress) => {
             innerBar.scale.x = progress;
         });
 

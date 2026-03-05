@@ -2,6 +2,7 @@ import type { Application, Container } from "pixi.js";
 import TitleScene from "../scene/TitleScene";
 import LoadScene from "../scene/LoadScene";
 import GameScene from "../scene/GameScene";
+import DungeonScene from "../scene/DungeonScene";
 
 
 class ManageScene{
@@ -26,8 +27,12 @@ class ManageScene{
 
     startGame(){
         const game:GameScene = new GameScene(this.stage,this.app,this);
-
         game.test();
+    }
+
+    startDungeon(){
+        const dungeon = new DungeonScene(this.stage,this.app,this);
+        dungeon.test();
     }
 
 

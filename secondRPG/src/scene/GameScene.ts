@@ -74,7 +74,11 @@ class GameScene {
 
 
         //バトルシーンに移動
-        dungeon.on('pointerdown', () => 1);
+        dungeon.on('pointerdown', () => {
+            //シーン遷移
+            this.scene.visible = false;
+            this.manager.startDungeon();
+        });
 
         scene.addChild(dungeon);
         this.scene.addChild(scene);
@@ -152,8 +156,6 @@ class GameScene {
             }
 
 
-
-
             // 位置・サイズを調整（例）
             icon.width = icon.height = Math.min(this.app.screen.width / 8, this.app.screen.height / 16);
             icon.anchor.x = icon.anchor.y = 0.5;
@@ -166,7 +168,7 @@ class GameScene {
             // ボタンに追加してステージへ
             button.addChild(box);
             button.addChild(icon);
-            this.stage.addChild(button);
+            this.scene.addChild(button);
 
         }
 
