@@ -1,4 +1,4 @@
-import { ColorMatrixFilter, Container, Graphics, Sprite, type Application, type GradientOptions } from "pixi.js";
+import { ColorMatrixFilter, Container, Graphics, Sprite, type Application } from "pixi.js";
 import type ManageScene from "../base/ManageScene";
 
 
