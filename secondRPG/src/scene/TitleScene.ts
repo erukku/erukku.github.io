@@ -1,4 +1,4 @@
-import { Application, Text, Graphics, Container, Assets, TextStyle } from 'pixi.js';
+import { Application, Text, Graphics, Container, Assets, TextStyle, Sprite } from 'pixi.js';
 import type ManageScene from '../base/ManageScene';
 
 
@@ -56,7 +56,16 @@ class TitleScene {
         text2.x = button2.width / 2;
         text2.y = button2.height / 2;
         continueButton.addChild(text2);
-    
+
+
+        await Assets.load({alias:'grass',src:'/secondRPG/resource/img/grass.png'})
+
+        const grass : Sprite= Sprite.from("grass");
+
+        grass.width = this.app.screen.width;
+        grass.height = this.app.screen.height;
+        
+        this.view.addChild(grass);
 
 
 

@@ -11,3 +11,9 @@
 
 ## done
 - [x] 環境構築
+- [x] 雛形の作成
+- [x] 雛形(title)
+- [x] 雛形(load)
+- [x] 雛形(game)
+- [x] 雛形(battle)
+
