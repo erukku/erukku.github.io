@@ -1,5 +1,6 @@
 import { Application, Assets, Container, Graphics, Ticker } from "pixi.js";
 import type ManageScene from "../base/ManageScene";
+import Player from "../base/Player";
 
 
 class LoadScene {
@@ -34,9 +35,9 @@ class LoadScene {
     setBundle() {
         Assets.addBundle('title', {
             player: '/secondRPG/resource/img/player.png',
-            silmeG: '/secondRPG/resource/img/slimeG.png',
-            silmeR: '/secondRPG/resource/img/slimeR.png',
-            silmeGL: '/secondRPG/resource/img/slimeGL.png',
+            slimeG: '/secondRPG/resource/img/slimeG.png',
+            slimeR: '/secondRPG/resource/img/slimeR.png',
+            slimeGL: '/secondRPG/resource/img/slimeGL.png',
             skelton: '/secondRPG/resource/img/skelton.png'
         });
 
@@ -93,8 +94,10 @@ class LoadScene {
 
         // 4. ロード完了後にバーを消してボタンを表示
         this.view.removeChild(outerBar, innerBar);
+
+        const player = new Player();
         
-        this.manager.startGame();
+        this.manager.startGame(player);
     }
 
 

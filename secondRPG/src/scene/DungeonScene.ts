@@ -1,5 +1,8 @@
-import { ColorMatrixFilter, Container, Graphics, Sprite, TextStyle, Application, Text } from "pixi.js";
+import { ColorMatrixFilter, Container, Sprite, TextStyle, Application, Text, Texture, Graphics } from "pixi.js";
 import type ManageScene from "../base/ManageScene";
+import Enemy from "../base/Enemy";
+import type Player from "../base/Player";
+import type Player from "../base/Player";
 
 
 
@@ -14,13 +17,16 @@ class DungeonScene {
     private grounds: Container;
     private fires: Container;
 
+    private enemys: Container;
+
     private chart: String[];
-    private player: Sprite;
+    private player: Player;
 
 
-    constructor(stage: Container, app: Application, manager: ManageScene) {
+    constructor(stage: Container, app: Application,player:Player ,manager: ManageScene) {
         this.app = app;
         this.stage = stage;
+        this.player = player;
         this.manager = manager;
 
         this.manager;
@@ -32,13 +38,12 @@ class DungeonScene {
         this.grounds = new Container();
         this.fires = new Container();
 
+        this.enemys = new Container();
+
 
         this.chart = [];
 
-        this.player = Sprite.from("player");
-        this.player.anchor.x = this.player.anchor.y = 0.5;
 
-        this.player.scale.x = this.player.scale.y = 0.5;
     }
 
     test() {
@@ -152,6 +157,51 @@ class DungeonScene {
         this.scene.addChild(battleContainer);
         this.scene.addChild(hourglassContainer);
 
+        const hour: Sprite = Sprite.from("grass");
+
+        hour.width = this.app.screen.width*1.2;
+        hour.height = this.app.screen.height*1.2;
+
+        hour.anchor.x = 0.5;
+        hour.x= this.app.screen.width/2;
+
+        //hour.scale.x = 1.2;
+
+
+
+
+        this.scene.getChildAt(1).addChild(hour);
+        hour.y -= this.app.screen.height*1/2;
+
+        // create a sprite from the gradient texture and use it as a mask
+        const maskTexture = createGradientTexture(hour.width, hour.height*3/5);
+        const maskSprite = new Sprite(maskTexture);
+        maskSprite.x = 0;
+        maskSprite.y = 0;
+        this.scene.getChildAt(1).addChild(maskSprite);
+        hour.mask = maskSprite;
+
+
+        function createGradientTexture(w: number, h: number) {
+            const canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                // Fallback: return an empty texture if 2D context is unavailable
+                return Texture.EMPTY;
+            }
+            const gradient = ctx.createLinearGradient(0, 0, 0, h*1/3); // 上から下へ
+            gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');   // 不透明
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');   // 透明
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, w, h*1/3);
+
+            //ctx.fillStyle = 0x000000;
+            ctx.fillRect(0, h*1/3, w, h);
+            return Texture.from(canvas);
+        }
+
     }
 
     setChart() {
@@ -167,7 +217,7 @@ class DungeonScene {
                 this.enter();
                 break;
             case "battle":
-                this.move();
+                this.setBattle();
                 break;
             case "end":
                 this.clear();
@@ -178,21 +228,21 @@ class DungeonScene {
 
     enter() {
         console.log("aaa")
-        this.player.y = this.app.screen.height * 3 / 5 * (2 / 5);
-        this.player.x = -100;
+        
+        this.player.graphic.y = this.app.screen.height * 3 / 5 * (2 / 5);
+        this.player.graphic.x = -100;
 
-        this.scene.getChildAt(0).addChild(this.player);
+        this.scene.getChildAt(0).addChild(this.player.graphic);
 
         const posX: number = this.app.screen.width / 4;
         var flame: number = 0;
 
         const fn = () => {
-            this.player.x += (posX - this.player.x) / 8;
-
+            this.player.graphic.x += (posX - this.player.graphic.x) / 8;
             flame += 1;
 
             if (flame >= 40) {
-                this.player.x = posX;
+                this.player.graphic.x = posX;
                 this.app.ticker.remove(fn);
                 flame = 0;
                 this.flow();
@@ -202,14 +252,26 @@ class DungeonScene {
         this.app.ticker.add(fn);
     }
 
-    move() {
-        console.log("bbb")
+    move(target: String = "null") {
+        var moveList: Container[] = [this.grounds, this.walls, this.fires];
         var flame: number = 0;
+        console.log(target);
+
+        switch (target) {
+            case "enemy":
+                moveList.push(this.enemys);
+                break;
+            case "event":
+                break;
+        }
+
+        moveList = moveList.reverse();
+
         const fn = () => {
 
-            this.grounds.x -= this.app.screen.width / 30;
-            this.walls.x -= this.app.screen.width / 30;
-            this.fires.x -= this.app.screen.width / 30;
+            for (var i = 0; i < moveList.length; i++) {
+                moveList[i].x -= this.app.screen.width / 30;
+            }
 
             flame += 1;
 
@@ -220,9 +282,18 @@ class DungeonScene {
                 this.fires.x = 0;
 
                 this.app.ticker.remove(fn);
-                this.flow();
+                switch (target) {
+                    case "enemy":
+                        this.enemys.x = 0;
+                        this.startBattle();
+                        break;
+                    case "event":
+                        break;
+                    case "null":
+                        this.flow();
+                        break
+                }
             }
-
 
 
         }
@@ -230,8 +301,31 @@ class DungeonScene {
 
     }
 
-    battle() {
+    setBattle() {
+        //test
+        const enemy: Enemy = new Enemy();
+        enemy.setGraphic();
 
+        const container: Container = new Container();
+        container.addChild(enemy.getGraphic());
+
+        this.enemys.addChild(container);
+        //this.enemys.x = this.app.screen.width/2;
+        container.y = this.app.screen.height * 3 / 5 * (2 / 5);
+
+        this.scene.addChild(this.enemys);
+
+        container.x = this.player.graphic.x + this.app.screen.width * 3 / 2;
+
+        this.move("enemy");
+
+    }
+
+    startBattle() {
+        //test
+        this.enemys.removeChildren();
+
+        this.flow();
     }
 
     rest() {
@@ -258,7 +352,7 @@ class DungeonScene {
         text1.y = button.height / 2;
         button.addChild(text1);
 
-        button.on('pointerdown',() => this.backHome());
+        button.on('pointerdown', () => this.backHome());
 
         button.x = this.app.screen.width / 2;
         button.y = this.app.screen.height * 5 / 8;
@@ -276,10 +370,10 @@ class DungeonScene {
 
     }
 
-    backHome(){
+    backHome() {
         this.scene.removeChildren();
 
-        this.manager.startGame();
+        this.manager.startGame(this.player);
     }
 
 

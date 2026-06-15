@@ -3,6 +3,7 @@ import TitleScene from "../scene/TitleScene";
 import LoadScene from "../scene/LoadScene";
 import GameScene from "../scene/GameScene";
 import DungeonScene from "../scene/DungeonScene";
+import Player from "./Player";
 
 
 class ManageScene{
@@ -25,13 +26,13 @@ class ManageScene{
         load.test();
     }
 
-    startGame(){
-        const game:GameScene = new GameScene(this.stage,this.app,this);
+    startGame(player:Player){
+        const game:GameScene = new GameScene(this.stage,this.app,player,this);
         game.test();
     }
 
-    startDungeon(){
-        const dungeon = new DungeonScene(this.stage,this.app,this);
+    startDungeon(player:Player){
+        const dungeon = new DungeonScene(this.stage,this.app,player,this);
         dungeon.test();
     }
 

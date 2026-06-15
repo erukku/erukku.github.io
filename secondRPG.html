@@ -20,6 +20,14 @@
     img {
       display: none;
     }
+    #game-container {
+      display: flex !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+    #game-container canvas {
+      display: block;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.5.1/pixi.min.js"></script>
 </head>
@@ -71,9 +79,13 @@
 
   <div class="container">
     <div class="row">
-      <div class="col">
-
+      <div class="col s12">
+        
+        
         <script type="module" src="secondRPG/src/game.ts"></script>
+        
+        
+        <div id="game-container" style="display: flex; justify-content: center;"></div>
         <div class="row"></div>
 
 
