@@ -2,7 +2,7 @@ import { ColorMatrixFilter, Container, Sprite, TextStyle, Application, Text, Tex
 import type ManageScene from "../base/ManageScene";
 import Enemy from "../base/Enemy";
 import type Player from "../base/Player";
-import type Player from "../base/Player";
+import Battle from "../base/Battle";
 
 
 
@@ -17,7 +17,8 @@ class DungeonScene {
     private grounds: Container;
     private fires: Container;
 
-    private enemys: Container;
+    private enemys: Enemy[];
+    private enemyGraphics: Container;
 
     private chart: String[];
     private player: Player;
@@ -38,7 +39,8 @@ class DungeonScene {
         this.grounds = new Container();
         this.fires = new Container();
 
-        this.enemys = new Container();
+        this.enemys = [];
+        this.enemyGraphics = new Container();
 
 
         this.chart = [];
@@ -259,7 +261,8 @@ class DungeonScene {
 
         switch (target) {
             case "enemy":
-                moveList.push(this.enemys);
+                moveList.push(this.enemyGraphics
+                );
                 break;
             case "event":
                 break;
@@ -284,7 +287,7 @@ class DungeonScene {
                 this.app.ticker.remove(fn);
                 switch (target) {
                     case "enemy":
-                        this.enemys.x = 0;
+                        this.enemyGraphics.x = 0;
                         this.startBattle();
                         break;
                     case "event":
@@ -309,11 +312,12 @@ class DungeonScene {
         const container: Container = new Container();
         container.addChild(enemy.getGraphic());
 
-        this.enemys.addChild(container);
+        this.enemys.push(enemy);
+        this.enemyGraphics.addChild(container);
         //this.enemys.x = this.app.screen.width/2;
         container.y = this.app.screen.height * 3 / 5 * (2 / 5);
 
-        this.scene.addChild(this.enemys);
+        this.scene.addChild(this.enemyGraphics);
 
         container.x = this.player.graphic.x + this.app.screen.width * 3 / 2;
 
@@ -323,7 +327,8 @@ class DungeonScene {
 
     startBattle() {
         //test
-        this.enemys.removeChildren();
+        //this.enemys.removeChildren();
+        let battle = new Battle(this.player,this.enemys);
 
         this.flow();
     }
