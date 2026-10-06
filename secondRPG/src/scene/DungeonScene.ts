@@ -2,7 +2,7 @@ import { ColorMatrixFilter, Container, Sprite, TextStyle, Application, Text, Tex
 import type ManageScene from "../base/ManageScene";
 import Enemy from "../base/Enemy";
 import type Player from "../base/Player";
-import Battle from "../base/Battle";
+//import Battle from "../base/Battle";
 
 
 
