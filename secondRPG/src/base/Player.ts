@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite } from "pixi.js";
+import { Container, Sprite } from "pixi.js";
 import Status from "./Status";
 import Equipment from "./item/Equipment";
 import type { EquipSlot } from "./item/Equipment";

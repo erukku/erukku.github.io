@@ -170,7 +170,7 @@ class GameScene {
             let isDragging = false;
             let dragOffset = new Point(0, 0);
 
-            skillIcon.on('pointerdown', (e) => {
+            skillIcon.on('pointerdown', (e: any) => {
                 isDragging = true;
                 // つかんだ場所とアイコンの中心とのズレを記録
                 const localPos = e.data.getLocalPosition(scene);

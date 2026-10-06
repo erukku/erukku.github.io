@@ -1,3 +1,4 @@
+
 import type Enemy from "./Enemy";
 import type Player from "./Player";
 
@@ -9,6 +10,9 @@ class Battle{
     constructor(player:Player,enemys:Enemy[]){
         this.player = player;
         this.enemys = enemys;
+
+        this.player;
+        this.enemys;
     }
 
     start(){

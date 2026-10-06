@@ -328,7 +328,7 @@ class DungeonScene {
     startBattle() {
         //test
         //this.enemys.removeChildren();
-        let battle = new Battle(this.player,this.enemys);
+        //let battle = new Battle(this.player,this.enemys);
 
         this.flow();
     }
