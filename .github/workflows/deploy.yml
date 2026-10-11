@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     # 実行対象のブランチ名（secondRPG ブランチなら以下を書き換え）
-    branches: [ "secondRPG" ]
+    branches: [ "develop" ]
 
 # GitHub Actionsにページ公開の権限を与える
 permissions:
