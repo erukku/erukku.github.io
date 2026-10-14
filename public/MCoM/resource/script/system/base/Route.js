@@ -1,0 +1,290 @@
+import DefaultDict from "../../util/DefaultDict.js";
+class Route{
+    constructor(scene){
+        this.route = null;
+        this.now = [0,0];
+
+        this.scene = scene;
+
+
+        this.assets = PIXI.Assets
+        this.rootIconDict = new DefaultDict(null);
+
+        this.count = 0;
+
+
+
+    }
+
+    setRoute(length){
+        this.length = length;
+        this.route = new Array();
+
+        this.route.push(["start"]);
+
+        for(var i = 0;i < this.length;i++){
+            var data = new Array();
+            var randomNum = Math.random();
+            var num = Math.floor(randomNum / 1.1) + 1;
+            for(var j = 0; j < num;j++){
+                data.push("battle");
+            }
+            data.push("event");
+            data.push("shop");
+            this.route.push(data);
+        }
+
+        this.route.push(["boss"])
+
+        this.route.push(["end"]);
+    }
+
+    async setGraphic(){
+        this.graphicContainer = new PIXI.Container();
+
+        this.base = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(20, 20, 20 + 100 * (this.length+2) + 60, 180).endFill();
+        this.underMap = new PIXI.Container();
+        //this.underMap = new PIXI.Graphics().beginFill(0xF5D88E).drawRect(-100, 20, 640, 180).endFill();
+        
+        this.graphicContainer.addChild(this.base);
+        this.graphicContainer.addChild(this.underMap);
+
+        this.graphicContainer.x = 100;
+    
+
+        this.pointList = new Array();
+        this.iconList = new Array();
+        this.lineList = new Array();
+        this.lineNumList = new Array();
+
+        this.playerIcon = new PIXI.Graphics().circle(0,0,20).fill(0xFFFFFF);
+
+
+        this.playerIcon.x = 60 + 100*(0);
+        this.playerIcon.y = 20 + 160/this.route[0].length * (0+1) - 160/this.route[0].length/2 ;
+        this.underMap.addChild(this.playerIcon);
+        this.playerIcon.zIndex = 100;
+
+        //console.log(this.route);
+
+        for(var i = 0;i < this.length+3;i++){
+            var data = new Array();
+            var icons = new Array();
+            var lines = new Array();
+            var lineNums = new Array();
+            for(var j = 0;j < this.route[i].length;j++){
+                
+                var circle = new PIXI.Graphics().circle(0,0,20);
+                var icon = new PIXI.Sprite();
+                circle.scale.y = 0.3;
+                switch(this.route[i][j]){
+                    case "start":
+                        circle.fill(0x0030D9);
+                        //icon = new PIXI.Graphics().circle(0,0,20).fill(0xFFFFFF);
+                        icon = new PIXI.Graphics();
+                        break;
+
+                    case "end":
+                        circle.fill(0xFEFF00);
+                        //icon = new PIXI.Graphics().circle(0,0,20).fill(0xFFFFFF);
+                        //icon = new PIXI.Sprite(this.rootIconDict["goal"]);
+                        
+                        
+                        //icon = new PIXI.Sprite(await this.assets.load("goal"));
+                        icon = PIXI.Sprite.from('iconGoal');
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        break;
+                    
+                    case "battle":
+                        circle.fill(0xFF002A);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        //icon = new PIXI.Sprite(this.rootIconDict["battle"]);
+                        
+                        icon = PIXI.Sprite.from('iconBattle');
+                        
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        break;
+
+                    case "shop":
+                        circle.fill(0x99330A);
+                        icon = new PIXI.Sprite();
+                        
+                        icon = PIXI.Sprite.from('iconShop');
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        break;
+
+                    case "event":
+                        circle.fill(0xbb330A);
+                        icon = new PIXI.Sprite();
+                        
+                        icon = PIXI.Sprite.from('iconEvent');
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        break;
+                    case "boss":
+                        circle.fill(0x8B0000);
+                        icon = new PIXI.Sprite();
+                        
+                        icon = PIXI.Sprite.from('iconBoss');
+                        icon.scale.x = icon.scale.y =0.13;
+                        icon.anchor.x = icon.anchor.y = 0.5;
+                        //icon = new PIXI.Sprite(this.rootIconDict["shop"]);
+                        //icon = new PIXI.Graphics().rect(-20,-20,40,40).fill(0xFFFFFF);
+                        break;
+                }
+
+                data.push(circle);
+                icons.push(icon);
+
+                var lineNext = new Array();
+                var nextNum = new Array();
+                if(i+1 != this.route.length){
+                    for(var k = 0;k<this.route[i+1].length;k++){
+                        var boarder = 0;
+                        if(j != 0){
+                            boarder = 20 + 160/this.route[i].length * (j) - 160/this.route[i].length/2 +20;
+                        }
+                        var upper = 200;
+                        if(j != this.route[i].length-1){
+                            upper = 20 + 160/this.route[i].length * (j+2) - 160/this.route[i].length/2 +20;
+                        }
+                        var next = 20 + 160/this.route[i+1].length * (k+1) - 160/this.route[i+1].length/2 +20
+                        if(boarder <= next && next <= upper){
+                            var x1 = 60 + 100*(i);
+                            var y1 = 20 + 160/this.route[i].length * (j+1) - 160/this.route[i].length/2 +20;
+
+                            var x2 = 60 + 100*(i+1);
+
+                            var line = new PIXI.Graphics().moveTo(x1,y1).lineTo(x2,next).stroke({width:7, color: 0xffffff, pixelLine: true });
+                            line.tint = 0x188744;
+                            lineNext.push(line);
+                            nextNum.push(k);
+
+                            this.underMap.addChild(line);
+                        }
+
+                    }
+                }
+                lines.push(lineNext);
+                lineNums.push(nextNum);
+
+                circle.x = 60 + 100*(i);
+                circle.y = 20 + 160/this.route[i].length * (j+1) - 160/this.route[i].length/2 +20;
+
+                icon.x = 60 + 100*(i);
+                icon.y = 20 + 160/this.route[i].length * (j+1) - 160/this.route[i].length/2 ;
+
+                this.underMap.addChild(circle);
+                this.underMap.addChild(icon);
+            }
+            
+            this.pointList.push(data);
+            this.iconList.push(icons);
+            this.lineList.push(lines);
+            this.lineNumList.push(lineNums);
+        }
+
+        //console.log("end");
+        this.addCount(0);
+
+    }
+
+    addCount(num){
+        var before = this.count;
+        console.log(this.now);
+        this.count += num;
+        this.count += this.lineList[this.now[0]][this.now[1]].length;
+        this.count %= this.lineList[this.now[0]][this.now[1]].length;
+        console.log(this.lineList[this.now[0]+1][this.now[1]]);
+        this.enLine(before,this.count);
+    }
+
+    initCount(){
+        var before = this.count;
+        this.count = 0;
+        
+    }
+
+    enLine(before,after){
+        //console.log(this.lineList[this.now[0]][this.now[1]][before].strokeStyle);
+        //var beforeStyle = new PIXI.StrokesStyle({color:0x188744});
+        this.lineList[this.now[0]][this.now[1]][before].tint = 0x188744;
+
+        //var afterStyle = new PIXI.FillStyle({color:0x00ff00});
+        this.lineList[this.now[0]][this.now[1]][after].tint = 0x00ff00;
+    }
+
+    selectWay(){
+        var next = [this.now[0]+1,this.lineNumList[this.now[0]][this.now[1]][this.count]];
+        this.now = next;
+
+        this.initCount();
+        
+        this.invisbleBefore();
+        return this.route[this.now[0]][this.now[1]];
+    }
+
+    setContainer(container){
+        container.addChild(this.graphicContainer);
+        
+    }
+
+    removeContainer(container){
+        container.removeChild(this.graphicContainer);
+        
+    }
+
+    movePlayerIcon(){
+        var po = this.iconList[this.now[0]][this.now[1]]
+        this.playerIcon.x = po.x;
+        this.playerIcon.y = po.y;
+        this.iconList[this.now[0]][this.now[1]].destroy();
+    }
+
+    initAsset(){
+        this.assets.add({alias:"battle",src:"MCoM/resource/img/battle.png"});
+        this.assets.add({alias:"shop",src:"MCoM/resource/img/shop.png"});
+        this.assets.add({alias:"event",src:"MCoM/resource/img/event.png"});
+        this.assets.add({alias:"goal",src:"MCoM/resource/img/goal.png"});
+    }
+
+
+    initRootIconDict(){
+        
+        (async () => {
+            console.log("aaaå")
+            this.rootIconDict["battle"] = await this.assets.load("battle");
+            this.rootIconDict["shop"] = await this.assets.load("shop");
+            this.rootIconDict["event"] = await this.assets.load("event");
+            
+            this.rootIconDict["goal"] = await this.assets.load("goal");
+            console.log("aaaå")
+        })();
+    }
+
+    invisbleBefore(){
+        for(var i = 0;i < this.pointList[this.now[0]-1].length;i++){
+            this.iconList[this.now[0]-1][i].visible = false;
+        }
+        if(this.now[0] >= 2){
+            for(var i = 0;i < this.lineList[this.now[0]-2].length;i++){
+                this.pointList[this.now[0]-2][i].visible = false;
+                for(var j = 0;j < this.lineList[this.now[0]-2][i].length;j++){
+                    this.lineList[this.now[0]-2][i][j].visible = false;
+                }
+            }
+        }
+        if(this.now[0] >= 2){
+            this.underMap.x -= 100;
+        }
+    }
+}
+
+export default Route;

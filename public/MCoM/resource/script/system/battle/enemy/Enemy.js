@@ -1,0 +1,208 @@
+import Status from "./Status.js"
+import Body from "../../base/Body.js"
+import Deck from "../../../card/Deck.js"
+import Position from "../../base/Position.js"
+import ConvertPos from "../../base/ConvertPos.js"
+import AttackInfo from "./AttackInfo.js"
+import HpBar from "../../../ui/normal/enemy/HpBar.js"
+
+import Animation from "./Animation.js"
+
+import DeckShow from "../../../ui/battle/DeckShow.js"
+class Enemy{
+    constructor(){
+        this.status = new Status();
+
+        this.deck = new Deck();
+        this.deck.setEBase();
+
+        this.uiContainer = new PIXI.Container();
+        this.deckset = new DeckShow(this.uiContainer,"R",this);
+        this.deckset.deckSet(this.deck);
+
+        this.hpBar = new HpBar(this.status.maxHp,this.uiContainer);
+        this.hpBar.setGraphic();
+
+        this.position = new Position();
+        this.body = new Body();
+        this.graphic = new PIXI.Container();
+        this.converter = new ConvertPos();
+
+        this.targetGraphic = new PIXI.Graphics();
+
+        this.action = "move";
+        this.actionPattern = new Array();
+        this.actionFlame = 0;
+
+        this.direction = "R";
+        this.breaked = false;
+
+        this.attackInfo = new AttackInfo();
+        this.attacking = false;
+        this.attackId = 0;
+        this.attackFlame = 0;
+        this.attackedE = new Array();
+
+        this.actionNow = null;
+
+
+        this.ticker = PIXI.Ticker.shared;
+
+        this.breaked = false;
+
+        this.assets = PIXI.Assets;
+
+
+        this.animation = new Animation(this);
+
+        this.cardIndex = 0;
+
+        this.useLock = false;
+
+        this.speed = 1;
+        
+    }
+    setTest(){
+        this.assets.add({alias:"slime",src:"MCoM/resource/img/slime.png"});
+        //this.graphicMain = new PIXI.Graphics().rect(0,0,30,30).fill(0x222222);
+        this.graphicMain = new PIXI.Graphics();
+        this.graphicShadow = new PIXI.Graphics().circle(0,0,15).fill(0x000000);
+        //this.graphicShadow.scale.y = 0.7;
+        //this.graphicShadow.y +=  (1-this.graphicShadow.scale.y)*30
+        (async() =>{
+            this.graphicMain = new PIXI.Sprite(await this.assets.load("slime"));
+            this.graphicMain.anchor.x = this.graphicMain.anchor.y = 0.5;
+            this.graphicMain.anchor.set(0.5,0.5);
+            this.graphicMain.scale.set(-0.5,0.5);
+            this.graphicMain.y = 20;
+            this.targetGraphic = new PIXI.Graphics().poly([0,0,30,0,15,15]).fill(0x0000ff);
+            this.targetGraphic.y = -40;
+
+            this.targetGraphic.visible = false;
+
+            this.graphicMain.addChild(this.targetGraphic);
+            this.graphic.addChild(this.graphicMain);
+            
+            this.converter.convert(this);
+        })();
+
+        this.body.setBody(30,10,30);
+
+        this.graphicMain.x -= 15;
+        
+        this.graphic.addChild(this.graphicShadow);
+
+        
+        //this.graphicMain.addChild(this.targetGraphic);
+
+        
+
+        this.actionPattern = [["move",50],["attack",50]];
+        //this.actionPattern = [["move",50]];
+
+        this.animation.setTest();
+        
+    }
+
+
+
+
+
+    setPos(x,y,z){
+        this.position.setPos(x,y,z);
+        this.converter.convert(this);
+    }
+
+    addPos(x,y,z){
+        this.animation.setStatus("move");
+        this.position.addPos(x,y,z);
+        this.converter.convert(this);
+    }
+
+    think(){
+        if(this.actionFlame == 0){
+            var num = 0;
+            var randomNum = Math.random();
+
+            for(var i = 0;i < this.actionPattern.length;i++){
+                var data = this.actionPattern[i];
+                num += data[1]/100;
+                if(randomNum < num){
+                    this.action = data[0];
+                    //console.log(this.action);
+                    break
+                }
+            }
+            if(this.deckset.rolling){
+                this.action = "move";
+            }
+        }
+        else if(this.actionFlame >= 60){
+            if(this.action == "attack" && this.selectCard(0).cardClass == "reload"){
+                return 0;
+            }
+            else{
+                console.log(this.action,this.selectCard(0).cardClass);
+                this.actionFlame = 0;
+                return 0
+            }
+        }
+        this.actionFlame += 1;
+    }
+
+    selectCard(index){
+        var i = this.deckset.getCardIndex(index);
+        var card = this.deck.deck[i];
+        return card;
+    }
+
+    damage(num){
+        this.status.damage(num);
+        this.hpBar.damage(num);
+        console.log(this.status);
+    }
+
+    attack(){
+        this.animation.setStatus("attack");
+        this.attackData = this.attackInfo.getInfo(0);
+        var data = this.attackData.shift();
+        this.cardAllflame = data[1];
+        this.attacking = true;   
+    }
+
+    getAttackInfo(index){
+        var card = this.deck.deck[index];
+        var data = null;
+        switch(card.cardClass){
+            case "attack":
+                data = this.attackInfo.getInfo(0);
+                break;
+
+            case "magic":
+                data = this.magicInfo.getInfo(0);
+                break;
+
+            case "item":
+                data = this.itemInfo.getInfo(0);
+                break;
+
+            case "special":
+                0
+                break;
+        }
+
+        return data;
+
+    }
+
+    destroy(){
+        this.animation.delete();
+        //delete this.graphic;
+        this.graphic.destroy({children : true});
+        this.deckset.destroy();
+        console.log(this.graphicShadow);
+        
+    }
+}
+
+export default Enemy;
